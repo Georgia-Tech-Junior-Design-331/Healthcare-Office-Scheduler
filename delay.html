@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal</title>
+</head>
+<body>
+    <nav>
+        <a href="#">AppointMEnt</a>
+        <button>
+            <img src="home.png" width='25' height='25'>
+        </button>
+        <button>
+            <img src="clock.png" width='25' height='25'>
+        </button>
+        <button>
+            <img src="profile.png" width='25' height='25'>
+        </button>
+        <button>Sign Out</button>
+    </nav>
+
+    <div>
+        <h1>Delay Request</h1>
+        <h2>Upcoming Appointments</h2>
+        <ul id='apptList'>
+            <li>
+                <h3><u>Appointment with Dr. <i>PLACEHOLDER</i></u></h3>
+                <div>
+                    <label for="delayTime">I will be late by</label>
+                    <select name="delayTime" id="delayTime">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    <label for="delayTime">minutes</label>
+                </div>
+                <button>Request</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
