@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <button type="menu">AppointMEnt</button>
+        <button type="menu">Settings</button>
+        <button type="menu">Sign Out</button>
+    </nav>
+
+    <h1>Reschedule Appointment</h1>
+    <label for="date">Find Date:</label><br>
+    <input type="date" id="date" name="date">
+    <input type="submit" value="Search" id="search" onclick="searchDay()">
+
+    <p id="results"></p>
+
+    <!--Once date selected, table should appear with available appointments-->
+
+    <p><strong>Note:</strong> type="date" is not supported in Safari or Internet Explorer 11 (or earlier).</p>
+    <script src="appointment.js"></script>
+</body>
+</html>
