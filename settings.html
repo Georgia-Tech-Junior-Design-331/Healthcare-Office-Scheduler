@@ -2,29 +2,55 @@
 
 <html>
     <head>
-        <title>User Settings!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Settings</title>
+        <link rel="stylesheet" href="css/v1NavBarStyles.css">
+        <link rel="stylesheet" href="css/home_page_styles.css">
     </head>
     <body>
-        <div>
-            <div>
+        <header>
+            <div class="left-nav nav-links">
+                <ul>
+                    <li><img class="logo-button" src="images/logo.png" width=30px height=30px></li>
+                    <li><a class="apt-button" href="index.html"><b>AppointMEnt</b></a></li>
+                </ul>
+            </div>
+        
+            <nav>
+                <ul class="right-links nav-links">
+                <li><button class="nav-img-button"><img src="images/home.png" width=30px height=30px></button></li>
+                <li><button class="nav-img-button"><img src="images/clock.png" width=30px height=30px></button></li>
+                <li><a href="settings.html"><button class="nav-img-button"><img src="images/profile.png" width=30px height=30px></button></a></li>
+                <li><button class="sign-out">Sign Out</button></li>
+            </ul>
+            </nav>
+        </header>
+        <hr>
+        <div class="all-appointments">
+            <div class="appt-heading">
                 <h1>Notification Settings</h1>
             </div>
-            <div>
-                <div align="left">
-                    <p>Text Messaging</p>
+            <div class="appt-list">
+                <div class="appt-slot">
+                    <div class="setting-row">
+                        <div class="setting-name">
+                            <p>Text Messaging</p>                      
+                        </div>
+                        <div class="setting-element">
+                            <input type="checkbox" checked data-toggle="toggle">
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-name">
+                            <p>Email</p>                     
+                        </div>
+                        <div class="setting-element">
+                            <input type="checkbox" checked data-toggle="toggle">
+                        </div>
+                    </div>
                 </div>
-                <div align="right">
-                    <input type="checkbox">
-                </div>
-            </div>
-            <div>
-                <div align="left">
-                    <p>Email</p>
-                </div>
-                <div align="right">
-                    <input type="checkbox">
-                </div>
-            </div>
+            </div>                   
         </div>
     </body>
 </html>

@@ -82,3 +82,17 @@
 .appt-num {
     font-size: 1.5em
 }
+
+/* For Settings Page */
+
+.setting-row {
+    width: 400px;
+}
+
+.setting-name {
+    float: left;
+}
+
+.setting-element {
+    float: right;
+}
