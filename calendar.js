@@ -27,28 +27,24 @@ function loadCalendar(month, year) {
 
         //creating individual cells, filing them up with data.
         for (let j = 0; j < 7; j++) {
+            let cell = document.createElement("td");
             if (i === 0 && j < firstDay) {
-                let cell = document.createElement("td");
                 let cellText = document.createTextNode("");
                 cell.appendChild(cellText);
                 row.appendChild(cell);
-            }
-            else if (date > daysInMonth) {
+            } else if (date > daysInMonth) {
                 break;
-            }
-
-            else {
-                let cell = document.createElement("td");
+            } else {
                 let cellText = document.createTextNode(date);
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-                    cell.classList.add("bg-info");
-                } // color today's date
+                    cell.classList.add("bg-success");
+                }
                 cell.appendChild(cellText);
                 row.appendChild(cell);
                 date++;
             }
-
-
+            cell.classList.add("pt-2")
+            cell.classList.add("pb-2")
         }
 
         tbl.appendChild(row); // appending each row into calendar body.
