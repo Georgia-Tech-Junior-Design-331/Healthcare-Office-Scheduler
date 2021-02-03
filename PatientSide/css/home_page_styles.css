@@ -99,12 +99,15 @@
 
 /* For Appointment Detail Page */
 .appt-det {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     background-color: #76A5FF;
     padding: 50px;
     height: 80%;
-    width: 95%;
+    width: 90%;
+    max-width: 600px;
     align-items: center;
     justify-content: center;
     font-weight: 1000;
@@ -122,6 +125,29 @@
     width: 100%;
 }
 
+.reschedule-button:hover {
+    cursor: pointer;
+    background-color: #17a117;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
+.delay-button {
+    background-color: #38f2ff;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 50px;
+    width: 100%;
+}
+
+.delay-button:hover {
+    cursor: pointer;
+    background-color: #28a5ad;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
 .cancel-button {
     background-color: #d82f2f;
     border: none;
@@ -133,6 +159,12 @@
     width: 100%;
 }
 
+.cancel-button:hover {
+    cursor: pointer;
+    background-color: #c76d6d;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
 .search-button {
     background-color: #38f2ff;
     border: none;
@@ -142,5 +174,11 @@
     font-weight: 1000;
     height: 40px;
     width: 70%;
+}
+
+.search-button:hover {
+    cursor: pointer;
+    background-color: #2bb6c0;
+    transition-timing-function: ease-in-out 0.5s;
 }
 
