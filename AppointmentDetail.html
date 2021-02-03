@@ -1,53 +1,102 @@
 <!DOCTYPE html>
 <html>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Navigation bar</title>
+        <link rel="stylesheet" href="css/v1NavBarStyles.css">
+        <link rel="stylesheet" href="css/home_page_styles.css">
+    </head>
+    <body>
+        <header>
+            <div class='left-nav nav-links'>
+                <ul class=''>
+                    <li><img class='logo-button' src="images/logo.png" width=30px height=30px></li>
+                    <li><a class='apt-button' href="index.html"><b>AppointMEnt</b></a></li>
+                </ul>
+            </div>
+            
+            <nav>
+                <ul class='right-links nav-links'>
+                    <li><button class='nav-img-button'><img src="images/home.png" width=30px height=30px></button></li>
+                    <li><button class='nav-img-button'><img src="images/clock.png" width=30px height=30px></button></li>
+                    <li><a href="settings.html"><button class='nav-img-button'><img src="images/profile.png" width=30px height=30px></button></a></li>
+                    <li><button class='sign-out'>Sign Out</button></li>
+                </ul>
+            </nav>
+        </header>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <button type="menu">AppointMEnt</button>
-        <button type="menu">Settings</button>
-        <button type="menu">Sign Out</button>
-    </nav>
+        <hr>
+        <div class='all-appointments'>
+            <div class='appt-heading'>
+                <p class='appts'>Appointments</p>
+                <p class='upcoming-appts'>Appointment Detail</p>
+            </div>
 
+            <div class="appt-det">
+                <u><h2 id="apptTitle"></h2></u>
+                <br>
 
+                <style>
+                    table {
+                        border-collapse: collapse;
+                        border: transparent;
+                        width: 100%;
+                        font: bolder;
+                    }
+                    td {
+                        text-align: left;
+                        padding: 8px;
+                        border: transparent;
+                    }
+                    tr:nth-child(odd) {background-color: rgb(41, 223, 214);}
+                    tr:nth-child(even) {background-color: rgb(127, 246, 255);}
+                </style>
 
-    <h1 id="apptTitle"></h1>
+                <table id="detTable">
+                    <tr>
+                        <td>Current Time: </td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Current Date: </td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Requested Time: </td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Requested Date: </td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Location: </td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Doctor: </td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Info: </td>
+                        <td>N/A</td>
+                    </tr>
+                </table>
 
-    <table id="detTable">
-        <tr>
-            <td>Current Time: </td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>Current Date: </td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>Requested Time: </td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>Requested Date: </td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>Location: </td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>Doctor: </td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>Info: </td>
-            <td>N/A</td>
-        </tr>
-    </table>
-
-    <button type="button" onclick="location.href='Reschedule.html'">Reschedule Appointment</button>
-
-    <button type="button" onclick="cancel()">Cancel Appointment</button>
-
-    <script src="appointment.js"></script>
-
-</body>
+                <div style="width: 100%; display: table-row;">
+                    <div style="width: 50%; float: left;">
+                        <button type="button" class="reschedule-button" onclick="location.href='Reschedule.html'">Reschedule Appointment</button>
+                    </div>
+                    
+                    <div style="margin-left: 50%;">
+                        <button type="button" class="cancel-button" onclick="cancel()">Cancel Appointment</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <script src="appointment.js"></script>
+    </body>
 </html>

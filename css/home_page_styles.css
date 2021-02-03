@@ -96,3 +96,51 @@
 .setting-element {
     float: right;
 }
+
+/* For Appointment Detail Page */
+.appt-det {
+    display: flex;
+    flex-direction: column;
+    background-color: #76A5FF;
+    padding: 50px;
+    height: 80%;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    font-weight: 1000;
+    font-size:1.25em;
+}
+
+.reschedule-button {
+    background-color: #21dd22;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 50px;
+    width: 100%;
+}
+
+.cancel-button {
+    background-color: #d82f2f;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 50px;
+    width: 100%;
+}
+
+.search-button {
+    background-color: #38f2ff;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 40px;
+    width: 70%;
+}
+

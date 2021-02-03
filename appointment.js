@@ -22,7 +22,7 @@ var testInfo = "Checkup"
 let details = new AppointDet(testSchDate, testReqDate, testLoc, testDoc, testInfo);
 var doctor = details.doctor;
 var date = details.schDate;
-document.getElementById("apptTitle").innerHTML = "Appointment with " + doctor;
+document.getElementById("apptTitle").innerHTML = "Appointment with " + doctor + ":";
 CreateTable(details);
 
 
