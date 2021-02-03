@@ -1,0 +1,68 @@
+.InformationListingHeaders {
+    float: left;
+    width: 25vw;
+    margin-left: 10vw;
+}
+
+.InformationListingHeaders h3 {
+    font-family: "Roboto Light", Arial, "Times New Roman";
+    text-align: center;
+    padding: 8px;
+    text-decoration: underline;
+    width: 25vw;
+}
+
+.InformationDisplay {
+    float: right;
+    width: 25vw;
+    margin-right: 10vw;
+}
+
+.InformationDisplay h3 {
+    font-family: "Roboto Light", Arial, "Times New Roman";
+    text-align: center;
+    padding: 8px;
+    width: 25vw;
+}
+
+.QuestionDisplay {
+    float: left;
+    width: 70vw;
+    margin-left: 15vw;
+}
+
+.QuestionDisplay h3 {
+    font-family: "Roboto Light", Arial, "Times New Roman";
+    width: 100%;
+    text-align: center;
+}
+
+
+.YesButton {
+    float: left;
+    text-align: center;
+    width: 140px;
+    height: 65px;
+    margin-left: 25vw;
+    margin-top: 8vh;
+    font-size: 22px;
+    line-height: 65px;
+    border: none;
+    border-radius: 30px;
+    background-color: #38b63c;
+}
+
+
+.BackButton {
+    float: right;
+    text-align: center;
+    width: 140px;
+    height: 65px;
+    margin-right: 25vw;
+    margin-top: 8vh;
+    font-size: 22px;
+    line-height: 65px;
+    border: none;
+    border-radius: 30px;
+    background-color: #ea4141;
+}
