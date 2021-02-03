@@ -3,26 +3,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Portal</title>
+    <link rel="stylesheet" href="css/v1NavBarStyles.css">
+    <link rel="stylesheet" href="css/home_page_styles.css">
 </head>
 <body>
-    <nav>
-        <a href="#">AppointMEnt</a>
-        <button>
-            <img src="home.png" width='25' height='25'>
-        </button>
-        <button>
-            <img src="clock.png" width='25' height='25'>
-        </button>
-        <button>
-            <img src="profile.png" width='25' height='25'>
-        </button>
-        <button>Sign Out</button>
-    </nav>
+    <header>
+        <div class='left-nav nav-links'>
+            <ul class=''>
+                <li><img class='logo-button' src="images/logo.png" width=30px height=30px></li>
+                <li><a class='apt-button' href="index.html"><b>AppointMEnt</b></a></li>
+            </ul>
+        </div>
+        
+        <nav>
+            <ul class='right-links nav-links'>
+                <li><button class='nav-img-button'><img src="images/home.png" width=30px height=30px></button></li>
+                <li><button class='nav-img-button'><img src="images/clock.png" width=30px height=30px></button></li>
+                <li><a href="settings.html"><button class='nav-img-button'><img src="images/profile.png" width=30px height=30px></button></a></li>
+                <li><button class='sign-out'>Sign Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <div class='all-appointments'>
+        <div class='appt-heading'>
+            <p class='appts'>Appointments</p>
+            <p class='upcoming-appts'>Upcoming Appointments</p>
+        </div>
 
-    <div>
-        <h1>Appointments</h1>
-        <h2>Upcoming Appointments</h2>
-        <ul id='apptList'>
+        <div class='appt-list'>
+            <div class='appt-slot'>
+                <div>Oct, 17, 2020 11:00-12:00</div>
+                <div>@ Atlanta Healthcare</div>
+                <a href="AppointmentDetail.html"><button class='view-detail'>View Detail</button></a>
+            </div>
+        </div>
+        
+        <!-- <ul id='apptList'>
             <li>
                 <time datetime='2021-11-13 18:00'>November 13, 2021</time>
                 <br>
@@ -30,7 +47,7 @@
                 <br>
                 <button>View details</button>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </body>
 </html>

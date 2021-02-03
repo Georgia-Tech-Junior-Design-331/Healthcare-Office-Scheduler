@@ -2,27 +2,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/v1NavBarStyles.css">
+    <link rel="stylesheet" href="css/home_page_styles.css">
     <title>Patient Portal</title>
 </head>
 <body>
-    <nav>
-        <a href="#">AppointMEnt</a>
-        <button>
-            <img src="home.png" width='25' height='25'>
-        </button>
-        <button>
-            <img src="clock.png" width='25' height='25'>
-        </button>
-        <button>
-            <img src="profile.png" width='25' height='25'>
-        </button>
-        <button>Sign Out</button>
-    </nav>
+    <header>
+        <div class='left-nav nav-links'>
+            <ul class=''>
+                <li><img class='logo-button' src="images/logo.png" width=30px height=30px></li>
+                <li><a class='apt-button' href="index.html"><b>AppointMEnt</b></a></li>
+            </ul>
+        </div>
+        
+        <nav>
+            <ul class='right-links nav-links'>
+                <li><button class='nav-img-button'><img src="images/home.png" width=30px height=30px></button></li>
+                <li><button class='nav-img-button'><img src="images/clock.png" width=30px height=30px></button></li>
+                <li><a href="settings.html"><button class='nav-img-button'><img src="images/profile.png" width=30px height=30px></button></a></li>
+                <li><button class='sign-out'>Sign Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
 
     <div>
-        <h1>Delay Request</h1>
-        <h2>Upcoming Appointments</h2>
-        <ul id='apptList'>
+        <div class='appt-heading'>
+            <p class='appts'>Delay Request</p>
+        </div>
+
+        <div class='appt-list'>
+            <div class='appt-slot'>
+                <div class='appt-num'>Appointment with <u>Dr. Burdell</u></div>
+                <div>
+                    <form action="">
+                        <label for="delayTime">I will be late by</label>
+                        <select name="delayTime" id="delayTime">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <label for="delayTime">minutes</label>
+                        <div><button type='submit' class='view-detail request' onclick="thankYouAlert()">Request</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            alert("You have submitted a request. You will receive a response via text shortly.")
+        </script>
+
+
+        <!-- <ul id='apptList'>
             <li>
                 <h3><u>Appointment with Dr. <i>PLACEHOLDER</i></u></h3>
                 <div>
@@ -37,7 +70,7 @@
                 </div>
                 <button>Request</button>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </body>
 </html>
