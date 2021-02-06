@@ -9,11 +9,11 @@ class AppointDet {
 }
 
 var testSchDate = new Date();
-testSchDate.setFullYear(2020, 11, 25);
-testSchDate.setHours(9, 30);
+testSchDate.setFullYear(2020, 9, 17);
+testSchDate.setHours(11, 0);
 var testReqDate = new Date();
-testReqDate.setFullYear(2020, 11, 25);
-testReqDate.setHours(9, 30);
+testReqDate.setFullYear(2020, 9, 17);
+testReqDate.setHours(11, 00);
 var testLoc = "STAMPS Health Services"
 var testDoc = "George P. Burdell"
 var testInfo = "Checkup"
@@ -27,11 +27,11 @@ CreateTable(details);
 
 
 function niceDateTimeFormat(dat) {
-    return dat.getHours() + ":" + dat.getMinutes() + " " + (dat.getMonth() + 1) + "-" + dat.getDate() + "-" + dat.getFullYear();
+    return dat.getHours() + "-:" + ("0" + dat.getMinutes()).slice(-2) + " " + (dat.getMonth() + 1) + "" + dat.getDate() + "-" + dat.getFullYear();
 }
 
 function niceTimeFormat(dat) {
-    return dat.getHours() + ":" + dat.getMinutes()
+    return dat.getHours() + ":" + ("0" + dat.getMinutes()).slice(-2)
 }
 
 function niceDateFormat(dat) { //American Date Format
