@@ -1,1 +1,1 @@
-# Healthcare-Office-Scheduler
+Please install and set up Node.js, Express.js, MySQL, and any other dependencies you run into.
