@@ -14,7 +14,7 @@ testSchDate.setHours(11, 0);
 var testReqDate = new Date();
 testReqDate.setFullYear(2020, 9, 17);
 testReqDate.setHours(11, 00);
-var testLoc = "STAMPS Health Services"
+var testLoc = "Atlanta Healthcare"
 var testDoc = "George P. Burdell"
 var testInfo = "Checkup"
 
@@ -25,7 +25,7 @@ var date = details.schDate;
 document.getElementById("apptTitle").innerHTML = "Appointment with " + doctor + ":";
 CreateTable(details);
 
-
+//TODO: add AM and PM to time
 function niceDateTimeFormat(dat) {
     return dat.getHours() + "-:" + ("0" + dat.getMinutes()).slice(-2) + " " + (dat.getMonth() + 1) + "" + dat.getDate() + "-" + dat.getFullYear();
 }
