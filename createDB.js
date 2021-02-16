@@ -2,8 +2,8 @@ var mysql = require("mysql");
 
 var con = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "Pleasebuffthederavandal123"
+    user: "server",
+    password: "Password123"
 });
 
 con.connect(function(err) {
@@ -16,7 +16,7 @@ con.connect(function(err) {
 
     con.query(checkDB, function(err, result) {
         if (err) throw err;
-    })
+    });
 
     // Create a new database db.
     var createDB = "CREATE DATABASE db;";
@@ -32,7 +32,7 @@ con.connect(function(err) {
     con.query(createPatients, function(err, result) {
         if (err) throw err;
         console.log("Patients table created.");
-    })
+    });
 
     // Create a table for db called Appointments. (id, patient_id, datetime)
     var createAppointments = "CREATE TABLE db.Appointments (id int NOT NULL AUTO_INCREMENT, patient_id int NOT NULL, datetime datetime NOT NULL, PRIMARY KEY (id), FOREIGN KEY (patient_id) REFERENCES db.Patients(id));";
@@ -40,7 +40,7 @@ con.connect(function(err) {
     con.query(createAppointments, function(err, result) {
         if (err) throw err;
         console.log("Appointments table created.");
-    })
+    });
 
     con.end(); 
 });
