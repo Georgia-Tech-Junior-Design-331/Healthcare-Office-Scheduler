@@ -71,6 +71,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "server",
     password: "Password123"
+
 });
 
 app.use(
