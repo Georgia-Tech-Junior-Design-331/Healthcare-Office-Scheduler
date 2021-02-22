@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <script type="text/javascript" src="appointmentListing.js"></script>
+
+    <link rel="stylesheet" href="appointmentListing.css">
+</head>
+<body>
+
+
+
+    <div style="font-family:'Roboto Light', Arial, Tahoma;text-align:center;font-size:14px;margin-top:15vw;width:50vw;margin-left:25vw;">
+        <h1>Appointment Delay Request</h1>
+    </div>
+    <div class="InformationListingHeaders">
+        <h3>Name</h3>
+        <h3>Date/Time</h3>
+        <h3>Contact Information</h3>
+        <h3>Additional Info</h3>
+    </div>
+
+    <div class="InformationDisplay">
+        <h3 id="name"></h3>
+        <h3 id="date/time"></h3>
+        <h3 id="contact"></h3>
+        <h3 id="additional"></h3>
+    </div>
+
+    <div class="QuestionDisplay">
+        <h3 id="question"></h3>
+    </div>
+
+    <button class="YesButton">Yes</button>
+    <button class="BackButton">Go Back</button>
+
+
+
+    <!-- This script if for the question -->
+    <script>
+        document.getElementById("question").innerHTML = getQuestion()
+    </script>
+    <!-- These scripts are for the patient information display -->
+    <script>
+        document.getElementById("name").innerHTML = getName()
+    </script>
+    <script>
+        document.getElementById("date/time").innerHTML = getDate()
+    </script>
+    <script>
+        document.getElementById("contact").innerHTML = getContact()
+    </script>
+    <script>
+        document.getElementById("additional").innerHTML = getInfo()
+    </script>
+
+</body>
+</html>
