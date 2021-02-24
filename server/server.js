@@ -8,6 +8,27 @@ const con = require('./cfg/mysql').con;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+//app.use(express.static(__dirname + 'dir of public folder'));
+
+// TESTING START
+app.get('/testing', function(req, res) {
+	res.sendFile(path.join(__dirname + '/testing.html'));
+});
+
+app.get('/getDoctors', function(req, res) {
+	query.getDoctors(con, function(err, result) {
+		res.send(result);
+	});
+});
+
+app.post('/addDoctor', function(req, res) {
+	query.addDoctor(con, req.body, function(err) {
+		query.getDoctors(con, function(err, result) {
+			res.send(result);
+		});
+	});
+});
+// TESTING END
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/../client/office/index.html'));
@@ -25,14 +46,17 @@ app.get('/calendar.js', function(req, res) {
     res.sendFile(path.join(__dirname + '/../client/office/calendar.js'));
 });
 
-app.post('/addPatient', function(req, res) {
-    console.log(req.body);
-    query.addPatient(con, req.body);
+app.get('/upcomingAppointments', function(req, res) {
+    res.sendFile(path.join(__dirname + '/../client/office/upcomingAppointments.html'));
 });
 
-app.post('/addAppointment', function(req, res) {
-    console.log(req.body);
-    
+app.get('/upcomingAppointmentsStyle.css', function(req, res) {
+    res.sendFile(path.join(__dirname + '/../client/office/upcomingAppointmentsStyle.css'));
 });
 
 app.listen(8080);
+console.log('Server is listening on port 8080.');
+con.connect();
+console.log('Connected to database.');
+
+
