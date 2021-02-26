@@ -71,23 +71,51 @@ function getUpcomingAppointments(con, callback) {
 
     con.query(sql, function(err, result) {
         if (err) {
-            console.log('Failed to retrieve list of appointments from database.');
+            console.log('Failed to retrieve list of upcoming appointments from database.');
         } else {
-            console.log('Retrieved all appointments from database.');
+            console.log('Retrieved all upcoming appointments from database.');
         }
 
         callback(err, result);
     });
 }
 
-function getLatestUpcomingAppointments(con, num, callback) {
+function getEarliestUpcomingAppointments(con, num, callback) {
     var sql = "SELECT * FROM db.Appointments WHERE status!=0 ORDER BY datetime ASC LIMIT " + num + ';';
 
     con.query(sql, function(err, result) {
         if (err) {
-            console.log('Failed to retrieve list of appointments from database.');
+            console.log('Failed to retrieve list of earliest ' + num + ' upcoming appointments from database.');
         } else {
-            console.log('Retrieved all appointments from database.');
+            console.log('Retrieved earliest ' + num + ' upcoming appointments from database.');
+        }
+
+        callback(err, result);
+    });
+}
+
+function getPastAppointments(con, callback) {
+    var sql = "SELECT * FROM db.Appointments WHERE status=0 ORDER BY datetime ASC;";
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Failed to retrieve list of past appointments from database.');
+        } else {
+            console.log('Retrieved all past appointments from database.');
+        }
+
+        callback(err, result);
+    });
+}
+
+function getAppointmentById(con, appointment, callback) {
+    var sql = "SELECT * FROM db.Appointments WHERE id=" + appointment.id + ";";
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Failed to retrieve appointment from database.');
+        } else {
+            console.log('Retrieved appointment from database.');
         }
 
         callback(err, result);
@@ -95,8 +123,8 @@ function getLatestUpcomingAppointments(con, num, callback) {
 }
 
 function addAppointment(con, appointment, patient, doctor, callback) {
-    var sql = "INSERT INTO db.Appointments (p_fname, p_lname, d_id, datetime, description, status) VALUES ?;";
-    var values = [[appointment.p_fname, p_lname, doctor.id, appointment.datetime, appointment.description, appointment.status]];
+    var sql = "INSERT INTO db.Appointments (p_fname, p_lname, d_id, datetime, end, description, status) VALUES ?;";
+    var values = [[patient.fname, patient.lname, doctor.id, appointment.datetime, null, appointment.description, appointment.status]];
 
     con.query(sql, [values], function(err) {
         if (err) {
@@ -109,4 +137,32 @@ function addAppointment(con, appointment, patient, doctor, callback) {
     });
 }
 
-module.exports = {getDoctors, addDoctor, addAppointment};
+function setAppointment(con, appointment, callback) {
+    var sql = "UPDATE db.Appointments SET datetime=" + appointment.start 
+        + ", end=" + appointment.end 
+        + ", description=" + appointment.description 
+        + ", status=" + appointment.status
+        + " WHERE id=" + appointment.id + ";";
+
+    con.query(sql, function(err) {
+        if (err) {
+            console.log('Failed to update appointment in database.');
+        } else {
+            console.log('Updated appointment in database.');
+        }
+
+        callback(err);
+    });
+}
+
+module.exports = {
+    getDoctors, 
+    addDoctor, 
+    getAppointments, 
+    getUpcomingAppointments,
+    getEarliestUpcomingAppointments,
+    getPastAppointments,
+    getAppointmentById,
+    addAppointment,
+    setAppointment
+};

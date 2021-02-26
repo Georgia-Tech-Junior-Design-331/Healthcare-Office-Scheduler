@@ -80,6 +80,41 @@ app.post('/addDoctor', function(req, res) {
 	});
 });
 
+app.get('/getAppointments', function(req, res) {
+	query.getAppointments(con, function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+app.get('/getUpcomingAppointments', function(req, res) {
+	query.getUpcomingAppointments(con, function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+app.get('/addAppointment', function(req, res) {
+	var appointment = req.body.appointment;
+	var patient = req.body.patient;
+	var doctor = req.body.doctor;
+	query.addAppointment(con, appointment, patient, doctor, function(err) {
+		query.getUpcomingAppointments(con, function(err, result) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+			}
+		});
+	});
+});
+
 app.listen(8080, function(err) {
 	if (err) {
 		throw err;
