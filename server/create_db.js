@@ -41,7 +41,7 @@ con.connect(function(err) {
     });
 
     // Create a table for db called Appointments. (id, p_fname, p_lname, d_id, datetime, end, description, status)
-    var createAppointments = "CREATE TABLE db.Appointments (id int NOT NULL AUTO_INCREMENT, p_fname varchar(255) NOT NULL, p_lname varchar(255) NOT NULL, d_id int NOT NULL, datetime datetime NOT NULL, end datetime, description varchar(255), status int NOT NULL, PRIMARY KEY (id), FOREIGN KEY (d_id) REFERENCES db.Doctors(id));";
+    var createAppointments = "CREATE TABLE db.Appointments (id int NOT NULL AUTO_INCREMENT, p_fname varchar(255) NOT NULL, p_lname varchar(255) NOT NULL, d_id int NOT NULL, start datetime NOT NULL, end datetime, description varchar(255), status int NOT NULL, PRIMARY KEY (id), FOREIGN KEY (d_id) REFERENCES db.Doctors(id));";
 
     con.query(createAppointments, function(err, result) {
         if (err) throw err;

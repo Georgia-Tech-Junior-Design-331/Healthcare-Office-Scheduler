@@ -40,7 +40,7 @@ con.connect(function(err) {
 	*/
 
 	/*
-	var app = {'datetime': new Date(), 'end': null, 'description': 'Hello.', 'status': 1};
+	var app = {'start': new Date(), 'end': null, 'description': 'Hello.', 'status': 1};
 	var patient = {'fname': 'Joe', 'lname': 'Cain'};
 	var doctor = {'id': 1};
 

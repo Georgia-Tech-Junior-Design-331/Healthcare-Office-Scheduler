@@ -67,7 +67,7 @@ function getAppointments(con, callback) {
 }
 
 function getUpcomingAppointments(con, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE status!=0 ORDER BY datetime ASC;";
+    var sql = "SELECT * FROM db.Appointments WHERE status!=0 ORDER BY start ASC;";
 
     con.query(sql, function(err, result) {
         if (err) {
@@ -81,7 +81,7 @@ function getUpcomingAppointments(con, callback) {
 }
 
 function getEarliestUpcomingAppointments(con, num, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE status!=0 ORDER BY datetime ASC LIMIT " + num + ';';
+    var sql = "SELECT * FROM db.Appointments WHERE status!=0 ORDER BY start ASC LIMIT " + num + ';';
 
     con.query(sql, function(err, result) {
         if (err) {
@@ -95,7 +95,7 @@ function getEarliestUpcomingAppointments(con, num, callback) {
 }
 
 function getPastAppointments(con, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE status=0 ORDER BY datetime ASC;";
+    var sql = "SELECT * FROM db.Appointments WHERE status=0 ORDER BY start ASC;";
 
     con.query(sql, function(err, result) {
         if (err) {
@@ -123,8 +123,8 @@ function getAppointmentById(con, appointment, callback) {
 }
 
 function addAppointment(con, appointment, patient, doctor, callback) {
-    var sql = "INSERT INTO db.Appointments (p_fname, p_lname, d_id, datetime, end, description, status) VALUES ?;";
-    var values = [[patient.fname, patient.lname, doctor.id, appointment.datetime, null, appointment.description, appointment.status]];
+    var sql = "INSERT INTO db.Appointments (p_fname, p_lname, d_id, start, end, description, status) VALUES ?;";
+    var values = [[patient.fname, patient.lname, doctor.id, appointment.start, appointment.end, appointment.description, appointment.status]];
 
     con.query(sql, [values], function(err) {
         if (err) {
@@ -138,7 +138,7 @@ function addAppointment(con, appointment, patient, doctor, callback) {
 }
 
 function setAppointment(con, appointment, callback) {
-    var sql = "UPDATE db.Appointments SET datetime=" + appointment.start 
+    var sql = "UPDATE db.Appointments SET start=" + appointment.start 
         + ", end=" + appointment.end 
         + ", description=" + appointment.description 
         + ", status=" + appointment.status
