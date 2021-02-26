@@ -58,6 +58,14 @@ app.get('/upcomingAppointments.js', function(req, res) {
     res.sendFile(path.join(office + 'upcomingAppointments.js'));
 });
 
+app.get('/addAppointmentPage', function(req, res) {
+    res.sendFile(path.join(office + 'addAppointmentPage.html'));
+});
+
+app.get('/addAppointmentPage.js', function(req, res) {
+    res.sendFile(path.join(office + 'addAppointmentPage.js'));
+});
+
 app.get('/getDoctors', function(req, res) {
 	query.getDoctors(con, function(err, result) {
 		if (err) {
