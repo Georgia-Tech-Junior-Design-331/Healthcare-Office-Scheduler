@@ -50,10 +50,12 @@ con.connect(function(err) {
 	});
 	*/
 
+	/*
 	var app = {'id': 1};
 
 	query.getAppointmentById(con, app, function(err, result) {
 		if (err) throw err;
 		console.log(result);
 	});
+	*/
 });
