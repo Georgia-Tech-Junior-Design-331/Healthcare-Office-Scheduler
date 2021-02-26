@@ -96,7 +96,7 @@ function getLatestUpcomingAppointments(con, num, callback) {
 
 function addAppointment(con, appointment, patient, doctor, callback) {
     var sql = "INSERT INTO db.Appointments (p_fname, p_lname, d_id, datetime, description, status) VALUES ?;";
-    var values = [[appointment.p_fname, p_lname, doctor.id, appointment.datetime]];
+    var values = [[appointment.p_fname, p_lname, doctor.id, appointment.datetime, appointment.description, appointment.status]];
 
     con.query(sql, [values], function(err) {
         if (err) {
