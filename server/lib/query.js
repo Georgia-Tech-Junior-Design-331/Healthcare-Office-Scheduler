@@ -28,6 +28,7 @@ function getDoctors(con, callback) {
     con.query(sql, function(err, result) {
         if (err) {
             console.log('Failed to retrieve list of doctors from database.');
+            console.log(err);
         } else {
             console.log('Retrieved all of doctors from database.');
             console.log(result);
@@ -44,6 +45,7 @@ function addDoctor(con, doctor, callback) {
     con.query(sql, [values], function(err) {
         if (err) { 
             console.log('Failed to add doctor ' + doctor.fname + ' ' + doctor.lname + ' to database.');
+            console.log(err);
         } else {
             console.log('Added doctor ' + doctor.fname + ' ' + doctor.lname + ' to database.')
         }
@@ -58,6 +60,7 @@ function getAppointments(con, callback) {
     con.query(sql, function(err, result) {
         if (err) {
             console.log('Failed to retrieve list of appointments from database.');
+            console.log(err);
         } else {
             console.log('Retrieved all appointments from database.');
         }
@@ -72,6 +75,7 @@ function getUpcomingAppointments(con, callback) {
     con.query(sql, function(err, result) {
         if (err) {
             console.log('Failed to retrieve list of upcoming appointments from database.');
+            console.log(err);
         } else {
             console.log('Retrieved all upcoming appointments from database.');
         }
@@ -86,6 +90,7 @@ function getEarliestUpcomingAppointments(con, num, callback) {
     con.query(sql, function(err, result) {
         if (err) {
             console.log('Failed to retrieve list of earliest ' + num + ' upcoming appointments from database.');
+            console.log(err);
         } else {
             console.log('Retrieved earliest ' + num + ' upcoming appointments from database.');
         }
@@ -100,6 +105,7 @@ function getPastAppointments(con, callback) {
     con.query(sql, function(err, result) {
         if (err) {
             console.log('Failed to retrieve list of past appointments from database.');
+            console.log(err);
         } else {
             console.log('Retrieved all past appointments from database.');
         }
@@ -114,6 +120,7 @@ function getAppointmentById(con, appointment, callback) {
     con.query(sql, function(err, result) {
         if (err) {
             console.log('Failed to retrieve appointment from database.');
+            console.log(err);
         } else {
             console.log('Retrieved appointment from database.');
         }
@@ -129,6 +136,7 @@ function addAppointment(con, appointment, patient, doctor, callback) {
     con.query(sql, [values], function(err) {
         if (err) {
             console.log('Failed to add appointment to database.'); 
+            console.log(err);
         } else {
             console.log('Added appointment to database.');
         }  
@@ -147,6 +155,7 @@ function setAppointment(con, appointment, callback) {
     con.query(sql, function(err) {
         if (err) {
             console.log('Failed to update appointment in database.');
+            console.log(err);
         } else {
             console.log('Updated appointment in database.');
         }

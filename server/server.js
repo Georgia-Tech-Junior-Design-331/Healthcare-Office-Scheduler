@@ -108,7 +108,7 @@ app.get('/getUpcomingAppointments', function(req, res) {
 	});
 });
 
-app.get('/addAppointment', function(req, res) {
+app.post('/addAppointment', function(req, res) {
 	var appointment = req.body.appointment;
 	var patient = req.body.patient;
 	var doctor = req.body.doctor;

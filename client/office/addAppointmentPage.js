@@ -32,7 +32,7 @@ class ApptForm extends React.Component {
     
     //put data in database
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "/addAppointment", true);
+    xhttp.open("POST", "/addAppointment", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     //console.log(JSON.stringify(appt));
     xhttp.send([JSON.stringify(appt)]);
