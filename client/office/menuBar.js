@@ -18,7 +18,7 @@ function Menu() {
                     </nav>
                 </div>
                 <div className="col-2">
-                    <a href="profile"  class="nav-link">
+                    <a href="profile"  className="nav-link">
                         <img alt="usericon" src="assets/images/person-icon.png" width="40" height="40"></img>
                     </a>
                 </div>
