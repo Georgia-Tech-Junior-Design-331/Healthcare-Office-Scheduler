@@ -26,12 +26,19 @@ app.get('/home', function(req, res) {
     res.sendFile(path.join(office + 'index.html'));
 });
 
+app.get('/menuBar.js', function(req, res) {
+    res.sendFile(path.join(office + 'menuBar.js'));
+});
+
 app.get('/calendar.js', function(req, res) {
     res.sendFile(path.join(office + 'calendar.js'));
 });
 
 app.get('/dynamic_app.js', function(req, res) {
 	res.sendFile(path.join(office + 'dynamic_app.js'));
+
+app.get('/TableElement.js', function(req, res) {
+    res.sendFile(path.join(office + 'TableElement.js'));
 });
 
 app.get('/profile', function(req, res) {

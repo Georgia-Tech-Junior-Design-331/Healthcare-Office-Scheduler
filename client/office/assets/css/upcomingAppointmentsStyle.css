@@ -1,34 +1,40 @@
+/* Modified the HTML and CSS in this page to change the display from a table to div elements
+   We can make this look cleaner in future frontend sprints
+*/
 
-table {
-    border-spacing: 0.5rem;
-    margin-left: 15vw;
-    margin-top: 10vh;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-td {
-    padding-left: 0.8vw;
-    padding-top: 0.2vw;
-    padding-bottom: 0.2vw;
-    height: 0.5vw;
-}
-td:nth-child(1) {
-    background: #76A5FF;
-    width: 60vw;
-    font-family: "Roboto Light", Arial, "Times New Roman";
-    border-radius: 20px;
-; }
-td:nth-child(2) {
-
-    width: 8vw;
-
-    font-family: "Roboto Light", Arial, "Times New Roman";
-    border-radius: 20px;
-    text-align: center;
-; }
-
-td:nth-child(2) button {
+.view-button {
     line-height: 30px;
     width: 8vw;
     height: 5vw;
     border-radius: 10px;
+    background: #5677b5;
+}
+
+.element-container {
+    display: flex;
     background: #76A5FF;
+    align-items: center;
+    justify-content: space-around;
+    margin: 25px;
+    width: 1000px;
+    border-radius: 20px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+
+}
+
+.element-box {
+    align-items: left;
+    justify-content: left;
+    margin-right: 10px;
 }
