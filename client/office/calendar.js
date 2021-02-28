@@ -58,17 +58,26 @@ function loadQuickAppointments() {
     xhttp.open("GET", "/getUpcomingAppointments", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     var apptInfo = 'debug: asynchronicity is fun'
-    xhttp.onload = function() {
-        apptInfo = JSON.parse(xhttp.responseText);
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            apptInfo = JSON.parse(xhttp.responseText);
         //console.log(apptInfo);
 
-        ReactDOM.render(<Appt apptName={apptInfo[0].p_fname + " "+ apptInfo[0].p_lname} apptNum="1" apptTime={apptInfo[0].start} />, document.getElementById('appt1'));
-        ReactDOM.render(<Appt apptName={apptInfo[1].p_fname + " "+ apptInfo[1].p_lname} apptNum="2" apptTime={apptInfo[1].start} />, document.getElementById('appt2'));
-        ReactDOM.render(<Appt apptName={apptInfo[2].p_fname + " "+ apptInfo[2].p_lname} apptNum="3" apptTime={apptInfo[2].start} />, document.getElementById('appt3'));
+        
+
+        ReactDOM.render(<Appt apptName={apptInfo[0].p_fname + " "+ apptInfo[0].p_lname} apptNum="1" apptTime={prettyDateAndTime(apptInfo[0].start)} />, document.getElementById('appt1'));
+        ReactDOM.render(<Appt apptName={apptInfo[1].p_fname + " "+ apptInfo[1].p_lname} apptNum="2" apptTime={prettyDateAndTime(apptInfo[1].start)} />, document.getElementById('appt2'));
+        ReactDOM.render(<Appt apptName={apptInfo[2].p_fname + " "+ apptInfo[2].p_lname} apptNum="3" apptTime={prettyDateAndTime(apptInfo[2].start)} />, document.getElementById('appt3'));
+        }
     };
     xhttp.send(null);
     
     //console.log(apptInfo);
+}
+
+function prettyDateAndTime(dateAndTime) {
+    var a = new Date(dateAndTime);
+    return a.toLocaleDateString() + " @ " + a.toLocaleTimeString();
 }
 
 function Appt(props) {

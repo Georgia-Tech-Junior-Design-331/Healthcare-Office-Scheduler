@@ -4,10 +4,16 @@ class ApptForm extends React.Component {
     this.state = {
       patname: '',
       docId: 0,
-      time: null
+      stime: null,
+      etime: null,
+      date: null,
+      description: '',
+      docInfo: null
     }
+    
     this.myChangeHandler = this.myChangeHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getDocInfo();
   }
 
   myChangeHandler = (event) => {
@@ -17,7 +23,7 @@ class ApptForm extends React.Component {
   }
 
   handleSubmit(event) {
-    //alert('A name was submitted: ' + this.state.patname);
+    //alert('A name was submitted: ' + this.state.patFname);
     var appt = {};
     appt.patient = {};
     appt.doctor = {};
@@ -25,53 +31,55 @@ class ApptForm extends React.Component {
     appt.patient.fname = this.state.patFname;
     appt.patient.lname = this.state.patLname;
     appt.doctor.id = this.state.docId;
-    appt.appointment.start = this.state.time;
-    appt.appointment.end = null;
+    appt.appointment.description = this.state.description;
+    appt.appointment.start = this.state.date + " " + this.state.stime + ":00"; //This is format for MySQL
+    appt.appointment.end = this.state.date + " " + this.state.etime + ":00";
+    appt.appointment.status = 1; //Any new appointment should be listed as "scheduled"
     //console.log(appt);
 
     
     //put data in database
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/addAppointment", true);
+    xhttp.open("POST", "/addAppointment", false); //Synchronous is not ideal
     xhttp.setRequestHeader('Content-Type', 'application/json');
     //console.log(JSON.stringify(appt));
     xhttp.send([JSON.stringify(appt)]);
     
-    //TODO: go back to main page
+    //go back to main page
     event.preventDefault();
-    //window.location.pathname = "home"
+    window.location.pathname = "home"
   }
 
-  getDocSel() {
+  getDocInfo() {
     //get doctor names
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "/getDoctors", false); //synchronous (false) is not ideal
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    var docInfo = 'debug: asynchronicity is fun'
-    let selection = [];
+    var doctorInfo = 'debug: asynchronicity is fun'
     xhttp.onload = function() {
-        docInfo = JSON.parse(xhttp.responseText);
+        doctorInfo = JSON.parse(xhttp.responseText);
         //console.log(docInfo);
-
-        var i = 0
-        docInfo.forEach(doc => {
-          selection.push(<option key={i} value={doc.id}>{doc.fname + " " + doc.lname}</option>);
-          i++;
-        });
-        //console.log(selection);
-        
-
-            
+        //console.log(selection);  
     };
     xhttp.send(null);
-
+    this.state.docInfo = doctorInfo;
     //console.log(selection);
-    return selection
+  }
+
+  getDocSelHTML() {
+    var i = 0
+    let selection = [];
+    this.state.docInfo.forEach(doc => {
+      selection.push(<option key={i} value={doc.id}>{doc.fname + " " + doc.lname}</option>);
+      i++;
+    });
+    return selection;
   }
 
   render() {
     return (
       <div className="centerForm">
+      { this.state && this.state.docInfo &&
       <form onSubmit={this.handleSubmit}>
         <p>Patient name:</p>
         <table className="centerForm">
@@ -100,40 +108,41 @@ class ApptForm extends React.Component {
         <p>Doctor name:</p>
         <select name="docId" value={this.state.docId} onChange={this.myChangeHandler}>
             <option value='0' disabled>Select Doctor</option> {/*TODO: validation */}
-            {this.getDocSel() /*Note: as of Feb 27th this implementation sends requests to database anytime you type. Not ideal. */}
+            {this.getDocSelHTML() /*TODO: as of Feb 27th this implementation sends requests to database anytime you type. Not ideal. */}
         </select>
-        <p>Start Time: (HH:MM AM/PM)</p>
+        <p></p>
+        <p>Date:</p>
         <input
-          type='time' //NOTE: time type is not supported by Safari
-          name='time'
+          type='date' //NOTE: date type is not supported by Safari
+          name='date'
           onChange={this.myChangeHandler}
         />
+        <p></p>
+        <p>Start and End Time: (HH:MM AM/PM)</p>
+        <input
+          type='time' //NOTE: time type is not supported by Safari
+          name='stime'
+          onChange={this.myChangeHandler}
+        />
+        <input
+          type='time' //NOTE: time type is not supported by Safari
+          name='etime'
+          onChange={this.myChangeHandler}
+        />
+        <p></p>
+        <input
+          type='textarea'
+          name='description'
+          placeholder="Appointment Description"
+          onChange={this.myChangeHandler}
+        />
+        <p></p>
         <input type="submit" value="Submit" />
       </form>
-      </div>
-    );//Debug: <h1>{this.state.patname} {this.state.docname} {this.state.time}</h1>
+    }
+    </div>
+    );
   }
-}
-
-function Appt(props) {
-  //seachbox
-  
-  
-  //results
-  
-  //time
-
-  //doctorsearch
-
-  //doctorresults
-
-  //confirmbutton-> to main page, plus new data
-
-  //cancel-> to main page
-
-  return (
-    <p>Test</p>
-  );
 }
 
 ReactDOM.render(<ApptForm />, document.getElementById('root'));
