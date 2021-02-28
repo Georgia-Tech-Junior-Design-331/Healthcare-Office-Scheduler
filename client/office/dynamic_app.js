@@ -65,6 +65,6 @@ function render_appointments() {
 
     ReactDOM.render(
     	[child], 
-    	document.getElementById('appt1')
+    	document.getElementById('list')
     );
 }
