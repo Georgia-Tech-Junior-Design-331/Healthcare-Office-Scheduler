@@ -44,6 +44,11 @@ function loadQuickAppointments() {
   doctorsReq.send(null);
 }
 
+function prettyDateAndTime(dateAndTime) {
+  var a = new Date(dateAndTime);
+  return a.toLocaleDateString() + " @ " + a.toLocaleTimeString();
+}
+
 function TableElement(props) {
   // Access to the current appointment, passed in to the component as a prop
   const [currElement, dr] = props.objt;
@@ -52,7 +57,7 @@ function TableElement(props) {
     <div className="element-container">
       <div className="info-container">
         <div className="element-box"> <b>Patient: </b>{`${currElement.p_lname}, ${currElement.p_fname}`}</div>
-        <div className="element-box"><b>Appointment Time: </b>{`${currElement.start}`}</div>
+        <div className="element-box"><b>Appointment Time: </b>{`${prettyDateAndTime(currElement.start)}`}</div>
         <div className="element-box"><b>Reason For Visit: </b>{`${currElement.description}`}</div>
         <div className="element-box"><b>Doctor: </b>Dr. {`${dr}`}</div>
       </div>

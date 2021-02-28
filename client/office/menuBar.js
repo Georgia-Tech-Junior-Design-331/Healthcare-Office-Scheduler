@@ -3,9 +3,7 @@ ReactDOM.render(<Menu />, document.getElementById('menu'));
 function Menu() {
     return (
     <div className="container-fluid">
-        <div className="header text-center mt-3" id="main-header">
-            <h1>Add an Appointment</h1>
-        </div>
+        
         <div className="container-fluid">
             <div className="row justify-content-between mt-3">
                 <div className="card col-8" style={{backgroundColor: "#e5e5e5"}}>
@@ -26,4 +24,9 @@ function Menu() {
         </div>
     </div>
     );
+    /*
+    <div className="header text-center mt-3" id="main-header">
+            <h1>Page Title</h1>
+        </div>
+    */
 }

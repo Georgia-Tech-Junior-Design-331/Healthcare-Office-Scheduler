@@ -25,7 +25,7 @@ class Appointment extends React.Component {
 		                  		</td>
 		              		</tr>
 		              		<tr>
-		                  		<td>{this.datetime}</td>
+		                  		<td>{prettyDateAndTime(this.datetime)}</td>
 		              		</tr>
 		            	</tbody>
 		          	</table>
@@ -33,6 +33,11 @@ class Appointment extends React.Component {
 		    </li>
         );
     }
+}
+
+function prettyDateAndTime(dateAndTime) {
+	var a = new Date(dateAndTime);
+	return a.toLocaleDateString() + " @ " + a.toLocaleTimeString();
 }
 
 function load_appointments() {
