@@ -51,6 +51,7 @@ function loadCalendar(month, year) {
         //creating individual cells, filing them up with data.
         for (let j = 0; j < 7; j++) {
             let cell = document.createElement("td");
+            cell.id = date;
             if (i === 0 && j < firstDay) {
                 let cellText = document.createTextNode("");
                 cell.appendChild(cellText);
@@ -65,13 +66,13 @@ function loadCalendar(month, year) {
                 cell.appendChild(cellText);
                 row.appendChild(cell);
                 date++;
+                cell.addEventListener('click', function() {
+                    location.href = "appointments?date=" + year + "-" + (month+1) + "-" + cell.id;
+                });
             }
-            cell.id = date - 1;
             cell.classList.add("pt-2")
             cell.classList.add("pb-2")
-            cell.addEventListener('click', function() {
-                location.href = "appointments?date=" + year + "-" + (month+1) + "-" + cell.id;
-            });
+            
         }
 
         tbl.appendChild(row); // appending each row into calendar body.
