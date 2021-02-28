@@ -42,11 +42,19 @@ function loadQuickAppointments() {
         for (const element of apptInfo) {
           items.push(<TableElement objt={[element, doctors[element.d_id - 1].lname]}/>);
         }
-        ReactDOM.render(
-          <div className="container">
-            {items}
-          </div>
-        , document.getElementById("appointments"));
+        if (items.length != 0) {
+          ReactDOM.render(
+            <div className="container">
+              {items}
+            </div>
+          , document.getElementById("appointments"));
+        } else {
+          ReactDOM.render(
+            <div className="container">
+              {"No appointment found."}
+            </div>
+          , document.getElementById("appointments"));
+        }
     };
     xhttp.send(null);
   };

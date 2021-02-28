@@ -15,9 +15,32 @@ function loadCalendar(month, year) {
 
     // clearing all previous cells
     tbl.innerHTML = "";
+    monthAndYear.innerHTML = "";
+    
+    var left_arrow = new Image(20, 20);
+    left_arrow.src = '/assets/images/arrow-left-circle.svg';
+    var right_arrow = new Image(20, 20);
+    right_arrow.src = '/assets/images/arrow-right-circle.svg';
+    left_arrow.addEventListener('click', function() {
+        if (month != 0) {
+            loadCalendar(month-1, year);
+        } else {
+            loadCalendar(11, year-1);
+        }
+    });
+    right_arrow.addEventListener('click', function() {
+        if (month != 11) {
+            loadCalendar(month+1, year);
+        } else {
+            loadCalendar(0, year+1);
+        }
+    });
+    var textnode = document.createTextNode("    " + months[month] + " " + year + "    "); 
 
     // filing data about month and in the page via DOM.
-    monthAndYear.innerHTML = months[month] + " " + year;
+    monthAndYear.appendChild(left_arrow);
+    monthAndYear.appendChild(textnode);
+    monthAndYear.appendChild(right_arrow);
 
     // creating all cells
     let date = 1;
