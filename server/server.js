@@ -30,8 +30,16 @@ app.get('/calendar.js', function(req, res) {
     res.sendFile(path.join(office + 'calendar.js'));
 });
 
+app.get('/dynamic_app.js', function(req, res) {
+	res.sendFile(path.join(office + 'dynamic_app.js'));
+});
+
 app.get('/profile', function(req, res) {
 	res.sendFile(path.join(office + 'profile.html'));
+});
+
+app.get('/appointment', function(req, res) {
+	console.log('Client requests page for appointment id: ' + req.query.id);
 });
 
 app.get('/appointments', function(req, res) {
@@ -67,6 +75,7 @@ app.get('/addAppointmentPage.js', function(req, res) {
 });
 
 app.get('/getDoctors', function(req, res) {
+	console.log('/getDoctors');
 	query.getDoctors(con, function(err, result) {
 		if (err) {
 			console.log(err);
@@ -77,6 +86,7 @@ app.get('/getDoctors', function(req, res) {
 });
 
 app.post('/addDoctor', function(req, res) {
+	console.log('/addDoctor');
 	query.addDoctor(con, req.body, function(err) {
 		query.getDoctors(con, function(err, result) {
 			if (err) {
@@ -89,6 +99,7 @@ app.post('/addDoctor', function(req, res) {
 });
 
 app.get('/getAppointments', function(req, res) {
+	console.log('/getAppointments');
 	query.getAppointments(con, function(err, result) {
 		if (err) {
 			console.log(err);
@@ -99,6 +110,7 @@ app.get('/getAppointments', function(req, res) {
 });
 
 app.get('/getUpcomingAppointments', function(req, res) {
+	console.log('/getUpcomingAppointments');
 	query.getUpcomingAppointments(con, function(err, result) {
 		if (err) {
 			console.log(err);
@@ -109,6 +121,7 @@ app.get('/getUpcomingAppointments', function(req, res) {
 });
 
 app.post('/addAppointment', function(req, res) {
+	console.log('/addAppointment');
 	var appointment = req.body.appointment;
 	var patient = req.body.patient;
 	var doctor = req.body.doctor;

@@ -5,8 +5,7 @@ let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 
 let monthAndYear = document.getElementById("calendar-month");
 loadCalendar(thisMonth, thisYear);
-loadQuickAppointments();
-
+//loadQuickAppointments();
 
 function loadCalendar(month, year) {
     let firstDay = (new Date(year, month)).getDay();
@@ -52,6 +51,7 @@ function loadCalendar(month, year) {
     }
 }
 
+/*
 function loadQuickAppointments() {
     //Get data
     var xhttp = new XMLHttpRequest();
@@ -96,3 +96,4 @@ function Appt(props) {
         </li>
     );
 }
+*/
