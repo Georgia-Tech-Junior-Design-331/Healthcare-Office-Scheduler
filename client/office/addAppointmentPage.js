@@ -32,8 +32,20 @@ class ApptForm extends React.Component {
     appt.patient.lname = this.state.patLname;
     appt.doctor.id = this.state.docId;
     appt.appointment.description = this.state.description;
-    appt.appointment.start = this.state.date + " " + this.state.stime + ":00"; //This is format for MySQL
-    appt.appointment.end = this.state.date + " " + this.state.etime + ":00";
+     //This is format for MySQL
+
+    if (this.state.date && this.state.stime) {
+      appt.appointment.start = this.state.date + " " + this.state.stime + ":00";
+      if (this.state.etime) {
+        appt.appointment.end = this.state.date + " " + this.state.etime + ":00";
+      } else {
+        appt.appointment.end = null;
+      }
+    } else {
+      alert('Please enter a date and starting time.');
+      return;
+    }
+    
     appt.appointment.status = 1; //Any new appointment should be listed as "scheduled"
     //console.log(appt);
 
