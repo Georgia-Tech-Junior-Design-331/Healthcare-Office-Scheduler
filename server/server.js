@@ -36,6 +36,7 @@ app.get('/calendar.js', function(req, res) {
 
 app.get('/dynamic_app.js', function(req, res) {
 	res.sendFile(path.join(office + 'dynamic_app.js'));
+});
 
 app.get('/TableElement.js', function(req, res) {
     res.sendFile(path.join(office + 'TableElement.js'));
@@ -159,6 +160,3 @@ con.connect(function(err) {
 		console.log('Connected to database.');
 	}	
 });
-
-
-
