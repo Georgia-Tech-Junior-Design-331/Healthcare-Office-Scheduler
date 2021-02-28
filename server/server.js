@@ -30,6 +30,10 @@ app.get('/calendar.js', function(req, res) {
     res.sendFile(path.join(office + 'calendar.js'));
 });
 
+app.get('/TableElement.js', function(req, res) {
+    res.sendFile(path.join(office + 'TableElement.js'));
+});
+
 app.get('/profile', function(req, res) {
 	res.sendFile(path.join(office + 'profile.html'));
 });
