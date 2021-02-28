@@ -54,6 +54,10 @@ app.get('/appointments', function(req, res) {
 	res.sendFile(path.join(office + 'appointments.html'));
 });
 
+app.get('/appointments.js', function(req, res) {
+	res.sendFile(path.join(office + 'appointments.js'));
+});
+
 app.get('/appointmentListing', function(req, res) {
 	res.sendFile(path.join(office + 'appointmentListing.html'));
 });
@@ -120,6 +124,17 @@ app.get('/getAppointments', function(req, res) {
 app.get('/getUpcomingAppointments', function(req, res) {
 	console.log('/getUpcomingAppointments');
 	query.getUpcomingAppointments(con, function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+app.get('/getAppointmentsOnDay', function(req, res) {
+	console.log('/getAppointmentsOnDay');
+	query.getAppointmentsOnDay(con, req.query.date, function(err, result) {
 		if (err) {
 			console.log(err);
 		} else {

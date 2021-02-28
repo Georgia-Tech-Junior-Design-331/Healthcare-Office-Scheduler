@@ -70,9 +70,25 @@ function getAppointments(con, callback) {
 }
 
 function getUpcomingAppointments(con, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE status!=0 ORDER BY start ASC;";
+    var sql = "SELECT * FROM db.Appointments WHERE status!=0 AND start >= NOW() ORDER BY start ASC;";
 
     con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Failed to retrieve list of upcoming appointments from database.');
+            console.log(err);
+        } else {
+            console.log('Retrieved all upcoming appointments from database.');
+        }
+
+        callback(err, result);
+    });
+}
+
+function getAppointmentsOnDay(con, date, callback) {
+    var sql = "SELECT * FROM db.Appointments WHERE START BETWEEN '" + date + " 00:00:00' AND '" + date + " 23:59:59';";
+
+    con.query(sql, date, function(err, result) {
+        console.log(sql)
         if (err) {
             console.log('Failed to retrieve list of upcoming appointments from database.');
             console.log(err);
@@ -169,6 +185,7 @@ module.exports = {
     addDoctor, 
     getAppointments, 
     getUpcomingAppointments,
+    getAppointmentsOnDay,
     getEarliestUpcomingAppointments,
     getPastAppointments,
     getAppointmentById,

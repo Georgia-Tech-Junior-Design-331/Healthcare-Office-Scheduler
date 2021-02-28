@@ -43,14 +43,21 @@ function loadCalendar(month, year) {
                 row.appendChild(cell);
                 date++;
             }
+            cell.id = date - 1;
             cell.classList.add("pt-2")
             cell.classList.add("pb-2")
+            cell.addEventListener('click', function() {
+                location.href = "appointments?date=" + year + "-" + (month+1) + "-" + cell.id;
+            });
         }
 
         tbl.appendChild(row); // appending each row into calendar body.
     }
 }
 
+function temp(value) {
+    console.log(value)
+}
 /*
 function loadQuickAppointments() {
     //Get data
