@@ -54,63 +54,63 @@ con.connect(function(err) {
     var p14 = {fname: 'Misael ', lname: 'Wilkinson', username: 'mwilkinson', password: '1234', age: 18, birthdate: da15, sex: "Male", phone_number: "3782097463", email: "mwilkinson@earthlink.net"};
     var p15 = {fname: 'Tianna ', lname: 'Walton', username: 'twalton', password: '1234', age: 76, birthdate: da16, sex: "Female", phone_number: "8182223456", email: "twalton@ix.netcom.com"};
 
-	query.addDoctor(con, p1, function(err) {
+	query.addPatient(con, p1, function(err) {
 		if (err) throw err;
 	});
 
-	query.addDoctor(con, p2, function(err) {
+	query.addPatient(con, p2, function(err) {
 		if (err) throw err;
 	});
 
-	query.addDoctor(con, p3, function(err) {
+	query.addPatient(con, p3, function(err) {
 		if (err) throw err;
 	});
 
-	query.addDoctor(con, p4, function(err) {
+	query.addPatient(con, p4, function(err) {
 		if (err) throw err;
 	});
 
-	query.addDoctor(con, p5, function(err) {
+	query.addPatient(con, p5, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p6, function(err) {
+    query.addPatient(con, p6, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p7, function(err) {
+    query.addPatient(con, p7, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p8, function(err) {
+    query.addPatient(con, p8, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p9, function(err) {
+    query.addPatient(con, p9, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p10, function(err) {
+    query.addPatient(con, p10, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p11, function(err) {
+    query.addPatient(con, p11, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p12, function(err) {
+    query.addPatient(con, p12, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p13, function(err) {
+    query.addPatient(con, p13, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p14, function(err) {
+    query.addPatient(con, p14, function(err) {
 		if (err) throw err;
 	});
 
-    query.addDoctor(con, p15, function(err) {
+    query.addPatient(con, p15, function(err) {
 		if (err) throw err;
 	});
 });
