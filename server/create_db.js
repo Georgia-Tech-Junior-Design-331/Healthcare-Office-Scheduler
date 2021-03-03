@@ -28,7 +28,7 @@ con.connect(function(err) {
         + "password varchar(255) NOT NULL, "
         + "fname varchar(255) NOT NULL, "
         + "lname varchar(255) NOT NULL, "
-        + "age varchar(255) NOT NULL, "
+        + "birthdate datetime NOT NULL, "
         + "sex ENUM('Male', 'Female'), "
         + "phone_number varchar(255), "
         + "email varchar(255), "
@@ -51,8 +51,7 @@ con.connect(function(err) {
     });
 
     // Create a table for db called Appointments. (id, p_fname, p_lname, d_id, datetime, end, description, status)
-    var createAppointments = "CREATE TABLE db.Appointments("
-        + "id int UNIQUE NOT NULL AUTO_INCREMENT, "
+    var createAppointments = "CREATE TABLE db.Appointments(id int UNIQUE NOT NULL AUTO_INCREMENT, "
         + "p_id int NOT NULL, "
         + "d_id int NOT NULL, "
         + "start datetime NOT NULL, "

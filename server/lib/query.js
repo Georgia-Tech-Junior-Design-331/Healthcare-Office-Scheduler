@@ -1,26 +1,31 @@
-/* Temporarily ignoring patient table
-function addPatient(con, patient, callback) {
-    var sql = "INSERT INTO db.Patients (fname, lname, birthdate, sex) VALUES ?;";
-    var values = [[patient.fname, patient.lname, patient.birth, patient.sex]];
-
-    con.query(sql, [values], function(err) {
-        if (err) console.log('Query failed.');
-        callback(err);
-    });
-}
-
-function getPatientID(con, patient, callback) {
-    var sql = "SELECT id FROM db.Patients WHERE fname='" + patient.fname
-            + "' AND lname='" + patient.lname
-            + "' AND age='" + patient.age
-            + "' AND sex='" + patient.sex + "';";
+function getPatientById(con, patient, callback) {
+    var sql = "SELECT * FROM db.Patients WHERE id=" + patient.id + ";";
 
     con.query(sql, function(err, result) {
-        if (err) console.log('Query failed.');
+        if (err) {
+            console.log('Query failed.');
+        } else {
+            console.log('Retrieved patient from datatbase.');
+        }
+
         callback(err, result);
     });
 }
-*/
+
+function addPatient(con, patient, callback) {
+    var sql = "INSERT INTO db.Patients (username, password, fname, lname, birthdate, sex, phone_number, email) VALUES ?;";
+    var values = [[patient.username, patient.password, patient.fname, patient.lname, patient.birthdate, patient.sex, patient.phone_number, patient.email]];
+
+    con.query(sql, [values], function(err) {
+        if (err) {
+            console.log('Query failed.');
+        } else {
+            console.log('Added patient ' + patient.fname + ' ' + patient.lname + ' to database.');
+        }
+
+        callback(err);
+    });
+}
 
 function getDoctors(con, callback) {
     var sql = "SELECT * FROM db.Doctors;";
@@ -145,8 +150,8 @@ function getAppointmentById(con, appointment, callback) {
 }
 
 function addAppointment(con, appointment, patient, doctor, callback) {
-    var sql = "INSERT INTO db.Appointments (p_fname, p_lname, d_id, start, end, description, status) VALUES ?;";
-    var values = [[patient.fname, patient.lname, doctor.id, appointment.start, appointment.end, appointment.description, appointment.status]];
+    var sql = "INSERT INTO db.Appointments (p_id, d_id, start, end, description, status) VALUES ?;";
+    var values = [[patient.id, doctor.id, appointment.start, appointment.end, appointment.description, appointment.status]];
 
     con.query(sql, [values], function(err) {
         if (err) {
