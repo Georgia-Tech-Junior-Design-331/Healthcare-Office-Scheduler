@@ -31,7 +31,6 @@ function getDoctors(con, callback) {
             console.log(err);
         } else {
             console.log('Retrieved all of doctors from database.');
-            console.log(result);
         }
 
         callback(err, result);
