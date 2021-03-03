@@ -84,7 +84,7 @@ function getUpcomingAppointments(con, callback) {
 }
 
 function getAppointmentsOnDay(con, date, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE START BETWEEN '" + date + " 00:00:00' AND '" + date + " 23:59:59';";
+    var sql = "SELECT * FROM db.Appointments WHERE START BETWEEN '" + date + " 00:00:00' AND '" + date + " 23:59:59' ORDER BY start ASC;";
 
     con.query(sql, date, function(err, result) {
         console.log(sql)

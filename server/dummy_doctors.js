@@ -7,7 +7,7 @@ con.connect(function(err) {
 
 	var d1 = {fname: 'Benjamin', lname: 'Harp'};
 	var d2 = {fname: 'Tilman', lname: 'Gromme'};
-	var d3 = {fname: 'Hoon Yeom', lname: 'Kyung'};
+	var d3 = {fname: 'Kyung Hoon', lname: 'Yeom'};
 	var d4 = {fname: 'Dane', lname: 'Koval'};
 	var d5 = {fname: 'Darren', lname: 'Chiang'};
 
