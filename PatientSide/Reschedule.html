@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Patient Portal</title>
+        <link rel="stylesheet" href="css/v1NavBarStyles.css">
+        <link rel="stylesheet" href="css/home_page_styles.css">
+    </head>
+    <body>
+        <header>
+            <div class='left-nav nav-links'>
+                <ul class=''>
+                    <li><img class='logo-button' src="images/logo.png" width=30px height=30px></li>
+                    <li><a class='apt-button' href="index.html"><b>AppointMEnt</b></a></li>
+                </ul>
+            </div>
+            
+            <nav>
+                <ul class='right-links nav-links'>
+                    <li><a href="index.html"><button class='nav-img-button'><img src="images/home.png" width=30px height=30px></button></a></li>
+                    <li><a href="settings.html"><button class='nav-img-button'><img src="images/profile.png" width=30px height=30px></button></a></li>
+                    <li><button class='sign-out'>Sign Out</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <hr>
+        <div class='all-appointments'>
+            <div class='appt-heading'>
+                <p class='appts'>Appointments</p>
+                <p class='upcoming-appts'>Reschedule Appointment</p>
+            </div>
+
+            <div class="appt-det">
+                <h1>Reschedule Appointment</h1>
+                <label for="date">Find Date:</label><br>
+                <input type="date" id="date" name="date">
+                <input type="submit" class="search-button" value="Search" id="search" onclick="searchDay()">
+
+            <p id="results"></p>
+            </div>
+
+        </div>
+
+        <!--Once date selected, table should appear with available appointments-->
+
+        <p><strong>Note:</strong> type="date" (this datepicker) is not supported in Safari or Internet Explorer 11 (or earlier).</p>
+        <script src="appointment.js"></script>
+    </body>
+</html>
