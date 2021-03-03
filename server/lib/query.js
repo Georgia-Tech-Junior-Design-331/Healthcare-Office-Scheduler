@@ -27,6 +27,20 @@ function addPatient(con, patient, callback) {
     });
 }
 
+function getPatients(con, callback) {
+    var sql = "SELECT * FROM db.Patients;";
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Failed to retrieve list of patients from database.');
+            console.log(err);
+        } else {
+            console.log('Retrieved all of patients from database.');
+        }
+
+        callback(err, result);
+    })
+}
 function getDoctors(con, callback) {
     var sql = "SELECT * FROM db.Doctors;";
 
@@ -187,6 +201,7 @@ function setAppointment(con, appointment, callback) {
 module.exports = {
     getPatientById,
     addPatient,
+    getPatients,
     getDoctors, 
     addDoctor, 
     getAppointments, 
