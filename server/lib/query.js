@@ -18,7 +18,7 @@ function addPatient(con, patient, callback) {
 
     con.query(sql, [values], function(err) {
         if (err) {
-            console.log('Query failed.');
+            console.log('Failed to add patient ' + patient.fname + ' ' + patient.lname + ' to database.');
         } else {
             console.log('Added patient ' + patient.fname + ' ' + patient.lname + ' to database.');
         }
@@ -185,6 +185,8 @@ function setAppointment(con, appointment, callback) {
 }
 
 module.exports = {
+    getPatientById,
+    addPatient,
     getDoctors, 
     addDoctor, 
     getAppointments, 
