@@ -86,6 +86,17 @@ app.get('/addAppointmentPage.js', function(req, res) {
     res.sendFile(path.join(office + 'addAppointmentPage.js'));
 });
 
+app.get('/getPatientByName', function(req, res) {
+	console.log('/getPatientByName');
+	query.getPatientByName(con, req.body, function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}			
+	});
+});
+
 app.get('/getDoctors', function(req, res) {
 	console.log('/getDoctors');
 	query.getDoctors(con, function(err, result) {
