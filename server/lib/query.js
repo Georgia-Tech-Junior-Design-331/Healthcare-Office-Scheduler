@@ -12,6 +12,20 @@ function getPatientById(con, patient, callback) {
     });
 }
 
+function getPatientByName(con, patient, callback) {
+    var sql = "SELECT * FROM db.Patients WHERE fname LIKE '%" + patient + "%' OR lname LIKE '%" + patient + "%'";
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Query failed.');
+        } else {
+            console.log('Retrieved patient from datatbase.');
+        }
+
+        callback(err, result);
+    });
+}
+
 function addPatient(con, patient, callback) {
     var sql = "INSERT INTO db.Patients (username, password, fname, lname, birthdate, sex, phone_number, email) VALUES ?;";
     var values = [[patient.username, patient.password, patient.fname, patient.lname, patient.birthdate, patient.sex, patient.phone_number, patient.email]];
@@ -216,6 +230,7 @@ function getAppointmentWithPatient(con, patient_id, callback) {
 
 module.exports = {
     getPatientById,
+    getPatientByName,
     addPatient,
     getPatients,
     getDoctors, 

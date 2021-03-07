@@ -63,7 +63,8 @@ function loadQuickAppointments() {
 
 function prettyDateAndTime(dateAndTime) {
   var a = new Date(dateAndTime);
-  return a.toLocaleDateString() + " @ " + a.toLocaleTimeString();
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return months[a.getMonth()] + " " + a.getDate() + " " + a.getFullYear() + " @ " + a.toLocaleTimeString();
 }
 
 function TableElement(props) {

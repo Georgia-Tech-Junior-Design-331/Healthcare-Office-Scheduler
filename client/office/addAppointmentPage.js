@@ -13,7 +13,7 @@ class ApptForm extends React.Component {
     
     this.myChangeHandler = this.myChangeHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getDocInfo();
+    //this.getDocInfo(); //Mar 7th: using componentDidMount to load doc info
   }
 
   myChangeHandler = (event) => {
@@ -62,36 +62,46 @@ class ApptForm extends React.Component {
     window.location.pathname = "home"
   }
 
+  componentDidMount() {
+    this.getDocInfo();
+  }
+
   getDocInfo() {
+    //console.log("getDocInfo");
     //get doctor names
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "/getDoctors", false); //synchronous (false) is not ideal
+    xhttp.open("GET", "/getDoctors", true); //synchronous (false) is not ideal
     xhttp.setRequestHeader('Content-Type', 'application/json');
     var doctorInfo = 'debug: asynchronicity is fun'
+    var thisClass = this;
     xhttp.onload = function() {
         doctorInfo = JSON.parse(xhttp.responseText);
         //console.log(docInfo);
-        //console.log(selection);  
+        thisClass.state.docInfo = doctorInfo;
+        ReactDOM.render(<ApptForm />, document.getElementById('root'));
     };
     xhttp.send(null);
-    this.state.docInfo = doctorInfo;
-    //console.log(selection);
+    
   }
 
   getDocSelHTML() {
     var i = 0
     let selection = [];
-    this.state.docInfo.forEach(doc => {
-      selection.push(<option key={i} value={doc.id}>{doc.fname + " " + doc.lname}</option>);
-      i++;
-    });
+    //console.log("getDocSelHTML");
+    if (Array.isArray(this.state.docInfo)) { //See if doc info has been loaded yet.
+      //console.log(this.state.docInfo);
+      this.state.docInfo.forEach(doc => {
+        selection.push(<option key={i} value={doc.id}>{doc.fname + " " + doc.lname}</option>);
+        i++;
+      });
+    }
     return selection;
   }
 
-  render() {
+  render() { //TODO as of Mar 7th: every change of any thing re-renders all of the form. not ideal
+    //console.log("rendered page");
     return (
       <div className="centerForm">
-      { this.state && this.state.docInfo &&
       <form onSubmit={this.handleSubmit}>
         <p>Patient name:</p>
         <table className="centerForm">
@@ -118,9 +128,9 @@ class ApptForm extends React.Component {
         </table>
         <br></br>
         <p>Doctor name:</p>
-        <select name="docId" value={this.state.docId} onChange={this.myChangeHandler}>
+        <select id="docSel" name="docId" value={this.state.docId} onChange={this.myChangeHandler}>
             <option value='0' disabled>Select Doctor</option> {/*TODO: validation */}
-            {this.getDocSelHTML() /*TODO: as of Feb 27th this implementation sends requests to database anytime you type. Not ideal. */}
+            {this.getDocSelHTML()}
         </select>
         <p></p>
         <p>Date:</p>
@@ -151,7 +161,6 @@ class ApptForm extends React.Component {
         <p></p>
         <input type="submit" value="Submit" />
       </form>
-    }
     </div>
     );
   }
