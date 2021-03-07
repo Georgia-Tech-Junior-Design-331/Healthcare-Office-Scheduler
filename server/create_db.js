@@ -66,4 +66,16 @@ con.connect(function(err) {
         if (err) throw err;
         console.log('Appointments table created.');
     });
+
+    var createRequests = "CREATE TABLE db.Requests(id int UNIQUE NOT NULL AUTO_INCREMENT, "
+        + "a_id int NOT NULL, "
+        + "type int NOT NULL, "
+        + "description varchar(255), "
+        + "PRIMARY KEY (id), "
+        + "FOREIGN KEY (a_id) REFERENCES db.Appointments(id));";
+
+    con.query(createRequests, function(err, result) {
+        if (err) throw err;
+        console.log('Requests table created.');
+    })
 });

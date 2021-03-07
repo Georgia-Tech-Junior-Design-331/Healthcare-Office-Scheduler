@@ -58,4 +58,11 @@ con.connect(function(err) {
 		console.log(result);
 	});
 	*/
+
+	var patient = {'id': 1};
+
+	query.getRequestsByPatient(con, patient, function(err, result) {
+		if (err) throw err;
+		console.log(result);
+	});
 });

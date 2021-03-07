@@ -212,6 +212,84 @@ function setAppointment(con, appointment, callback) {
     });
 }
 
+function getRequests(con, callback) {
+    var sql = "SELECT * FROM db.Requests;";
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Failed to retrieve list of requests from database.');
+            console.log(err);
+        } else {
+            console.log('Retrieved all requests from database.')
+        }
+
+        callback(err, result);
+    });
+}
+
+function getRequestsByPatient(con, patient, callback) {
+    var sql = "SELECT * FROM db.Requests WHERE a_id IN "
+        + "(SELECT id FROM db.Appointments WHERE id=" + patient.id + ");";
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Failed to retrieve list of requests from database.');
+            console.log(err);
+        } else {
+            console.log('Retrieved list of requests from database.')
+        }
+
+        callback(err, result);
+    });
+}
+
+function addRequest(con, request, appointment, callback) {
+    var sql = "INSERT INTO db.Requests (a_id, type, description) VALUES ?;";
+    var values = [[appointment.id, request.type, request.description]];
+
+    con.query(sql, [values], function(err) {
+        if (err) {
+            console.log('Failed to add request to database.');
+            console.log(err);
+        } else {
+            console.log('Added request to database.');
+        }
+
+        callback(err);
+    });
+}
+
+function deleteRequest(con, request, callback) {
+    var sql = "DELETE FROM db.Requests WHERE id=" + request.id + ";";
+
+    con.query(sql, function(err) {
+        if (err) {
+            console.log('Failed to delete request from database.');
+            console.log(err);
+        } else {
+            console.log('Deleted request from database.');
+        }
+
+        callback(err);
+    });
+}
+
+function setRequest(con, request, callback) {
+    var sql = "UPDATE db.Requests SET type=" + request.type
+        + ", description=" + request.description + ";";
+
+    con.query(sql, function(err) {
+        if (err) {
+            console.log('Failed to update request in database.');
+            console.log(err);
+        } else {
+            console.log('Updated request in database.');
+        }
+
+        callback(err);
+    });
+}
+
 module.exports = {
     getPatientById,
     getPatientByName,
@@ -226,5 +304,10 @@ module.exports = {
     getPastAppointments,
     getAppointmentById,
     addAppointment,
-    setAppointment
+    setAppointment,
+    getRequests,
+    getRequestsByPatient,
+    addRequest,
+    deleteRequest,
+    setRequest
 };
