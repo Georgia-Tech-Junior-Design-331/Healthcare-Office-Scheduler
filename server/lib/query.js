@@ -198,6 +198,22 @@ function setAppointment(con, appointment, callback) {
     });
 }
 
+function getAppointmentWithPatient(con, patient_id, callback) {
+    var sql = "SELECT Appointments.id, Doctors.fname, Doctors.lname, Appointments.start, Appointments.description, Appointments.id "
+        + "FROM db.Appointments "
+        + "LEFT JOIN db.Doctors ON Appointments.d_id = Doctors.id "
+        + "WHERE p_id=" + patient_id + " AND start > NOW() ORDER BY start ASC";
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Appointments Retrieved');
+        }
+
+        callback(err, result);
+    })
+}
+
 module.exports = {
     getPatientById,
     addPatient,
@@ -211,5 +227,6 @@ module.exports = {
     getPastAppointments,
     getAppointmentById,
     addAppointment,
-    setAppointment
+    setAppointment,
+    getAppointmentWithPatient
 };

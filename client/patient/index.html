@@ -3,8 +3,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Portal</title>
-    <link rel="stylesheet" href="assets/css/v1NavBarStyles.css">
-    <link rel="stylesheet" href="assets/css/home_page_styles.css">
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/v1NavBarStyles.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/home_page_styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
     <header>
@@ -24,29 +30,19 @@
         </nav>
     </header>
     <hr>
-    <div class='all-appointments'>
+    <div class='container text-center all-appointments'>
         <div class='appt-heading'>
             <p class='appts'>Appointments</p>
             <p class='upcoming-appts'>Upcoming Appointments</p>
         </div>
+        <div id="list"></div>
 
-        <div class='appt-list'>
+        <!-- <div class='container appt-list'>
             <div class='appt-slot'>
-                <div>Oct, 17, 2020 11:00-12:00</div>
-                <div>@ Atlanta Healthcare</div>
-                <a href="AppointmentDetail.html"><button class='view-detail'>View Detail</button></a>
             </div>
-        </div>
+        </div> -->
         
-        <!-- <ul id='apptList'>
-            <li>
-                <time datetime='2021-11-13 18:00'>November 13, 2021</time>
-                <br>
-                @ <i>HEALTHCARE LOCATION</i>
-                <br>
-                <button>View details</button>
-            </li>
-        </ul> -->
+        <script type="text/babel" src="index.js"></script>
     </div>
 </body>
 </html>
