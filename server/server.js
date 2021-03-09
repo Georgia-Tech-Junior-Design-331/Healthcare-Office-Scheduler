@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 const office = __dirname + '/../client/office/';
-const login = __dirname + '/../client/office/';
+const login = __dirname + '/../client/login/';
 
 app.use('/assets', express.static(office + 'assets'));
 

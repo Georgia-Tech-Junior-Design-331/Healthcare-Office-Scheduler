@@ -1,3 +1,15 @@
+function verifyAccountInfo(con, username, password, callback) {
+    var sqlCmd = `SELECT * FROM db.Patients WHERE id = "${username}";`;
+    con.query(sqlCmd, function(err, result) {
+        if (err) {
+            console.log("Query failed.");
+        } else {
+            console.log(result);
+        }
+        callback(err, result);
+    });
+}
+
 function getPatientById(con, patient, callback) {
     var sql = "SELECT * FROM db.Patients WHERE id=" + patient.id + ";";
 
