@@ -10,6 +10,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 const office = __dirname + '/../client/office/';
+const login = __dirname + '/../client/office/';
 
 app.use('/assets', express.static(office + 'assets'));
 
@@ -20,6 +21,11 @@ app.get('/testing', function(req, res) {
 
 app.get('/', function(req, res) {
 	res.redirect('/home');
+});
+
+// Temporary get request to test login page functionality
+app.get('/login', function(req, res) {
+	res.sendFile(path.join(login + 'login.html'));
 });
 
 app.get('/home', function(req, res) {
