@@ -224,9 +224,28 @@ function setAppointment(con, appointment, callback) {
     });
 }
 
-
 function getRequests(con, callback) {
     var sql = "SELECT * FROM db.Requests;";
+
+    con.query(sql, function(err, result) {
+        if (err) {
+            console.log('Failed to retrieve list of requests from database.');
+            console.log(err);
+        } else {
+            console.log('Retrieved all requests from database.')
+        }
+
+        callback(err, result);
+    });
+}
+
+function getRequestsOffice(con, callback) {
+    var sql = "SELECT r.id AS id, r.type AS type, r.description, "
+        + "a_id, a.description as a_description, start, end, "
+        + "p_id, p.fname, p.lname "
+        + "FROM db.requests AS r "
+        + "LEFT JOIN db.appointments AS a ON r.a_id=a.id "
+        + "LEFT JOIN db.patients AS p ON a.p_id=p.id;";
 
     con.query(sql, function(err, result) {
         if (err) {
@@ -336,6 +355,7 @@ module.exports = {
     addAppointment,
     setAppointment,
     getRequests,
+    getRequestsOffice,
     getRequestsByPatient,
     addRequest,
     deleteRequest,

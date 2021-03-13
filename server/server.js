@@ -176,6 +176,25 @@ app.post('/addAppointment', function(req, res) {
 	});
 });
 
+app.get('/requests', function(req, res) {
+	res.sendFile(path.join(office + 'requests/index.html'));
+});
+
+app.get('/requests/index.js', function(req, res) {
+	res.sendFile(path.join(office + 'requests/index.js'));
+});
+
+app.get('/getRequestsOffice', function(req, res) {
+	console.log('/getRequestsOffice');
+	query.getRequestsOffice(con, function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
 app.listen(8080, function(err) {
 	if (err) {
 		throw err;
