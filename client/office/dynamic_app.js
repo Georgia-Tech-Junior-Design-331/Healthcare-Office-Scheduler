@@ -65,7 +65,9 @@ function open_appointment(id) {
 function render_appointments() {
 	var child = [];
 
-	for (var i = 0; i < list_display_count; i++) {
+    var len = (list_display_count > 0 && list_display_count < appointments.length) ? list_display_count : appointments.length;
+
+	for (var i = 0; i < len; i++) {
         child[i] = appointments[i].render();
     }
 

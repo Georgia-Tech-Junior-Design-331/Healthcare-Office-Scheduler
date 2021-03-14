@@ -103,7 +103,7 @@ function load_requests() {
 function render_requests() {
     var child = [];
 
-    var len = (list_display_count > 0) ? list_display_count : requests.length;
+    var len = (list_display_count > 0 && list_display_count < requests.length) ? list_display_count : requests.length;
 
     for (var i = 0; i < len; i++) {
         child[i] = requests[i].render();
