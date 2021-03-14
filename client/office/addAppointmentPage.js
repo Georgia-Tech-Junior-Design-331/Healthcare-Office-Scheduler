@@ -2,17 +2,20 @@ class ApptForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      patname: '',
+      //patname: '',
       docId: 0,
+      patId: 0,
       stime: null,
       etime: null,
       date: null,
       description: '',
-      docInfo: null
+      docInfo: null,
+      patInfo: null
     }
     
     this.myChangeHandler = this.myChangeHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.searchPatients = this.searchPatients.bind(this);
     //this.getDocInfo(); //Mar 7th: using componentDidMount to load doc info
   }
 
@@ -28,8 +31,7 @@ class ApptForm extends React.Component {
     appt.patient = {};
     appt.doctor = {};
     appt.appointment = {};
-    appt.patient.fname = this.state.patFname;
-    appt.patient.lname = this.state.patLname;
+    appt.patient.id = this.state.patId;
     appt.doctor.id = this.state.docId;
     appt.appointment.description = this.state.description;
      //This is format for MySQL
@@ -52,7 +54,7 @@ class ApptForm extends React.Component {
     
     //put data in database
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/addAppointment", false); //Synchronous is not ideal
+    xhttp.open("POST", "/addAppointment", false); //Synchronous (false) is not ideal
     xhttp.setRequestHeader('Content-Type', 'application/json');
     //console.log(JSON.stringify(appt));
     xhttp.send([JSON.stringify(appt)]);
@@ -66,7 +68,7 @@ class ApptForm extends React.Component {
     this.getDocInfo();
   }
 
-  getDocInfo() {
+  getDocInfo() { //Queries Database for Doctor Info
     //console.log("getDocInfo");
     //get doctor names
     var xhttp = new XMLHttpRequest();
@@ -84,7 +86,7 @@ class ApptForm extends React.Component {
     
   }
 
-  getDocSelHTML() {
+  getDocSelHTML() {  //Gets the HTML for rendering Doctor Info
     var i = 0
     let selection = [];
     //console.log("getDocSelHTML");
@@ -98,7 +100,53 @@ class ApptForm extends React.Component {
     return selection;
   }
 
-  render() { //TODO as of Mar 7th: every change of any thing re-renders all of the form. not ideal
+  searchPatients() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/getPatientByName", true); //synchronous (false) is not ideal
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    //var selectedPatients = 'debug: asynchronicity is fun'
+    var thisClass = this;
+    var req = {};
+    console.log("SearchPatients: " + thisClass.state.patName);
+    req.name = thisClass.state.patName;
+    xhttp.onload = function() {
+        thisClass.state.patInfo = JSON.parse(xhttp.responseText);
+        //console.log();
+        ReactDOM.render(<ApptForm />, document.getElementById('root'));
+        console.log(thisClass.state.patInfo)
+    };
+    console.log("JSON: " + [JSON.stringify(req)]);
+    xhttp.send([JSON.stringify(req)]);
+  }
+
+  getPatientNameResultsHTML() {
+    //if null:
+    //standard out
+    //else
+    //list of buttons that trigger this.setState({patFname: val}); and this.setState({patLname: val});
+    console.log("Getpatresults");
+    if (!this.state) {
+      return (<p>Loading...</p>);
+    } else if (this.state.patInfo == null) {
+      return (<p>Waiting for search...</p>);
+    } else {
+      console.log("Returning patients");
+      let ret = [];
+      this.state.patInfo.forEach(pat => {
+        ret.push(<button type="button" onClick={this.selectPatient(pat.id)}>{pat.fname} {pat.lname}</button>);
+      });
+      if (ret.length == 0) {
+        return (<p>No patient with that name...</p>);
+      }
+      return ret;
+    }
+  }
+
+  selectPatient(id) {
+    this.state.patId = id;
+  }
+
+  render() { //TODO as of Mar 7th 21: every change of any thing re-renders all of the form. not ideal
     //console.log("rendered page");
     return (
       <div className="centerForm">
@@ -110,22 +158,25 @@ class ApptForm extends React.Component {
               <td>
                 <input
                 type='text'
-                placeholder='First'
-                name='patFname'
+                placeholder='Search Name'
+                name='patName'
                 onChange={this.myChangeHandler}
                 />
               </td>
               <td>
                 <input
-                type='text'
-                placeholder='Last'
-                name='patLname'
-                onChange={this.myChangeHandler}
+                type='button'
+                name='Search'
+                value="Search"
+                onClick={this.searchPatients}//{this.getPatientNameResults}
                 />
               </td>
             </tr>
           </tbody>
         </table>
+        <div id="patNameResults">
+          {this.getPatientNameResultsHTML()}
+        </div>
         <br></br>
         <p>Doctor name:</p>
         <select id="docSel" name="docId" value={this.state.docId} onChange={this.myChangeHandler}>
