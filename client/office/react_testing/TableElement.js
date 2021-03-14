@@ -12,7 +12,7 @@ function TableElement(props) {
 
     <div className="element-container">
       <div className="info-container">
-        <div className="element-box"> <b>Patient: </b>{`${currElement.p_lname}, ${currElement.p_fname}`}</div>
+        <div className="element-box"> <b>Patient: </b>{`${currElement.lname}, ${currElement.fname}`}</div>
         <div className="element-box"><b>Appointment Time: </b>{`${currElement.datetime}`}</div>
         <div className="element-box"><b>Reason For Visit: </b>{`${currElement.description}`}</div>
         <div className="element-box"><b>Doctor ID: </b>{`${drIdMapping[currElement.doctor_id]}`}</div>
