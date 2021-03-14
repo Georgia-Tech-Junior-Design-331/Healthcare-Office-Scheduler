@@ -9,7 +9,7 @@ function loadQuickAppointments() {
     var date = url.searchParams.get("date");
     console.log(date);
 
-    appointments_date.innerText = date;
+    appointments_date.innerText = prettyDate(date);
   // Styles for Upcoming Appointments from original HTML
   const divStyle = {
     fontFamily:'Roboto Light, Arial, Arial, Tahoma',
@@ -61,6 +61,12 @@ function loadQuickAppointments() {
   doctorsReq.send(null);
 }
 
+function prettyDate(date) {
+  var a = new Date(date);
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return months[a.getMonth()] + " " + a.getDate() + " " + a.getFullYear();
+}
+
 function prettyDateAndTime(dateAndTime) {
   var a = new Date(dateAndTime);
   var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -74,7 +80,7 @@ function TableElement(props) {
 
     <div className="element-container">
       <div className="info-container">
-        <div className="element-box"> <b>Patient: </b>{`${currElement.p_lname}, ${currElement.p_fname}`}</div>
+        <div className="element-box"> <b>Patient: </b>{`${currElement.lname}, ${currElement.fname}`}</div>
         <div className="element-box"><b>Appointment Time: </b>{`${prettyDateAndTime(currElement.start)}`}</div>
         <div className="element-box"><b>Reason For Visit: </b>{`${currElement.description}`}</div>
         <div className="element-box"><b>Doctor: </b>Dr. {`${dr}`}</div>
