@@ -107,7 +107,7 @@ class ApptForm extends React.Component {
     //var selectedPatients = 'debug: asynchronicity is fun'
     var thisClass = this;
     var req = {};
-    console.log("SearchPatients: " + thisClass.state.patName);
+    //console.log("SearchPatients: " + thisClass.state.patName);
     req.name = thisClass.state.patName;
     xhttp.onload = function() {
         thisClass.state.patInfo = JSON.parse(xhttp.responseText);
@@ -115,7 +115,7 @@ class ApptForm extends React.Component {
         ReactDOM.render(<ApptForm />, document.getElementById('root'));
         console.log(thisClass.state.patInfo)
     };
-    console.log("JSON: " + [JSON.stringify(req)]);
+    //console.log("JSON: " + [JSON.stringify(req)]);
     xhttp.send([JSON.stringify(req)]);
   }
 
@@ -124,13 +124,13 @@ class ApptForm extends React.Component {
     //standard out
     //else
     //list of buttons that trigger this.setState({patFname: val}); and this.setState({patLname: val});
-    console.log("Getpatresults");
+    //console.log("Getpatresults");
     if (!this.state) {
       return (<p>Loading...</p>);
     } else if (this.state.patInfo == null) {
       return (<p>Waiting for search...</p>);
     } else {
-      console.log("Returning patients");
+      //console.log("Returning patients");
       let ret = [];
       this.state.patInfo.forEach(pat => {
         ret.push(<button type="button" onClick={this.selectPatient(pat.id)}>{pat.fname} {pat.lname}</button>);

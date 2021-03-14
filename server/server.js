@@ -92,10 +92,16 @@ app.get('/addAppointmentPage.js', function(req, res) {
     res.sendFile(path.join(office + 'addAppointmentPage.js'));
 });
 
+app.get('/contact', function(req, res) {
+    res.sendFile(path.join(office + 'contact.html'));
+});
+
+app.get('/contact.js', function(req, res) {
+    res.sendFile(path.join(office + 'contact.js'));
+});
+
 app.post('/getPatientByName', function(req, res) {
 	console.log('/getPatientByName');
-	console.log("req.body: " + req.body)
-	console.log("Patient Name: " + req.body.name)
 	query.getPatientByName(con, req.body.name, function(err, result) {
 		if (err) {
 			console.log(err);

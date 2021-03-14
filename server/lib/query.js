@@ -25,14 +25,13 @@ function getPatientById(con, patient, callback) {
 }
 
 function getPatientByName(con, patient, callback) {
-    console.log("Searching for patient: " + patient);
     var sql = "SELECT * FROM db.Patients WHERE fname LIKE '%" + patient + "%' OR lname LIKE '%" + patient + "%'";
 
     con.query(sql, function(err, result) {
         if (err) {
             console.log('Query failed.');
         } else {
-            console.log('Retrieved patient from datatbase.');
+            console.log('Retrieved patient(s) from datatbase.');
         }
 
         callback(err, result);
