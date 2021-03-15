@@ -203,6 +203,26 @@ app.get('/getRequestsOffice', function(req, res) {
 	});
 });
 
+app.get('/test', function(req, res) {
+	res.sendFile(path.join(__dirname + '/modular/test.html'));
+});
+
+app.get('/dynamic_list.js', function(req, res) {
+	res.sendFile(path.join(__dirname + '/modular/dynamic_list.js'));
+});
+
+app.get('/formatting.js', function(req, res) {
+	res.sendFile(path.join(__dirname + '/modular/formatting.js'));
+});
+
+app.get('/appointment.js', function(req, res) {
+	res.sendFile(path.join(__dirname + '/modular/appointment.js'));
+});
+
+app.get('/request.js', function(req, res) {
+	res.sendFile(path.join(__dirname + '/modular/request.js'));
+});
+
 app.listen(8080, function(err) {
 	if (err) {
 		throw err;
