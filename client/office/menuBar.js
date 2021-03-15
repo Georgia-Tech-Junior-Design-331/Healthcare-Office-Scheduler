@@ -10,7 +10,7 @@ function Menu() {
                     <nav className="navbar nav-fill">
                         <a href="home" className="nav-link">Home</a>
                         <a href="contact" className="nav-link">Contact Patients</a>
-                        <a href="appointments" className="nav-link">Appointment Requests</a>
+                        <a href="requests" className="nav-link">Appointment Requests</a>
                         <a href="addAppointmentPage" className="nav-link">Add an Appointment</a>
                         <a href="appointments" className="nav-link">Cancelled Appointments</a>
                     </nav>
