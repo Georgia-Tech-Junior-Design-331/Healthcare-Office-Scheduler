@@ -50,7 +50,7 @@ function load_appointments() {
 
         for (var i = 0; i < list.length; i++) {
         	var app = list[i];
-        	appointments[i] = new Appointment({}, i + 1, app.id, app.p_fname, app.p_lname, app.start);
+        	appointments[i] = new Appointment({}, i + 1, app.id, app.fname, app.lname, app.start);
         }
 
         render_appointments();
@@ -65,9 +65,7 @@ function open_appointment(id) {
 function render_appointments() {
 	var child = [];
 
-    var len = (list_display_count > 0 && list_display_count < appointments.length) ? list_display_count : appointments.length;
-
-	for (var i = 0; i < len; i++) {
+	for (var i = 0; i < list_display_count; i++) {
         child[i] = appointments[i].render();
     }
 

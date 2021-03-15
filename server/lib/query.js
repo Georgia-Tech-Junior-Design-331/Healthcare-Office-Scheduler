@@ -10,20 +10,6 @@ function verifyAccountInfo(con, username, password, callback) {
     });
 }
 
-function getPatientById(con, patient, callback) {
-    var sql = "SELECT * FROM db.Patients WHERE id=" + patient.id + ";";
-
-    con.query(sql, function(err, result) {
-        if (err) {
-            console.log('Query failed.');
-        } else {
-            console.log('Retrieved patient from datatbase.');
-        }
-
-        callback(err, result);
-    });
-}
-
 function getPatientByName(con, patient, callback) {
     var sql = "SELECT * FROM db.Patients WHERE fname LIKE '%" + patient + "%' OR lname LIKE '%" + patient + "%'";
 
@@ -114,7 +100,9 @@ function getAppointments(con, callback) {
 }
 
 function getUpcomingAppointments(con, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE status!=0 AND start >= NOW() ORDER BY start ASC;";
+    var sql = "SELECT db.appointments.id, p_id, d_id, start, end, description, status, fname, lname FROM " + 
+    "db.Appointments LEFT JOIN db.patients ON db.appointments.p_id=db.patients.id WHERE " + 
+    "status!=0 AND start >= NOW() ORDER BY start ASC;";
 
     con.query(sql, function(err, result) {
         if (err) {
@@ -129,7 +117,9 @@ function getUpcomingAppointments(con, callback) {
 }
 
 function getAppointmentsOnDay(con, date, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE START BETWEEN '" + date + " 00:00:00' AND '" + date + " 23:59:59' ORDER BY start ASC;";
+    var sql = "SELECT db.appointments.id, p_id, d_id, start, end, description, status, fname, lname FROM " + 
+    "db.Appointments LEFT JOIN db.patients ON db.appointments.p_id=db.patients.id WHERE " + 
+    "START BETWEEN '" + date + " 00:00:00' AND '" + date + " 23:59:59' ORDER BY start ASC;";
 
     con.query(sql, date, function(err, result) {
         console.log(sql)
@@ -145,7 +135,9 @@ function getAppointmentsOnDay(con, date, callback) {
 }
 
 function getEarliestUpcomingAppointments(con, num, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE status!=0 ORDER BY start ASC LIMIT " + num + ';';
+    var sql = "SELECT db.appointments.id, p_id, d_id, start, end, description, status, fname, lname FROM " + 
+    "db.Appointments LEFT JOIN db.patients ON db.appointments.p_id=db.patients.id " + 
+    "WHERE status!=0 ORDER BY start ASC LIMIT " + num + ';';
 
     con.query(sql, function(err, result) {
         if (err) {
@@ -175,7 +167,8 @@ function getPastAppointments(con, callback) {
 }
 
 function getAppointmentById(con, appointment, callback) {
-    var sql = "SELECT * FROM db.Appointments WHERE id=" + appointment.id + ";";
+    var sql = "SELECT db.appointments.id, p_id, d_id, start, end, description, status, fname, lname FROM " + 
+    "db.Appointments LEFT JOIN db.patients ON db.appointments.p_id=db.patients.id WHERE id=" + appointment.id + ";";
 
     con.query(sql, function(err, result) {
         if (err) {
@@ -339,7 +332,6 @@ function getAppointmentWithPatient(con, patient_id, callback) {
 }
 
 module.exports = {
-    getPatientById,
     getPatientByName,
     addPatient,
     getPatients,
