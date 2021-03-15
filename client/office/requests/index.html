@@ -15,9 +15,19 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 </head>
 <body>
-	<div id="list">
-	</div>
+    <div id="menu"></div>
+    <div class="row text-center mt-3">
+        <div class="container col-sm-7" id="calendar">
+            <div class="card-body">
+                <h2 class="card-title">Requests</h2>
+                <div style="background-color: #e5e5e5; padding: auto;">
+                   <div id="list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script type="text/babel" src="menuBar.js"></script>
     <script type="text/babel" src="requests/index.js"></script>
 </body>
 </html>
