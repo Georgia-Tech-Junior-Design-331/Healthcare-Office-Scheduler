@@ -59,8 +59,19 @@ con.connect(function(err) {
 	});
 	*/
 
+	/*
 	query.getRequestsOffice(con, function(err, result) {
 		if (err) throw err;
 		console.log(result);
 	});
+	*/
+
+	/*
+	var da2 = new Date();
+	da2.setDate(da2.getDate() + 1);
+	var p1 = {fname: 'Bean ', lname: 'Hart', username: 'bharp', password: '1234', age: 21, birthdate: da2, sex: "Male", phone_number: "4045408977", email: "benharp@gatech.edu"};
+	query.addPatient(con, p1, function(err) {
+		if (err) throw err;
+	});
+	*/
 });

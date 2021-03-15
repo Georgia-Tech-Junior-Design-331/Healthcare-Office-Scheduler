@@ -22,6 +22,7 @@ class ApptForm extends React.Component {
   myChangeHandler = (event) => {
     let nam = event.target.name;
     let val = event.target.value;
+    //console.log(nam + "; " + val)
     this.setState({[nam]: val});
   }
 
@@ -100,7 +101,7 @@ class ApptForm extends React.Component {
     return selection;
   }
 
-  searchPatients() {
+  searchPatients() { //take a patient name and search the db for it
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/getPatientByName", true); //synchronous (false) is not ideal
     xhttp.setRequestHeader('Content-Type', 'application/json');
@@ -113,17 +114,13 @@ class ApptForm extends React.Component {
         thisClass.state.patInfo = JSON.parse(xhttp.responseText);
         //console.log();
         ReactDOM.render(<ApptForm />, document.getElementById('root'));
-        console.log(thisClass.state.patInfo)
+        //console.log(thisClass.state.patInfo)
     };
     //console.log("JSON: " + [JSON.stringify(req)]);
     xhttp.send([JSON.stringify(req)]);
   }
 
-  getPatientNameResultsHTML() {
-    //if null:
-    //standard out
-    //else
-    //list of buttons that trigger this.setState({patFname: val}); and this.setState({patLname: val});
+  getPatientNameResultsHTML() { //after db has seached for patients, get html to display those results
     //console.log("Getpatresults");
     if (!this.state) {
       return (<p>Loading...</p>);
@@ -132,18 +129,18 @@ class ApptForm extends React.Component {
     } else {
       //console.log("Returning patients");
       let ret = [];
+      var i = 1;
       this.state.patInfo.forEach(pat => {
-        ret.push(<button type="button" onClick={this.selectPatient(pat.id)}>{pat.fname} {pat.lname}</button>);
+        ret.push(<input type="radio" className="btn-check" key={"i"+i} onClick={this.myChangeHandler} value={pat.id} name="patId" id={"option" + i} autoComplete="off" defaultChecked></input>);
+        ret.push(<label className="btn btn-primary" key={"l"+i} htmlFor={"option"+i}>{pat.fname} {pat.lname}</label>);
+        i++;
+        //ret.push(<button type="button" onClick={this.selectPatient(pat.id)}>{pat.fname} {pat.lname}</button>);
       });
       if (ret.length == 0) {
         return (<p>No patient with that name...</p>);
       }
       return ret;
     }
-  }
-
-  selectPatient(id) {
-    this.state.patId = id;
   }
 
   render() { //TODO as of Mar 7th 21: every change of any thing re-renders all of the form. not ideal
@@ -166,6 +163,7 @@ class ApptForm extends React.Component {
               <td>
                 <input
                 type='button'
+                className="btn btn-success btn-sm"
                 name='Search'
                 value="Search"
                 onClick={this.searchPatients}//{this.getPatientNameResults}
@@ -210,7 +208,7 @@ class ApptForm extends React.Component {
           onChange={this.myChangeHandler}
         />
         <p></p>
-        <input type="submit" value="Submit" />
+        <input type="submit" className="btn btn-primary" value="Submit" />
       </form>
     </div>
     );

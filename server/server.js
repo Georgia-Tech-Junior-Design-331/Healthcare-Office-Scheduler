@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const query = require('./lib/query');
 const path = require('path');
+const nodemailer = require("nodemailer");
 
 const app = express();
 const con = require('./cfg/mysql').con;
@@ -98,6 +99,33 @@ app.get('/contact', function(req, res) {
 
 app.get('/contact.js', function(req, res) {
     res.sendFile(path.join(office + 'contact.js'));
+});
+
+app.post('/sendMail', function(req, res) {
+	console.log('/sendMail');
+	
+	var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+	  user: '', //if using gmail, you have to enable "access for less secure apps"
+	  pass: ''
+	}
+  });
+  
+  var mailOptions = {
+	from: '', //your email
+	to: req.body.emailaddr,
+	subject: req.body.message,
+	text: req.body.message
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+	if (error) {
+	  console.log(error);
+	} else {
+	  console.log('Email sent: ' + info.response);
+	}
+  }); 
 });
 
 app.post('/getPatientByName', function(req, res) {
