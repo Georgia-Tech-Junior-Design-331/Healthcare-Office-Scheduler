@@ -3,4 +3,5 @@ document.getElementById("view_all").onclick = function() {
 };
 
 var appointments = new Dynamic_List('appointments', render_appointment_item);
-appointments.request_items('/getUpcomingAppointments');
+appointments.list_display_count = 3;
+appointments.request_items('/getAppointments', {status: [1, 2, 3, 4], upcoming: true});

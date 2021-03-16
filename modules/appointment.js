@@ -5,7 +5,7 @@ function render_appointment_item() {
             <table>
                 <tbody>
                     <tr>
-                        <td style={{width: '60%'}}>{this.lname + ' ' + this.fname}</td>
+                        <td style={{width: '60%'}}>{this.p_lname + ' ' + this.p_fname}</td>
                         <td rowSpan="2">
                             <button className="btn btn-primary" onClick={() => open_appointment(this.id)}>View</button>
                         </td>
