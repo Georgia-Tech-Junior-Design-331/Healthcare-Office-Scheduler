@@ -1,8 +1,0 @@
-# Add new patient
-INSERT INTO db.Patients (fname, lname, birthdate, sex) VALUES ?;
-
-# Get patient id based on patient info
-SELECT id FROM db.Patients WHERE fname=x AND lname=y AND age=z AND sex=s;
-
-# Add new appointment
-INSERT INTO dp.Appointments (patient_id, datetime) VALUES ?;
