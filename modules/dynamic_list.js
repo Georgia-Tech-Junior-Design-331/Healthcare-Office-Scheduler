@@ -7,7 +7,7 @@ class Dynamic_List {
 		this.render_func = render_func;
 	}
 
-	request_items(request, fields) {
+	request_items(request, body) {
 		var xhttp = new XMLHttpRequest();
     	xhttp.open('POST', request, true);
     	xhttp.setRequestHeader('Content-Type', 'application/json');
@@ -24,7 +24,7 @@ class Dynamic_List {
 
 		    this.render();
 		};
-		xhttp.send(JSON.stringify(fields));
+		xhttp.send(JSON.stringify(body));
 	}
 
 	render() {
