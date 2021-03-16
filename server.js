@@ -135,7 +135,7 @@ app.post('/sendMail', function(req, res) {
 });
 
 app.post('/verify', function(req, res) {
-	var account = req.body;
+	var account = req.body.account;
 
 	login.login(con, account.username, account.password, function(err, result) {
 		if (err) {

@@ -1,15 +1,21 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const appointment_id = urlParams.get('id');
-var xhttp = new XMLHttpRequest();
-xhttp.open("POST", "/getAppointment", true); //Synchronous (false) is not ideal
-xhttp.setRequestHeader('Content-Type', 'application/json');
-//console.log(JSON.stringify(appt));
-xhttp.onload = function() {
-    //go back to main page
-    location.href = 'home';
-};
-xhttp.send([JSON.stringify(appt)]);
+const id = urlParams.get('id');
+
+function update() {
+    const request = '/getAppointments';
+    const filters = {id: id};
+    const body = {filters: filters};
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/getAppointment", true); //Synchronous (false) is not ideal
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.onload = function() {
+        
+    };
+    xhttp.send(JSON.stringify(body));
+}
+
+update();
 
 
 
