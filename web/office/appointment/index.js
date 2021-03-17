@@ -7,53 +7,58 @@ function update() {
     const filters = {id: id};
     const body = {filters: filters};
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/getAppointment", true); //Synchronous (false) is not ideal
+    xhttp.open("POST", "/getAppointments", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.onload = function() {
-        
+        var response = JSON.parse(xhttp.responseText);
+        const appointment = response[0];
+        ReactDOM.render(
+            <div className="container">
+                {render(appointment)}
+            </div>
+            , document.getElementById("listing")
+        );
     };
     xhttp.send(JSON.stringify(body));
+}
+
+function render(app) {
+    return (
+        <div className="element-container">
+            <div className="info-container">
+                <div className="element-box"> <b>Appointment ID: </b>{`${app.id}`}</div>
+                <div className="element-box"> <b>Patient ID: </b>{`${app.p_id}`}</div>
+                <div className="element-box"> <b>Doctor ID: </b>{`${app.d_id}`}</div>
+                <div className="element-box"> <b>Start Time: </b>{`${app.start}`}</div>
+                <div className="element-box"> <b>End Time: </b>{`${app.end}`}</div>
+                <div className="element-box"> <b>Description: </b>{`${app.description}`}</div>
+                <div className="element-box"> <b>Status: </b>{`${app.status}`}</div>
+            </div>
+            <div className="info-containerAdjust">
+                <div className="input-element-box">
+                    <label htmlFor="start">New Start Time:</label>
+                    <input type="text" fontSize="20px" id="start" name="startbox" required minLength="4" maxLength="8" size="10"></input>
+                </div>
+                <div className="input-element-box">
+                    <label htmlFor="end">New End Time:</label>
+                    <input type="text" fontSize="20px" id="end" name="endbox" required minLength="4" maxLength="8" size="10" ></input>
+                </div>
+                <div className="input-element-box">
+                    <label htmlFor="description">New Description:</label>
+                    <input type="text" fontSize="20px" id="description" name="descriptionbox" required minLength="4" maxLength="8" size="10" ></input>
+                </div>
+                <div className="input-element-box">
+                    <label htmlFor="status">New Status:</label>
+                    <input type="text" fontSize="20px" id="status" name="statusbox" required minLength="4" maxLength="8" size="10" ></input>
+                </div>
+                <div className="input-element-box">
+                    <input className="submit-button" type="submit" value="Submit"></input>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 update();
 
 
-
-function getName() {
-    var name = ""
-    if (name.length == 0) {
-        name = "Name"
-    }
-    return name;
-}
-function getDate() {
-    var date = "";
-    if (date.length == 0) {
-        date = "Temporary Date"
-    }
-    return date;
-}
-function getContact() {
-    var contact = "";
-    if (contact.length == 0) {
-        contact = "Temporary Contact"
-    }
-    return contact;
-}
-function getInfo() {
-    var info = "";
-    if (info.length == 0) {
-        info = "Temporary Info"
-    }
-    return info;
-}
-function getQuestion() {
-    var question = "";
-    var temp = 2
-    if (temp == 1) {
-        question = "Do you want to send appointment change to patient?"
-    } else {
-        question = "Do you want to send the patient a rescheduling notification?"
-    }
-    return question;
-}
