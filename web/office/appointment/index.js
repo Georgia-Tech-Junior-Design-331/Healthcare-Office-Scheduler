@@ -23,16 +23,18 @@ function update() {
 }
 
 function render(app) {
+    const status = ['Completed', 'Scheduled', 'Delayed', 'In Progress', 'Delay Requested'];
+
     return (
         <div className="element-container">
             <div className="info-container">
-                <div className="element-box"> <b>Appointment ID: </b>{`${app.id}`}</div>
-                <div className="element-box"> <b>Patient ID: </b>{`${app.p_id}`}</div>
-                <div className="element-box"> <b>Doctor ID: </b>{`${app.d_id}`}</div>
-                <div className="element-box"> <b>Start Time: </b>{`${app.start}`}</div>
-                <div className="element-box"> <b>End Time: </b>{`${app.end}`}</div>
+                <div className="element-box"> <b>Appointment ID : </b>{`${app.id}`}</div>
+                <div className="element-box"> <b>Patient: </b>{`${app.p_lname + ', ' + app.p_fname}`}</div>
+                <div className="element-box"> <b>Doctor: </b>{`${app.d_lname + ', ' + app.d_fname}`}</div>
+                <div className="element-box"> <b>Start Time: </b>{`${pretty_datetime(app.start)}`}</div>
+                <div className="element-box"> <b>End Time: </b>{`${pretty_datetime(app.end)}`}</div>
                 <div className="element-box"> <b>Description: </b>{`${app.description}`}</div>
-                <div className="element-box"> <b>Status: </b>{`${app.status}`}</div>
+                <div className="element-box"> <b>Status: </b>{`${status[app.status]}`}</div>
             </div>
             <div className="info-containerAdjust">
                 <div className="input-element-box">
