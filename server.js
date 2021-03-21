@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const lib = require('./lib');
 const query = lib.query;
 const app_list = lib.appointment_list;
+const req_list = lib.request_list;
 const login = lib.login;
 const app = express();
 const con = require('./cfg/mysql').con;
@@ -243,9 +244,10 @@ app.post('/addAppointment', function(req, res) {
 	});
 });
 
-app.post('/getRequestsOffice', function(req, res) {
-	console.log('/getRequestsOffice');
-	query.getRequestsOffice(con, function(err, result) {
+app.post('/getRequests', function(req, res) {
+	console.log('/getRequests');
+	var filters = req.body.filters;
+	req_list.filter(con, filters, function(err, result) {
 		if (err) {
 			console.log(err);
 		} else {
