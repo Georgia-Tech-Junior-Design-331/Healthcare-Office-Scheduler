@@ -9,9 +9,9 @@ function Menu() {
                         <nav className="navbar nav-fill">
                             <a href="./home" className="nav-link">Home</a>
                             <a href="./contact" className="nav-link">Contact Patients</a>
-                            <a href="./requests" className="nav-link">Appointment Requests</a>
+                            <a href="./requests" className="nav-link">Requests</a>
                             <a href="./new_appointment" className="nav-link">Add an Appointment</a>
-                            <a href="./canceled_appointments" className="nav-link">Cancelled Appointments</a>
+                            <a href="./appointments" className="nav-link">Appointments</a>
                         </nav>
                     </div>
                     <div className="col-2">

@@ -13,11 +13,11 @@ con.connect(function(err) {
 		var a3 = appointments[3];
 		var a4 = appointments[4];
 		
-		var r0 = {type: 0, description: "cancel plz"};
-		var r1 = {type: 1, description: "delay plz"};
-		var r2 = {type: 1, description: "hello"};
-		var r3 = {type: 0, description: "help"};
-		var r4 = {type: 0, description: "yo"};
+		var r0 = {urgent: 0, type: 0, description: "cancel plz"};
+		var r1 = {urgent: 1, type: 1, description: "delay plz"};
+		var r2 = {urgent: 0, type: 1, description: "hello"};
+		var r3 = {urgent: 0, type: 0, description: "help"};
+		var r4 = {urgent: 1, type: 0, description: "yo"};
 
 		query.addRequest(con, r0, a0, function(err) {
 			if (err) throw err;
