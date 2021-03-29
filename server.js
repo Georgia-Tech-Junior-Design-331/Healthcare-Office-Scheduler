@@ -244,6 +244,20 @@ app.post('/addAppointment', function(req, res) {
 	});
 });
 
+app.post('/setAppointment', function(req, res) {
+	console.log('/addAppointment');
+	var appointment = req.body.appointment;
+	query.setAppointment(con, appointment, function(err) {
+		app_list.filter(con, {id: appointment.id}, function(err, result) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+			}
+		});
+	});
+});
+
 app.post('/getRequests', function(req, res) {
 	console.log('/getRequests');
 	var filters = req.body.filters;
