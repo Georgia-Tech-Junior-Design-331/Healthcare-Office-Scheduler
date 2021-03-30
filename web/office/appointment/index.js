@@ -2,13 +2,14 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
 var appointment = {};
+var requests = [];
 
 function update() {
     const request = '/getAppointments';
     const filters = {id: id};
     var body = {filters: filters};
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/getAppointments", true);
+    xhttp.open('POST', request, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.onload = function() {
         var response = JSON.parse(xhttp.responseText);
@@ -118,6 +119,19 @@ function submit_changes() {
         };
         xhttp.send(JSON.stringify(body));
     }
+}
+
+function get_requests() {
+    const request = '/getRequests';
+    const filters = {a_id: id};
+    var body = {filters: filters};
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('POST', request, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.onload = function() {
+        requests = JSON.parse(xhttp.responseText);
+    };
+    xhttp.send(JSON.stringify(body));
 }
 
 update();
