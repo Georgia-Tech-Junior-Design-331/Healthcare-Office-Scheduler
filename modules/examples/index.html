@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--React CDNs-->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!--Bootstrap CDNs-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">       
+</head>
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <h3>Appointments</h3>
+                </td>
+                <td>
+                    <h3>Requests</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="appointments"></div>
+                </td>
+                <td>
+                    <div id="requests"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="text/babel" src="modules/dynamic_list.js"></script>
+    <script type="text/babel" src="modules/formatting.js"></script>
+    <script type="text/babel" src="modules/appointment.js"></script>
+    <script type="text/babel" src="modules/request.js"></script>
+    <script type="text/babel">
+        var appointments = new Dynamic_List('appointments');
+        appointments.request_items(render_appointment_item, '/getAppointments');
+        var requests = new Dynamic_List('requests');
+        requests.request_items(render_request_item, '/getRequestsOffice');
+    </script>
+</body>
+</html>
