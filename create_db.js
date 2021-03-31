@@ -70,6 +70,7 @@ con.connect(function(err) {
 
     var createRequests = "CREATE TABLE db.Requests(id int UNIQUE NOT NULL AUTO_INCREMENT, "
         + "a_id int NOT NULL, "
+        + "datetime datetime NOT NULL, "
         + "urgent int NOT NULL,"
         + "type int NOT NULL, "
         + "description varchar(255), "

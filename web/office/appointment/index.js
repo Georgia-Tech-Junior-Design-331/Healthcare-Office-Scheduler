@@ -2,7 +2,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
 var appointment = {};
-var requests = [];
+var requests = new Dynamic_List('requests', render_request_item_app);
 
 function update() {
     const request = '/getAppointments';
@@ -29,47 +29,51 @@ function render(app) {
     const status = ['Completed', 'Scheduled', 'Delayed', 'In Progress', 'Delay Requested'];
 
     return (
-        <div className="element-container">
-            <div className="info-container">
-                <div className="element-box"> <b>Appointment ID : </b>{`${app.id}`}</div>
-                <div className="element-box"> <b>Patient: </b>{`${app.p_lname + ', ' + app.p_fname}`}</div>
-                <div className="element-box"> <b>Doctor: </b>{`${app.d_lname + ', ' + app.d_fname}`}</div>
-                <div className="element-box"> <b>Start Time: </b>{`${pretty_datetime(app.start)}`}</div>
-                <div className="element-box"> <b>End Time: </b>{`${pretty_datetime(app.end)}`}</div>
-                <div className="element-box"> <b>Description: </b>{`${app.description}`}</div>
-                <div className="element-box"> <b>Status: </b>{`${status[app.status]}`}</div>
-            </div>
-            <div className="info-containerAdjust">
-                <div className="input-element-box">
-                    <label htmlFor="start">New Start Time:</label>
-                    <input type="datetime-local" fontSize="20px" id="start" name="startbox" defaultValue={app.start}></input>
+        <div>
+            <div className="element-container">
+                <div className="info-container">
+                    <div className="element-box"> <b>Appointment ID : </b>{`${app.id}`}</div>
+                    <div className="element-box"> <b>Patient: </b>{`${app.p_lname + ', ' + app.p_fname}`}</div>
+                    <div className="element-box"> <b>Doctor: </b>{`${app.d_lname + ', ' + app.d_fname}`}</div>
+                    <div className="element-box"> <b>Start Time: </b>{`${pretty_datetime(app.start)}`}</div>
+                    <div className="element-box"> <b>End Time: </b>{`${pretty_datetime(app.end)}`}</div>
+                    <div className="element-box"> <b>Description: </b>{`${app.description}`}</div>
+                    <div className="element-box"> <b>Status: </b>{`${status[app.status]}`}</div>
                 </div>
-                <div className="input-element-box">
-                    <label htmlFor="end">New End Time:</label>
-                    <input type="datetime-local" fontSize="20px" id="end" name="endbox" defaultValue={app.end}></input>
-                </div>
-                <div className="input-element-box">
-                    <label htmlFor="description">New Description:</label>
-                    <input type="text" fontSize="20px" id="description" name="descriptionbox" required minLength="4" maxLength="255" defaultValue={app.description}></input>
-                </div>
-                <div className="input-element-box">
-                    <label htmlFor="status">New Status:</label>
-                    <select defaultValue={app.status} id="status" name="statusbox">
-                        {
-                            status.map((e, key) => {
-                                if (key == app.status) {
-                                    return (<option key={key} value={key}>No Change</option>);
-                                }
+                <div className="info-containerAdjust">
+                    <div className="input-element-box">
+                        <label htmlFor="start">New Start Time:</label>
+                        <input type="datetime-local" fontSize="20px" id="start" name="startbox" defaultValue={app.start}></input>
+                    </div>
+                    <div className="input-element-box">
+                        <label htmlFor="end">New End Time:</label>
+                        <input type="datetime-local" fontSize="20px" id="end" name="endbox" defaultValue={app.end}></input>
+                    </div>
+                    <div className="input-element-box">
+                        <label htmlFor="description">New Description:</label>
+                        <input type="text" fontSize="20px" id="description" name="descriptionbox" required minLength="4" maxLength="255" defaultValue={app.description}></input>
+                    </div>
+                    <div className="input-element-box">
+                        <label htmlFor="status">New Status:</label>
+                        <select defaultValue={app.status} id="status" name="statusbox">
+                            {
+                                status.map((e, key) => {
+                                    if (key == app.status) {
+                                        return (<option key={key} value={key}>No Change</option>);
+                                    }
 
-                                return (<option key={key} value={key}>{e}</option>);
-                            })
-                        }
-                    </select>
-                </div>
-                <div className="input-element-box">
-                    <input className="submit-button" type="submit" value="Submit" onClick={submit_changes}></input>
-                </div>
+                                    return (<option key={key} value={key}>{e}</option>);
+                                })
+                            }
+                        </select>
+                    </div>
+                    <div className="input-element-box">
+                        <input className="submit-button" type="submit" value="Submit" onClick={submit_changes}></input>
+                    </div>
+                </div>     
             </div>
+            <button id="refresh" onClick={get_requests}>Show Requests</button>
+            <div id="requests"></div>
         </div>
     );
 }
@@ -122,16 +126,12 @@ function submit_changes() {
 }
 
 function get_requests() {
-    const request = '/getRequests';
     const filters = {a_id: id};
-    var body = {filters: filters};
-    var xhttp = new XMLHttpRequest();
-    xhttp.open('POST', request, true);
-    xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.onload = function() {
-        requests = JSON.parse(xhttp.responseText);
-    };
-    xhttp.send(JSON.stringify(body));
+    const body = {filters: filters};
+    const request = '/getRequests';
+    requests.request_items(request, body);
+    var button = document.getElementById('refresh');
+    button.innerHTML = 'Refresh';
 }
 
 update();
