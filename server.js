@@ -96,6 +96,14 @@ app.get('/office/contact/index.js', function(req, res) {
     res.sendFile(path.join(office + 'contact/index.js'));
 });
 
+app.get('/office/manage_patients', function(req, res) {
+    res.sendFile(path.join(office + 'manage_patients/index.html'));
+});
+
+app.get('/office/manage_patients/index.js', function(req, res) {
+    res.sendFile(path.join(office + 'manage_patients/index.js'));
+});
+
 app.get('/patient', function(req, res) {
 	res.redirect('/patient/home');
 });

@@ -12,6 +12,7 @@ function Menu() {
                             <a href="./requests" className="nav-link">Requests</a>
                             <a href="./new_appointment" className="nav-link">Add an Appointment</a>
                             <a href="./appointments" className="nav-link">Appointments</a>
+                            <a href="./manage_patients" className="nav-link">Manage Patients</a>
                         </nav>
                     </div>
                     <div className="col-2">
