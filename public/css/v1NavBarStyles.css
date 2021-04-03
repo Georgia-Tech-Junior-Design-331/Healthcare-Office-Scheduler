@@ -17,7 +17,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 30px 10%;
-    /* background-color: seagreen; */
+    padding-bottom: 0%;
 }
 
 .nav-links li {
@@ -32,11 +32,12 @@ header {
 }
 
 .sign-out {
-    position: relative;
+    /* position: relative; */
     bottom: 10px;
     background-color: rgb(71, 181, 255);
     color: white;
     border-radius: 10px;
+    margin-left: 10px;
     padding: 10px;
     border: none;
 }
@@ -68,9 +69,11 @@ header {
 }
 
 .logo-button {
-    position: relative;
+    /* position: relative; */
     top: 6px;
     margin-right: 10px;
+    width: 30px;
+    height: 30px;
 }
 
 .right-links {
