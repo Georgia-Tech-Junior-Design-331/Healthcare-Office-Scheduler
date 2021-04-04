@@ -32,7 +32,9 @@ con.connect(function(err) {
         + "sex ENUM('Male', 'Female'), "
         + "phone_number varchar(255), "
         + "email varchar(255), "
-        + "PRIMARY KEY(id));";
+        + "email_notif BOOLEAN, "
+        + "text_notif BOOLEAN,"
+        + "PRIMARY KEY(id))";
     
     con.query(createPatients, function(err, result) {
         if (err) throw err;

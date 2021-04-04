@@ -36,7 +36,7 @@ function render_appointment_item_patient() {
                         <td>{pretty_datetime(this.start)}</td>
                     </tr>
                     <tr>
-                        <td><b>{delay}</b></td>
+                        <td><p className="mt-3 fw-bold fst-italic">{delay}</p></td>
                     </tr>
                     <tr>
                         <td>
@@ -48,16 +48,16 @@ function render_appointment_item_patient() {
                 </tbody>
             </table>
             <div className="container">
-			<div id="check-modal" className="modal">
-				<div className="modal-content col-sm-6">
-					<h5 className="text-center mt-2" id="check-label"></h5>
-                    <div className="justify-content-sm-center d-sm-flex d-grid gap-2 mt-3">
-						<button type="button" id="request-btn" className="btn btn-danger btn-sm col-sm-4" onClick={() => request_cancel(this)}>Yes</button>
-                        <button type="button" id="close-btn" className="btn btn-secondary btn-sm col-sm-4">No</button>
-					</div>
-				</div>
-			</div>
-		</div>
+                <div id="check-modal" className="modal">
+                    <div className="modal-content col-sm-6">
+                        <h5 className="text-center mt-2" id="check-label"></h5>
+                        <div className="justify-content-sm-center d-sm-flex d-grid gap-2 mt-3">
+                            <button type="button" id="request-btn" className="btn btn-danger btn-sm col-sm-4" onClick={() => request_cancel(this)}>Yes</button>
+                            <button type="button" id="close-btn" className="btn btn-secondary btn-sm col-sm-4">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

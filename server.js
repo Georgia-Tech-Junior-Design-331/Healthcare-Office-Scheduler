@@ -112,6 +112,10 @@ app.get('/patient/settings', function(req, res) {
 	res.sendFile(path.join(patient + 'settings/index.html'));
 });
 
+app.get('/patient/settings/index.js', function(req, res) {
+	res.sendFile(path.join(patient + 'settings/index.js'));
+});
+
 app.get('/patient/delay', function(req, res) {
 	res.sendFile(path.join(patient + 'delay/index.html'));
 });
@@ -297,6 +301,28 @@ app.post('/getRequests', function(req, res) {
 			console.log(err);
 		} else {
 			res.send(result);
+		}
+	});
+});
+
+app.post('/getNotification', function(req, res) {
+	console.log('/getNotification');
+	query.getNotification(con, req.body.patient_id, function(err, result) {
+		if(err) {
+			console.log(err)
+		} else {
+			res.send(result)
+		}
+	});
+});
+
+app.post('/setNotification', function(req, res) {
+	console.log('/setNotification');
+	query.setNotification(con, req.body.request, req.body.patient_id, function(err, result) {
+		if(err) {
+			console.log(err)
+		} else {
+			res.send(result)
 		}
 	});
 });

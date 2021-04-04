@@ -38,21 +38,21 @@ con.connect(function(err) {
 	da16.setDate(da16.getDate() + 15);
 
     // Dummy patient data
-	var p1 = {fname: 'Yoselin ', lname: 'Knight', username: 'yknight', password: '1234', age: 23, birthdate: da2, sex: "Female", phone_number: "8185408977", email: "yknight@gmail.com"};
-    var p2 = {fname: 'Jaylan ', lname: 'Bullock', username: 'jbullock', password: '1234', age: 63, birthdate: da3, sex: "Female", phone_number: "8185158551", email: "jbullock@gmail.com"};
-    var p3 = {fname: 'Payton ', lname: 'Whitaker', username: 'pwhitaker', password: '1234', age: 28, birthdate: da4, sex: "Female", phone_number: "8185405523", email: "pwhitaker@gmail.com"};
-    var p4 = {fname: 'Aliana ', lname: 'Sparks', username: 'asparks', password: '1234', age: 19, birthdate: da5, sex: "Female", phone_number: "4049873974", email: "asparks@yahoo.com"};
-    var p5 = {fname: 'Taniyah ', lname: 'Mercer', username: 'tmercer', password: '1234', age: 46, birthdate: da6, sex: "Female", phone_number: "4783658875", email: "tmercer@gatech.edu"};
-    var p6 = {fname: 'Mercedes ', lname: 'Pope', username: 'mpope', password: '1234', age: 25, birthdate: da7, sex: "Female", phone_number: "8007658702", email: "mpope@aol.com"};
-    var p7 = {fname: 'Natalya ', lname: 'Hutchinson', username: 'nhutchinson', password: '1234', birthdate: da8, age: 87, sex: "Female", phone_number: "3687646531", email: "nhutchinson@gmail.com"};
-    var p8 = {fname: 'Jaime ', lname: 'Osborn', username: 'josborn', password: '1234', age: 62, birthdate: da9, sex: "Male", phone_number: "9836749835", email: "josborn@ugabluh.com"};
-    var p9 = {fname: 'Saniya ', lname: 'French', username: 'sfrench', password: '1234', age: 69, birthdate: da10, sex: "Female", phone_number: "4973897256", email: "sfrench@gatech.edu"};
-    var p10 = {fname: 'Harry ', lname: 'McKinney', username: 'hmckinney', password: '1234', age: 21, birthdate: da11, sex: "Male", phone_number: "9742739276", email: "hmckinney@gmail.com"};
-    var p11 = {fname: 'Angelo ', lname: 'Salas', username: 'asalas', password: '1234', age: 55, birthdate: da12, sex: "Male", phone_number: "9864483333", email: "asalas@hotmail.com"};
-    var p12 = {fname: 'Killian ', lname: 'Brock', username: 'kbrock', password: '1234', age: 38, birthdate: da13, sex: "Female", phone_number: "9879998766", email: "kbrock@gmail.com"};
-    var p13 = {fname: 'Jaida ', lname: 'Webster', username: 'jwebster', password: '1234', age: 47, birthdate: da14, sex: "Female", phone_number: "5543760823", email: "jwebster@yahoo.com"};
-    var p14 = {fname: 'Misael ', lname: 'Wilkinson', username: 'mwilkinson', password: '1234', age: 18, birthdate: da15, sex: "Male", phone_number: "3782097463", email: "mwilkinson@earthlink.net"};
-    var p15 = {fname: 'Tianna ', lname: 'Walton', username: 'twalton', password: '1234', age: 76, birthdate: da16, sex: "Female", phone_number: "8182223456", email: "twalton@ix.netcom.com"};
+	var p1 = {fname: 'Yoselin ', lname: 'Knight', username: 'yknight', password: '1234', age: 23, birthdate: da2, sex: "Female", phone_number: "8185408977", email: "yknight@gmail.com", email_notif: 1, text_notif: 1};
+    var p2 = {fname: 'Jaylan ', lname: 'Bullock', username: 'jbullock', password: '1234', age: 63, birthdate: da3, sex: "Female", phone_number: "8185158551", email: "jbullock@gmail.com", email_notif: 0, text_notif: 1};
+    var p3 = {fname: 'Payton ', lname: 'Whitaker', username: 'pwhitaker', password: '1234', age: 28, birthdate: da4, sex: "Female", phone_number: "8185405523", email: "pwhitaker@gmail.com", email_notif: 1, text_notif: 0};
+    var p4 = {fname: 'Aliana ', lname: 'Sparks', username: 'asparks', password: '1234', age: 19, birthdate: da5, sex: "Female", phone_number: "4049873974", email: "asparks@yahoo.com", email_notif: 1, text_notif: 0};
+    var p5 = {fname: 'Taniyah ', lname: 'Mercer', username: 'tmercer', password: '1234', age: 46, birthdate: da6, sex: "Female", phone_number: "4783658875", email: "tmercer@gatech.edu", email_notif: 0, text_notif: 1};
+    var p6 = {fname: 'Mercedes ', lname: 'Pope', username: 'mpope', password: '1234', age: 25, birthdate: da7, sex: "Female", phone_number: "8007658702", email: "mpope@aol.com", email_notif: 1, text_notif: 0};
+    var p7 = {fname: 'Natalya ', lname: 'Hutchinson', username: 'nhutchinson', password: '1234', birthdate: da8, age: 87, sex: "Female", phone_number: "3687646531", email: "nhutchinson@gmail.com", email_notif: 0, text_notif: 1};
+    var p8 = {fname: 'Jaime ', lname: 'Osborn', username: 'josborn', password: '1234', age: 62, birthdate: da9, sex: "Male", phone_number: "9836749835", email: "josborn@ugabluh.com", email_notif: 1, text_notif: 0};
+    var p9 = {fname: 'Saniya ', lname: 'French', username: 'sfrench', password: '1234', age: 69, birthdate: da10, sex: "Female", phone_number: "4973897256", email: "sfrench@gatech.edu", email_notif: 1, text_notif: 0};
+    var p10 = {fname: 'Harry ', lname: 'McKinney', username: 'hmckinney', password: '1234', age: 21, birthdate: da11, sex: "Male", phone_number: "9742739276", email: "hmckinney@gmail.com", email_notif: 0, text_notif: 1};
+    var p11 = {fname: 'Angelo ', lname: 'Salas', username: 'asalas', password: '1234', age: 55, birthdate: da12, sex: "Male", phone_number: "9864483333", email: "asalas@hotmail.com", email_notif: 0, text_notif: 1};
+    var p12 = {fname: 'Killian ', lname: 'Brock', username: 'kbrock', password: '1234', age: 38, birthdate: da13, sex: "Female", phone_number: "9879998766", email: "kbrock@gmail.com", email_notif: 0, text_notif: 0};
+    var p13 = {fname: 'Jaida ', lname: 'Webster', username: 'jwebster', password: '1234', age: 47, birthdate: da14, sex: "Female", phone_number: "5543760823", email: "jwebster@yahoo.com", email_notif: 1, text_notif: 1};
+    var p14 = {fname: 'Misael ', lname: 'Wilkinson', username: 'mwilkinson', password: '1234', age: 18, birthdate: da15, sex: "Male", phone_number: "3782097463", email: "mwilkinson@earthlink.net", email_notif: 0, text_notif: 1};
+    var p15 = {fname: 'Tianna ', lname: 'Walton', username: 'twalton', password: '1234', age: 76, birthdate: da16, sex: "Female", phone_number: "8182223456", email: "twalton@ix.netcom.com", email_notif: 1, text_notif: 1};
 
 	query.addPatient(con, p1, function(err) {
 		if (err) throw err;
