@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const lib = require('./lib');
 const query = lib.query;
 const app_list = lib.appointment_list;
+const req_list = lib.request_list;
 const login = lib.login;
 const app = express();
 const con = require('./cfg/mysql').con;
@@ -87,12 +88,12 @@ app.get('/office/new_appointment/index.js', function(req, res) {
     res.sendFile(path.join(office + 'new_appointment/index.js'));
 });
 
-app.get('/office/contact', function(req, res) {
-    res.sendFile(path.join(office + 'contact/index.html'));
+app.get('/office/manage_patients', function(req, res) {
+    res.sendFile(path.join(office + 'manage_patients/index.html'));
 });
 
-app.get('/office/contact/index.js', function(req, res) {
-    res.sendFile(path.join(office + 'contact/index.js'));
+app.get('/office/manage_patients/index.js', function(req, res) {
+    res.sendFile(path.join(office + 'manage_patients/index.js'));
 });
 
 app.get('/patient', function(req, res) {
@@ -105,6 +106,26 @@ app.get('/patient/home', function(req, res) {
 
 app.get('/patient/home/index.js', function(req, res) {
 	res.sendFile(path.join(patient + 'home/index.js'));
+});
+
+app.get('/patient/settings', function(req, res) {
+	res.sendFile(path.join(patient + 'settings/index.html'));
+});
+
+app.get('/patient/settings/index.js', function(req, res) {
+	res.sendFile(path.join(patient + 'settings/index.js'));
+});
+
+app.get('/patient/delay', function(req, res) {
+	res.sendFile(path.join(patient + 'delay/index.html'));
+});
+
+app.get('/patient/delay/index.js', function(req, res) {
+	res.sendFile(path.join(patient + 'delay/index.js'));
+});
+
+app.get('/patient/reschedule', function(req, res) {
+	res.sendFile(path.join(patient + 'reschedule/index.html'));
 });
 
 app.post('/sendMail', function(req, res) {
@@ -181,6 +202,23 @@ app.post('/addDoctor', function(req, res) {
 	});
 });
 
+app.post('/getPatientAccts', function(req, res) {
+	console.log('/getPatientAccts');
+	query.getPatientAccts(con, function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+app.post('/addPatient', function(req, res) {
+	console.log('/addPatient');
+	query.addPatient(con, req.body, function(err) {
+	});
+});
+
 app.post('/getAppointments', function(req, res) {
 	console.log('/getAppointments');
 	var filters = req.body.filters;
@@ -243,13 +281,65 @@ app.post('/addAppointment', function(req, res) {
 	});
 });
 
-app.post('/getRequestsOffice', function(req, res) {
-	console.log('/getRequestsOffice');
-	query.getRequestsOffice(con, function(err, result) {
+app.post('/addRequest', function(req, res) {
+	console.log('/addRequest');
+	var request = req.body.request;
+	var appointment = req.body.appointment;
+	query.addRequest(con, request, appointment, function(err) {
+		query.getRequests(con, function(err, result) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+			}
+		});
+	});
+});
+
+app.post('/setAppointment', function(req, res) {
+	console.log('/addAppointment');
+	var appointment = req.body.appointment;
+	query.setAppointment(con, appointment, function(err) {
+		app_list.filter(con, {id: appointment.id}, function(err, result) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+			}
+		});
+	});
+});
+
+app.post('/getRequests', function(req, res) {
+	console.log('/getRequests');
+	var filters = req.body.filters;
+	req_list.filter(con, filters, function(err, result) {
 		if (err) {
 			console.log(err);
 		} else {
 			res.send(result);
+		}
+	});
+});
+
+app.post('/getNotification', function(req, res) {
+	console.log('/getNotification');
+	query.getNotification(con, req.body.patient_id, function(err, result) {
+		if(err) {
+			console.log(err)
+		} else {
+			res.send(result)
+		}
+	});
+});
+
+app.post('/setNotification', function(req, res) {
+	console.log('/setNotification');
+	query.setNotification(con, req.body.request, req.body.patient_id, function(err, result) {
+		if(err) {
+			console.log(err)
+		} else {
+			res.send(result)
 		}
 	});
 });

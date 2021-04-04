@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Patient Portal</title>
+        <!--React CDNs-->
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+        <!--Bootstrap CDNs-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="/css/v1NavBarStyles.css">
+        <link rel="stylesheet" type="text/css" href="/css/home_page_styles.css">
+
+    </head>
+    <body>
+        <div id="menu"></div>
+
+        <hr>
+        <div class='container text-center all-appointments'>
+            <p class='appts'>Appointments</p>
+            <p class='upcoming-appts'>Reschedule Appointment</p>            
+            <div class="appt-det">
+                <h1>Reschedule Appointment</h1>
+                <label for="date">Find Date:</label><br>
+                <input type="date" id="date" name="date">
+                <input type="submit" class="search-button" value="Search" id="search" onclick="searchDay()">
+
+            <p id="results"></p>
+            </div>
+
+        </div>
+
+        <!--Once date selected, table should appear with available appointments-->
+
+        <p><strong>Note:</strong> type="date" (this datepicker) is not supported in Safari or Internet Explorer 11 (or earlier).</p>
+        <script type="text/babel" src="/modules/menu_bar.js"></script>  
+        <!-- <script src="appointment.js"></script> -->
+    </body>
+</html>
