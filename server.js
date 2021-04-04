@@ -108,6 +108,22 @@ app.get('/patient/home/index.js', function(req, res) {
 	res.sendFile(path.join(patient + 'home/index.js'));
 });
 
+app.get('/patient/settings', function(req, res) {
+	res.sendFile(path.join(patient + 'settings/index.html'));
+});
+
+app.get('/patient/delay', function(req, res) {
+	res.sendFile(path.join(patient + 'delay/index.html'));
+});
+
+app.get('/patient/delay/index.js', function(req, res) {
+	res.sendFile(path.join(patient + 'delay/index.js'));
+});
+
+app.get('/patient/reschedule', function(req, res) {
+	res.sendFile(path.join(patient + 'reschedule/index.html'));
+});
+
 app.post('/sendMail', function(req, res) {
 	console.log('/sendMail');
 	
@@ -252,6 +268,21 @@ app.post('/addAppointment', function(req, res) {
 	var doctor = req.body.doctor;
 	query.addAppointment(con, appointment, patient, doctor, function(err) {
 		query.getUpcomingAppointments(con, function(err, result) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.send(result);
+			}
+		});
+	});
+});
+
+app.post('/addRequest', function(req, res) {
+	console.log('/addRequest');
+	var request = req.body.request;
+	var appointment = req.body.appointment;
+	query.addRequest(con, request, appointment, function(err) {
+		query.getRequests(con, function(err, result) {
 			if (err) {
 				console.log(err);
 			} else {

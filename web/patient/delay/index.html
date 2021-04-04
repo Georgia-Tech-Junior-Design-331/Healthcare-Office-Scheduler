@@ -1,10 +1,7 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Portal</title>
-
     <!--React CDNs-->
     <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
@@ -15,24 +12,17 @@
 
     <link rel="stylesheet" type="text/css" href="/css/v1NavBarStyles.css">
     <link rel="stylesheet" type="text/css" href="/css/home_page_styles.css">
-    
+    <title>Patient Portal</title>
 </head>
 <body>
     <div id="menu"></div>
     <hr>
-    <div class='container text-center all-appointments'>
-        <div class='appt-heading'>
-            <p class='appts'>Appointments</p>
-            <p class='upcoming-appts'>Upcoming Appointments</p>
-        </div>
-        <div class="justify-content-center row">
-            <div class="col-sm-6" id="appointments"></div> 
-        </div>
-    </div>
+    <div id="request"></div>
+    
     <script type="text/babel" src="/modules/menu_bar.js"></script>  
     <script type="text/babel" src="/modules/dynamic_list.js"></script>
     <script type="text/babel" src="/modules/formatting.js"></script>
     <script type="text/babel" src="/modules/appointment.js"></script>
-    <script type="text/babel" src="home/index.js"></script>
+    <script type="text/babel" src="delay/index.js"></script>
 </body>
 </html>
