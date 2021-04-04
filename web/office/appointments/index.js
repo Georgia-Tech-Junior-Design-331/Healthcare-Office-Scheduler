@@ -1,4 +1,4 @@
-function send_request(filters) {	
+function send_request(filters) {
 	const request = '/getAppointments';
 	const body = {filters: filters};
 	appointments.request_items(request, body);
@@ -10,6 +10,7 @@ var filters = {};
 
 urlParams.forEach(function(value, key) {
 	filters[key] = value;
+
 });
 
 if (filters.date) {
@@ -18,3 +19,5 @@ if (filters.date) {
 
 var appointments = new Dynamic_List('appointments', render_appointment_item);
 send_request(filters);
+
+
