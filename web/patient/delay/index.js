@@ -34,12 +34,11 @@ function request_delay() {
     appt.appointment = appointment;
     appt.appointment.status = 4;
 
-    appt.request.datetime = new_time.toISOString().slice(0, 19).replace('T', ' ');;
+    appt.request.datetime = new_time.toISOString().slice(0, 19).replace('T', ' ');
     appt.request.urgent = 0
     appt.request.type = 1
     appt.request.description = document.getElementById('desc').value;
-    // console.log(request.datetime)
-    console.log(JSON.stringify(appt))
+
     var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "/addRequest", true); //Synchronous (false) is not ideal
         xhttp.setRequestHeader('Content-Type', 'application/json');
@@ -74,6 +73,12 @@ function render(app) {
         delay_time = time;
         request_delay()
     }
+
+    function go_back(e) {
+        e.preventDefault();
+        window.location.href="home"
+    }
+
     return (
         <div className="container">
             <p className="appts text-center">Delay Request</p>
@@ -97,8 +102,9 @@ function render(app) {
                             </div>
                             <textarea name="Description" id="desc" cols="30" rows="5"></textarea>
                         </div>
-                        <div className="justify-content-center row mt-3">
-                            <button type="button" className="btn btn-success btn-sm col-sm-6" data-target="#modal" data-toggle="modal" onClick={show_modal}>Request</button>
+                        <div className="justify-content-sm-center d-sm-flex d-grid gap-2 mt-3">
+                            <button type="button" className="btn btn-success btn-sm" onClick={show_modal}>Request</button>
+                            <button type="button" className="btn btn-secondary btn-sm" onClick={go_back}>Go back</button>
                         </div>
                         <div className="container">
                             <div id="check-modal" className="modal">
@@ -113,7 +119,6 @@ function render(app) {
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
