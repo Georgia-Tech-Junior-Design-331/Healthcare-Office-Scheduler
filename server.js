@@ -88,14 +88,6 @@ app.get('/office/new_appointment/index.js', function(req, res) {
     res.sendFile(path.join(office + 'new_appointment/index.js'));
 });
 
-app.get('/office/contact', function(req, res) {
-    res.sendFile(path.join(office + 'contact/index.html'));
-});
-
-app.get('/office/contact/index.js', function(req, res) {
-    res.sendFile(path.join(office + 'contact/index.js'));
-});
-
 app.get('/office/manage_patients', function(req, res) {
     res.sendFile(path.join(office + 'manage_patients/index.html'));
 });
@@ -187,6 +179,23 @@ app.post('/addDoctor', function(req, res) {
 				res.send(result);
 			}			
 		});
+	});
+});
+
+app.post('/getPatientAccts', function(req, res) {
+	console.log('/getPatientAccts');
+	query.getPatientAccts(con, function(err, result) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}
+	});
+});
+
+app.post('/addPatient', function(req, res) {
+	console.log('/addPatient');
+	query.addPatient(con, req.body, function(err) {
 	});
 });
 

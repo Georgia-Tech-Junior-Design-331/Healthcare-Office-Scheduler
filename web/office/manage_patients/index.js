@@ -17,7 +17,7 @@ function Sidebar() {
                 type='button'
                 className="btn btn-primary btn-lg"
                 name='addAcct'
-                value='Add a Patient Account'
+                value='Add an Account'
                 onClick={renderAddAcct}
             />
             <input
@@ -169,6 +169,8 @@ class AddAccount extends React.Component {
         this.selectAddPatient = this.selectAddPatient.bind(this);
         this.selectAddDoctor = this.selectAddDoctor.bind(this);
         this.myChangeHandler = this.myChangeHandler.bind(this);
+        this.addPatientToDB = this.addPatientToDB.bind(this);
+        this.addDoctorToDB = this.addDoctorToDB.bind(this);
       }
 
     myChangeHandler = (event) => {
@@ -180,11 +182,29 @@ class AddAccount extends React.Component {
 
     addDoctorToDB() {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/sendMail", true);
+        xhttp.open("POST", "/addDoctor", true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
         var req = {};
         req.fname = this.state.docFName;
         req.lname = this.state.docLName;
+        xhttp.onload = function() {
+        };
+        xhttp.send([JSON.stringify(req)]);
+    }
+
+    addPatientToDB() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/addPatient", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        var req = {};
+        req.fname = this.state.patFName;
+        req.lname = this.state.patLName;
+        req.username = this.state.patUName;
+        req.password = "temp";
+        req.birthdate = this.state.birthDate;
+        req.sex = this.state.sexId;
+        req.phone_number = this.state.patPhone;
+        req.email = this.state.patEmail;
         xhttp.onload = function() {
         };
         xhttp.send([JSON.stringify(req)]);
@@ -199,12 +219,11 @@ class AddAccount extends React.Component {
         this.state.mode = "pat";
         ReactDOM.render(<AddAccount />, document.getElementById('maincontent'));
     }
-    
 
     render() {
         return (
             <div className="centerForm">
-                <h1>Add Account</h1>
+                <h1>Add Account</h1> {/**TODO as of 4/3 2021: validation of text inputs*/}
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" className="btn btn-primary" onClick={this.selectAddPatient}>Add Patient</button>
                     <button type="button" className="btn btn-primary" onClick={this.selectAddDoctor}>Add Doctor</button>
@@ -223,6 +242,8 @@ class AddAccount extends React.Component {
                         name='docLName'
                         onChange={this.myChangeHandler}
                     />
+                    <br/>
+                    <input type="button" className="btn btn-primary" value="Submit" onClick={this.addDoctorToDB}/>
                 </form>
                 }
                 {this.state.mode == "pat" &&
@@ -242,25 +263,37 @@ class AddAccount extends React.Component {
                         <p>Username</p>
                         <input
                             type='text'
-                            name='patLName'
+                            name='patUName'
                             onChange={this.myChangeHandler}
                         />
                         <p>Date of Birth</p>
-                        {/**datepicker */}
+                        {/**TODO: better datepicker */}
+                        <input
+                            type='date' //NOTE: date type is not supported by Safari
+                            name='birthDate'
+                            onChange={this.myChangeHandler}
+                        />
                         <p>Sex</p>
                         {/**radio with m,f,other */}
+                        <select id="sexSel" name="sexId" value={this.state.docId} onChange={this.myChangeHandler}>
+                            <option key={0} value={"Other"}>Other/Prefer Not To Say</option>
+                            <option key={1} value={"Male"}>Male</option>
+                            <option key={2} value={"Female"}>Female</option>
+                        </select>
                         <p>Phone Number</p>
                         <input
                             type='text'
-                            name='patLName'
+                            name='patPhone'
                             onChange={this.myChangeHandler}
                         />
                         <p>Email</p>
                         <input
                             type='text'
-                            name='patLName'
+                            name='patEmail'
                             onChange={this.myChangeHandler}
                         />
+                        <br/>
+                        <input type="button" className="btn btn-primary" value="Submit" onClick={this.addPatientToDB}/>
                     </form>
                 }
             </div>   
@@ -298,15 +331,52 @@ class ViewAccount extends React.Component {
     }
 
     listDocAccts() {
-        return (
-            <p>docs</p>
-        );
+        if (!Array.isArray(this.state.docInfo)) { //if we already have doctor info, no need to get it again
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/getDoctors", true); //synchronous (false) is not ideal
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            var doctorInfo = 'debug: asynchronicity is fun'
+            var thisClass = this;
+            xhttp.onload = function() {
+                doctorInfo = JSON.parse(xhttp.responseText);
+                //console.log(docInfo);
+                thisClass.state.docInfo = doctorInfo;
+                ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
+            };
+            xhttp.send(null);
+        } else {
+            var i = 0
+            let selection = [];
+            this.state.docInfo.forEach(doc => {
+                selection.push(<p key={i}>{doc.fname + " " + doc.lname}</p>);
+                i++;
+                });
+            return selection;
+        } 
     }
 
     listPatAccts() {
-        return (
-            <p>pats</p>
-        );
+        if (!Array.isArray(this.state.patInfo)) { //if we already have patient info, no need to get it again
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/getPatientAccts", true); //synchronous (false) is not ideal
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            var patientInfo = 'debug: asynchronicity is fun'
+            var thisClass = this;
+            xhttp.onload = function() {
+                patientInfo = JSON.parse(xhttp.responseText);
+                thisClass.state.patInfo = patientInfo;
+                ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
+            };
+            xhttp.send(null);
+        } else {
+            var i = 0
+            let selection = [];
+            this.state.patInfo.forEach(pat => {
+                selection.push(<p key={i}>{"User: " + pat.username + " with name: " + pat.fname + " " + pat.lname}</p>);
+                i++;
+                });
+            return selection;
+        } 
     }
     
     render() {
@@ -314,8 +384,8 @@ class ViewAccount extends React.Component {
             <div className="centerForm">
                 <h1>View Accounts</h1>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-primary" onClick={this.selectAddPatient}>Add Patient</button>
-                    <button type="button" className="btn btn-primary" onClick={this.selectAddDoctor}>Add Doctor</button>
+                    <button type="button" className="btn btn-primary" onClick={this.selectAddPatient}>Patients</button>
+                    <button type="button" className="btn btn-primary" onClick={this.selectAddDoctor}>Doctors</button>
                 </div>
                 {this.state.mode == "doc" &&
                     this.listDocAccts()

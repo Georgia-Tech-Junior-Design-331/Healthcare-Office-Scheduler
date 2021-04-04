@@ -8,11 +8,10 @@ function Menu() {
                     <div className="card col-8" style={{backgroundColor: "#e5e5e5"}}>
                         <nav className="navbar nav-fill">
                             <a href="./home" className="nav-link">Home</a>
-                            <a href="./contact" className="nav-link">Contact Patients</a>
+                            <a href="./manage_patients" className="nav-link">Manage Patients</a>
                             <a href="./requests" className="nav-link">Requests</a>
                             <a href="./new_appointment" className="nav-link">Add an Appointment</a>
                             <a href="./appointments" className="nav-link">Appointments</a>
-                            <a href="./manage_patients" className="nav-link">Manage Patients</a>
                         </nav>
                     </div>
                     <div className="col-2">
