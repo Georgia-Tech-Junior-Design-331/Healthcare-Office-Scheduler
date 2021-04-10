@@ -27,6 +27,14 @@ app.get('/temp', function(req, res) {
 	res.sendFile(path.join(__dirname + '/web/temp.html'));
 });
 
+app.get('/test', function(req, res) {
+	res.sendFile(path.join(__dirname + '/web/test/index.html'));
+});
+
+app.get('/test/index.js', function(req, res) {
+	res.sendFile(path.join(__dirname + '/web/test/index.js'));
+});
+
 app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname + '/web/login/index.html'));
 });
