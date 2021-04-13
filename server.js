@@ -210,6 +210,12 @@ app.post('/addDoctor', function(req, res) {
 	});
 });
 
+app.post('/deleteDoctor', function(req, res) {
+	console.log('/deleteDoctor');
+	query.deleteDoctor(con, req.body, function(err) {
+	});
+});
+
 app.post('/getPatientAccts', function(req, res) {
 	console.log('/getPatientAccts');
 	query.getPatientAccts(con, function(err, result) {
@@ -224,6 +230,12 @@ app.post('/getPatientAccts', function(req, res) {
 app.post('/addPatient', function(req, res) {
 	console.log('/addPatient');
 	query.addPatient(con, req.body, function(err) {
+	});
+});
+
+app.post('/deletePatient', function(req, res) {
+	console.log('/deletePatient');
+	query.deletePatient(con, req.body, function(err) {
 	});
 });
 

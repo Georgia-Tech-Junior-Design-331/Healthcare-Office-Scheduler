@@ -1,4 +1,5 @@
 //Page for managing patients. Has sidebar element with buttons to render the Contact, Add, or View Account classes
+//Still TODO as of 2021/4/13: confirmation of deletion of accounts, better UI for viewing accts
 ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
 
 function Sidebar() {
@@ -356,6 +357,8 @@ class ViewAccount extends React.Component {
         this.selectDoctor = this.selectDoctor.bind(this);
         this.listDocAccts = this.listDocAccts.bind(this);
         this.listPatAccts = this.listPatAccts.bind(this);
+        this.removeDocAcct = this.removeDocAcct.bind(this);
+        this.removePatAcct = this.removePatAcct.bind(this);
     }
 
 
@@ -387,7 +390,14 @@ class ViewAccount extends React.Component {
             var i = 0
             let selection = [];
             this.state.docInfo.forEach(doc => {
-                selection.push(<p key={i}>{doc.fname + " " + doc.lname}</p>);
+                selection.push(
+                <div key={i}>
+                    <span>
+                        {doc.fname + " " + doc.lname + "  "}
+                    </span>
+                    <button type="button" className="btn btn-primary" onClick={() => this.removeDocAcct(doc.id)}>Remove Account</button>
+                    <br></br>
+                </div>);
                 i++;
                 });
             return selection;
@@ -411,11 +421,49 @@ class ViewAccount extends React.Component {
             var i = 0
             let selection = [];
             this.state.patInfo.forEach(pat => {
-                selection.push(<p key={i}>{"User: " + pat.username + " with name: " + pat.fname + " " + pat.lname}</p>);
+                selection.push(
+                <div key={i}>
+                    <span>
+                        {"User: " + pat.username + " with name: " + pat.fname + " " + pat.lname}
+                    </span>
+                    <button type="button" className="btn btn-primary" onClick={() => this.removePatAcct(pat.id)}>Remove Account</button>
+                    <br></br>
+                </div>);
                 i++;
                 });
             return selection;
         } 
+    }
+
+    removeDocAcct(id) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/deleteDoctor", true); //synchronous (false) is not ideal
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        var req = {};
+        req.id = id;
+        xhttp.onload = function() {
+            //This doesn't ever happen
+            this.state.docInfo = '';
+            console.log("THis does get triggered........................");
+            ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
+        };
+        xhttp.send([JSON.stringify(req)]);
+        ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
+    }
+
+    removePatAcct(id) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/deletePatient", true); //synchronous (false) is not ideal
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        var req = {};
+        req.id = id;
+        xhttp.onload = function() {
+            //this doen't ever happen
+            this.state.mode = ''
+            ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
+        };
+        xhttp.send([JSON.stringify(req)]);
+        ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
     }
     
     render() {
@@ -435,12 +483,4 @@ class ViewAccount extends React.Component {
             </div>   
         );
     }
-}
-
-function renderPatientAccount() {
-
-}
-
-function renderDoctorAccount() {
-
 }
