@@ -1,32 +1,43 @@
-//For sidbar:
-//Contact, patient accounts
+//Page for managing patients. Has sidebar element with buttons to render the Contact, Add, or View Account classes
 ReactDOM.render(<Sidebar />, document.getElementById('sidebar'));
 
 function Sidebar() {
     return (
-        <div>
-        <div className="d-grid ms-1 mt-1">
-            <input
-                type='button'
-                className="btn btn-primary btn-lg"
-                name='contact'
-                value='Contact a Patient'
-                onClick={renderContact}
-            />
-            <input
-                type='button'
-                className="btn btn-primary btn-lg"
-                name='addAcct'
-                value='Add an Account'
-                onClick={renderAddAcct}
-            />
-            <input
-                type='button'
-                className="btn btn-primary btn-lg"
-                name='viewAcct'
-                value='View Patient Accounts'
-                onClick={renderViewAcct}
-            />
+        <div className="card mt-2 ms-2" style={{backgroundColor: "#ffda1f"}}>
+        <div className="nav flex-column">
+            <li className="nav-item">
+                <div className="d-grid">
+                    <input
+                    type='button'
+                    className="btn btn-outline-* btn-lg"
+                    name='contact'
+                    value='Contact a Patient'
+                    onClick={renderContact}
+                />
+                </div>
+            </li>
+            <li className="nav-item">
+                <div className="d-grid">
+                    <input
+                    type='button'
+                    className="btn btn-outline-* btn-lg"
+                    name='addAcct'
+                    value='Add an Account'
+                    onClick={renderAddAcct}
+                />
+                </div>
+            </li>
+            <li className="nav-item">
+                <div className="d-grid">
+                    <input
+                    type='button'
+                    className="btn btn-outline-* btn-lg"
+                    name='viewAcct'
+                    value='View Accounts'
+                    onClick={renderViewAcct}
+                />
+                </div>
+            </li>
         </div>
         </div>
     )
@@ -78,7 +89,7 @@ class Contact extends React.Component{
         req.name = thisClass.state.patName;
         xhttp.onload = function() {
             thisClass.state.patInfo = JSON.parse(xhttp.responseText);
-            ReactDOM.render(<Contact />, document.getElementById('root'));
+            ReactDOM.render(<Contact />, document.getElementById('maincontent'));
             //console.log(thisClass.state.patInfo)
         };
         //console.log("JSON: " + [JSON.stringify(req)]);
@@ -190,6 +201,9 @@ class AddAccount extends React.Component {
         xhttp.onload = function() {
         };
         xhttp.send([JSON.stringify(req)]);
+        this.state.mode = "added";
+        ReactDOM.render(<AddAccount />, document.getElementById('maincontent'));
+        
     }
 
     addPatientToDB() {
@@ -208,6 +222,8 @@ class AddAccount extends React.Component {
         xhttp.onload = function() {
         };
         xhttp.send([JSON.stringify(req)]);
+        this.state.mode = "added";
+        ReactDOM.render(<AddAccount />, document.getElementById('maincontent'));
     }
 
     selectAddDoctor() {
@@ -228,70 +244,93 @@ class AddAccount extends React.Component {
                     <button type="button" className="btn btn-primary" onClick={this.selectAddPatient}>Add Patient</button>
                     <button type="button" className="btn btn-primary" onClick={this.selectAddDoctor}>Add Doctor</button>
                 </div>
+                {this.state.mode == "added" &&
+                <p>
+                    Account Added!
+                </p>
+                }
                 {this.state.mode == "doc" &&
                 <form>
-                    <p>First Name</p>
+                    <br/>
+                    <span>First Name</span>
                     <input
                         type='text'
                         name='docFName'
                         onChange={this.myChangeHandler}
                     />
-                    <p>Last Name</p>
+                    <br/>
+                    <br/>
+                    <span>Last Name</span>
                     <input
                         type='text'
                         name='docLName'
                         onChange={this.myChangeHandler}
                     />
                     <br/>
+                    <br/>
                     <input type="button" className="btn btn-primary" value="Submit" onClick={this.addDoctorToDB}/>
                 </form>
                 }
                 {this.state.mode == "pat" &&
                     <form>
-                        <p>First Name</p>
+                        <br/>
+                        <span>First Name</span>
                         <input
                             type='text'
                             name='patFName'
                             onChange={this.myChangeHandler}
                         />
-                        <p>Last Name</p>
+                        <br/>
+                        <br/>
+                        <span>Last Name</span>
                         <input
                             type='text'
                             name='patLName'
                             onChange={this.myChangeHandler}
                         />
-                        <p>Username</p>
+                        <br/>
+                        <br/>
+                        <span>Username</span>
                         <input
                             type='text'
                             name='patUName'
                             onChange={this.myChangeHandler}
                         />
-                        <p>Date of Birth</p>
+                        <br/>
+                        <br/>
+                        <span>Date of Birth</span>
                         {/**TODO: better datepicker */}
                         <input
                             type='date' //NOTE: date type is not supported by Safari
                             name='birthDate'
                             onChange={this.myChangeHandler}
                         />
-                        <p>Sex</p>
+                        <br/>
+                        <br/>
+                        <span>Sex</span>
                         {/**radio with m,f,other */}
                         <select id="sexSel" name="sexId" value={this.state.docId} onChange={this.myChangeHandler}>
                             <option key={0} value={"Other"}>Other/Prefer Not To Say</option>
                             <option key={1} value={"Male"}>Male</option>
                             <option key={2} value={"Female"}>Female</option>
                         </select>
-                        <p>Phone Number</p>
+                        <br/>
+                        <br/>
+                        <span>Phone Number</span>
                         <input
                             type='text'
                             name='patPhone'
                             onChange={this.myChangeHandler}
                         />
-                        <p>Email</p>
+                        <br/>
+                        <br/>
+                        <span>Email</span>
                         <input
                             type='text'
                             name='patEmail'
                             onChange={this.myChangeHandler}
                         />
+                        <br/>
                         <br/>
                         <input type="button" className="btn btn-primary" value="Submit" onClick={this.addPatientToDB}/>
                     </form>
@@ -313,19 +352,19 @@ class ViewAccount extends React.Component {
         this.state = {
         }
         
-        this.selectAddPatient = this.selectAddPatient.bind(this);
-        this.selectAddDoctor = this.selectAddDoctor.bind(this);
+        this.selectPatient = this.selectPatient.bind(this);
+        this.selectDoctor = this.selectDoctor.bind(this);
         this.listDocAccts = this.listDocAccts.bind(this);
         this.listPatAccts = this.listPatAccts.bind(this);
     }
 
 
-    selectAddDoctor() {
+    selectDoctor() {
         this.state.mode = "doc";
         ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
     }
 
-    selectAddPatient() {
+    selectPatient() {
         this.state.mode = "pat";
         ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
     }
@@ -384,8 +423,8 @@ class ViewAccount extends React.Component {
             <div className="centerForm">
                 <h1>View Accounts</h1>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-primary" onClick={this.selectAddPatient}>Patients</button>
-                    <button type="button" className="btn btn-primary" onClick={this.selectAddDoctor}>Doctors</button>
+                    <button type="button" className="btn btn-primary" onClick={this.selectPatient}>Patients</button>
+                    <button type="button" className="btn btn-primary" onClick={this.selectDoctor}>Doctors</button>
                 </div>
                 {this.state.mode == "doc" &&
                     this.listDocAccts()
@@ -398,3 +437,10 @@ class ViewAccount extends React.Component {
     }
 }
 
+function renderPatientAccount() {
+
+}
+
+function renderDoctorAccount() {
+
+}
