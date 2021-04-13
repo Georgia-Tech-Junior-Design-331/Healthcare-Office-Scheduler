@@ -14,6 +14,17 @@ const con = require('./cfg/mysql').con;
 const office = __dirname + '/web/office/';
 const patient = __dirname + '/web/patient/'
 
+var pid = -1;
+
+app.post('/setPID', function(req, res) {
+	console.log(pid);
+	console.log(req.body);
+	pid = req.body.patient_id.id;
+	console.log(pid);
+	console.log("this is the next line");
+	res.send("Patient ID successfully updated");
+});
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use('/', express.static(__dirname + '/public/'));
@@ -108,6 +119,10 @@ app.get('/patient', function(req, res) {
 	res.redirect('/patient/home');
 });
 
+app.get('/patient', function(req, res) {
+	res.redirect('/patient/home');
+});
+
 app.get('/patient/home', function(req, res) {
 	res.sendFile(path.join(patient + 'home/index.html'));
 });
@@ -170,7 +185,8 @@ app.post('/verify', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(result);
+			console.log(result)
+			res.send(result[0]);
 		}
 	});
 });
