@@ -120,7 +120,11 @@ app.get('/patient', function(req, res) {
 });
 
 app.get('/patient/home', function(req, res) {
-	res.sendFile(path.join(patient + 'home/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'home/index.html'));
+	}
 });
 
 app.get('/patient/home/index.js', function(req, res) {
@@ -128,7 +132,11 @@ app.get('/patient/home/index.js', function(req, res) {
 });
 
 app.get('/patient/settings', function(req, res) {
-	res.sendFile(path.join(patient + 'settings/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'settings/index.html'));
+	}
 });
 
 app.get('/patient/settings/index.js', function(req, res) {
@@ -136,7 +144,11 @@ app.get('/patient/settings/index.js', function(req, res) {
 });
 
 app.get('/patient/delay', function(req, res) {
-	res.sendFile(path.join(patient + 'delay/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'delay/index.html'));
+	}
 });
 
 app.get('/patient/delay/index.js', function(req, res) {
@@ -144,7 +156,11 @@ app.get('/patient/delay/index.js', function(req, res) {
 });
 
 app.get('/patient/reschedule', function(req, res) {
-	res.sendFile(path.join(patient + 'reschedule/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'reschedule/index.html'));
+	}
 });
 
 app.post('/sendMail', function(req, res) {
