@@ -16,15 +16,6 @@ const patient = __dirname + '/web/patient/'
 
 var pid = -1;
 
-app.post('/setPID', function(req, res) {
-	console.log(pid);
-	console.log(req.body);
-	pid = req.body.patient_id.id;
-	console.log(pid);
-	console.log("this is the next line");
-	res.send("Patient ID successfully updated");
-});
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use('/', express.static(__dirname + '/public/'));
@@ -33,6 +24,11 @@ app.use('/modules', express.static(__dirname + '/modules/'));
 app.get('/', function(req, res) {
 	res.redirect('/temp');
 });
+
+app.post('/getPatientID', function(req, res){
+	var patient = {id: pid}
+	res.send(patient);
+});	
 
 app.get('/temp', function(req, res) {
 	res.sendFile(path.join(__dirname + '/web/temp.html'));
@@ -185,8 +181,9 @@ app.post('/verify', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(result)
-			res.send(result[0]);
+			pid = result[0].id;
+			console.log("pid: " + pid)
+			res.send(result);
 		}
 	});
 });

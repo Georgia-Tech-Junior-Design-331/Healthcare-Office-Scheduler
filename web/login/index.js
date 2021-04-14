@@ -8,25 +8,27 @@ document.getElementById('login').onclick = function() {
     xhttp.open("POST", "/verify", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
 
-	xhttp.onload = function() {
-		var xhttp1 = new XMLHttpRequest();
-		xhttp1.open("POST", "/setPID", true);
-		xhttp1.setRequestHeader('Content-Type', 'application/json');
 
-		// var id_to_use = JSON.parse(xhttp.response).id;
+	xhttp.onload = function() {
+		// var response = JSON.parse(xhttp.response);
 		
-		var patient_id = {};
-		var body = {patient_id: patient_id};
-		patient_id.id = JSON.parse(xhttp.response).id;
-		console.log(body.patient_id.id);
+		// var xhttp1 = new XMLHttpRequest();
+		// xhttp1.open("POST", "/setPID", true);
+		// xhttp1.setRequestHeader('Content-Type', 'application/json');
+
+		// // var id_to_use = JSON.parse(xhttp.response).id;
 		
-		xhttp1.onload = function() {
-			console.log(xhttp1.response)
-		};
+		// var p_body = {id: -1};
+		// p_body.id = response.id;
 		
-		xhttp1.send(JSON.stringify(body));
+		// xhttp1.onload = function() {
+			alert("Successfully requested!");
+			location.href = 'patient/home';
+		// };
+		// xhttp1.send(JSON.stringify(p_body));
+		
 		// console.log(JSON.parse(xhttp.response).id);
 	};
-
     xhttp.send(JSON.stringify(body));
+
 }

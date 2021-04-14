@@ -4,9 +4,23 @@ function send_request(filters) {
 	appointments.request_items(request, body);
 }
 
-var filters = {p_id: 3};
+var filters = {p_id: -1};
+
+function get_patient_id()
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.open( "POST", '/getPatientID', true ); // false for synchronous request
+    xhttp.send( null );
+    xhttp.onload = function() {
+		var response = JSON.parse(xhttp.response);
+        filters.p_id = response.id;
+        send_request(filters);
+    }
+}
+
+get_patient_id();
+
 var appointments = new Dynamic_List('appointments', render_appointment_item_patient);
-send_request(filters);
 
 function cancel_btn(id) {
 	var check_label = document.getElementById('check-label');
