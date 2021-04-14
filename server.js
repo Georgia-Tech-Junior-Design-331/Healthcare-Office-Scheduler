@@ -190,6 +190,11 @@ app.post('/sendMail', function(req, res) {
   	}); 
 });
 
+app.post('/signOut', function(req, res) {
+	pid = -1;
+	res.send('Sign out');
+})
+
 app.post('/verify', function(req, res) {
 	var account = req.body.account;
 
@@ -198,7 +203,6 @@ app.post('/verify', function(req, res) {
 			console.log(err);
 		} else {
 			pid = result[0].id;
-			console.log(pid == -1)
 			if (pid == -1) {
 				res.status(401).send("Bad")
 			} else {
