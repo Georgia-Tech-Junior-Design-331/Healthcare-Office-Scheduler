@@ -10,6 +10,16 @@ document.getElementById('login').onclick = function() {
 
 
 	xhttp.onload = function() {
+		var response = xhttp.response
+
+		if (response == 'Bad') {
+			alert("Login Failed!");
+			location.href = 'login';
+		} else {
+			alert("Success!");
+			location.href = 'patient/home';
+		}
+
 		// var response = JSON.parse(xhttp.response);
 		
 		// var xhttp1 = new XMLHttpRequest();
@@ -22,8 +32,7 @@ document.getElementById('login').onclick = function() {
 		// p_body.id = response.id;
 		
 		// xhttp1.onload = function() {
-			alert("Successfully requested!");
-			location.href = 'patient/home';
+		
 		// };
 		// xhttp1.send(JSON.stringify(p_body));
 		

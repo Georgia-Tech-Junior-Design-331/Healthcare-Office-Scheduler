@@ -182,8 +182,12 @@ app.post('/verify', function(req, res) {
 			console.log(err);
 		} else {
 			pid = result[0].id;
-			console.log("pid: " + pid)
-			res.send(result);
+			console.log(pid == -1)
+			if (pid == -1) {
+				res.status(401).send("Bad")
+			} else {
+				res.send(result);
+			}
 		}
 	});
 });
