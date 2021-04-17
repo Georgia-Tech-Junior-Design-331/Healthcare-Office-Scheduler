@@ -20,12 +20,12 @@ function Menu() {
                 <div className="container-fluid">
                     <div className="row justify-content-between mt-3">
                         <div className="card col-8" style={{backgroundColor: "#e5e5e5"}}>
-                            <nav className="navbar nav-fill">
-                                <a href="./home" className="nav-link">Home</a>
-                                <a href="./manage_patients" className="nav-link">Manage Accounts</a>
-                                <a href="./requests" className="nav-link">Requests</a>
-                                <a href="./new_appointment" className="nav-link">Add an Appointment</a>
-                                <a href="./appointments" className="nav-link">Appointments</a>
+                            <nav className="nav nav-fill nav-pills mt-2">
+                                {renderHomeButton()}
+                                {renderManagePatients()}
+                                {renderRequests()}
+                                {renderNewAppt()}
+                                {renderAppts()}
                             </nav>
                         </div>
                         <div className="col-2">
@@ -62,4 +62,43 @@ function Menu() {
             );
     }
     
+    function renderHomeButton() {
+        let str = window.location.href.split("/");
+        if (str[str.length - 1] == "home") {
+            return (<a href="./home" className="nav-link active">Home</a>);
+        }
+        return (<a href="./home" className="nav-link">Home</a>);
+    }
+
+    function renderManagePatients() {
+        let str = window.location.href.split("/");
+        if (str[str.length - 1] == "manage_patients") {
+            return (<a href="./manage_patients" className="nav-link active">Manage Accounts</a>);
+        }
+        return (<a href="./manage_patients" className="nav-link">Manage Accounts</a>);
+    }
+
+    function renderRequests() {
+        let str = window.location.href.split("/");
+        if (str[str.length - 1] == "requests") {
+            return (<a href="./requests" className="nav-link active">Requests</a>);
+        }
+        return (<a href="./requests" className="nav-link">Requests</a>);
+    }
+
+    function renderNewAppt() {
+        let str = window.location.href.split("/");
+        if (str[str.length - 1] == "new_appointment") {
+            return (<a href="./new_appointment" className="nav-link active">Add an Appointment</a>);
+        }
+        return (<a href="./new_appointment" className="nav-link">Add an Appointment</a>);
+    }
+
+    function renderAppts() {
+        let str = window.location.href.split("/");
+        if (str[str.length - 1] == "appointments") {
+            return (<a href="./appointments" className="nav-link active">Appointments</a>);
+        }
+        return (<a href="./appointments" className="nav-link">Appointments</a>);
+    }
 }
