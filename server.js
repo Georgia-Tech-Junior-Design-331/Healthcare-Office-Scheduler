@@ -252,6 +252,8 @@ app.post('/deleteDoctor', function(req, res) {
 	console.log('/deleteDoctor');
 	query.deleteDoctor(con, req.body, function(err) {
 	});
+	console.log('/de')
+	res.send(null);
 });
 
 app.post('/getPatientAccts', function(req, res) {
@@ -263,6 +265,7 @@ app.post('/getPatientAccts', function(req, res) {
 			res.send(result);
 		}
 	});
+	res.send(null);
 });
 
 app.post('/addPatient', function(req, res) {

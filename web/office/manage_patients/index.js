@@ -381,7 +381,6 @@ class ViewAccount extends React.Component {
             var thisClass = this;
             xhttp.onload = function() {
                 doctorInfo = JSON.parse(xhttp.responseText);
-                //console.log(docInfo);
                 thisClass.state.docInfo = doctorInfo;
                 ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
             };
@@ -442,13 +441,10 @@ class ViewAccount extends React.Component {
         var req = {};
         req.id = id;
         xhttp.onload = function() {
-            //This doesn't ever happen
-            this.state.docInfo = '';
-            console.log("THis does get triggered........................");
             ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
         };
         xhttp.send([JSON.stringify(req)]);
-        ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
+        this.state.docInfo = '';
     }
 
     removePatAcct(id) {
@@ -458,12 +454,10 @@ class ViewAccount extends React.Component {
         var req = {};
         req.id = id;
         xhttp.onload = function() {
-            //this doen't ever happen
-            this.state.mode = ''
             ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
         };
         xhttp.send([JSON.stringify(req)]);
-        ReactDOM.render(<ViewAccount />, document.getElementById('maincontent'));
+        this.state.patInfo = ''
     }
     
     render() {
