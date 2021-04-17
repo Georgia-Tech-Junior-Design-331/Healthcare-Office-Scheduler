@@ -3,6 +3,17 @@ ReactDOM.render(<Menu />, document.getElementById('menu'));
 
 function Menu() {
     var user = window.location.pathname.split('/')
+
+
+    function signOut() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/signOut", true);
+        xhttp.onload = function() {
+            alert('Sign out');
+            location.href = '/patient/home'
+        }
+        xhttp.send(null);
+    }
     if (user[1] == 'office') {
         return (
             <div className="container-fluid"> 
@@ -37,13 +48,12 @@ function Menu() {
                             <li><b className='apt-button'>AppointMEnt</b></li>
                         </ul>
                         </a>
-                        
                     </div>
                     <nav>
                         <ul className='right-links nav-links'>
                             <li><a href="./home"><button className='nav-img-button'><img src="/images/home.png" width="30px" height="30px" /></button></a></li>
                             <li><a href="./settings"><button className='nav-img-button'><img src="/images/profile.png" width="30px" height="30px" /></button></a></li>
-                            <li><button className='sign-out'>Sign Out</button></li>
+                            <li><button className='sign-out' onClick={signOut}>Sign Out</button></li>
                         </ul>
                     </nav>
         

@@ -8,5 +8,37 @@ document.getElementById('login').onclick = function() {
 	var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/verify", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
+
+
+	xhttp.onload = function() {
+		var response = xhttp.response
+
+		if (response == 'Bad') {
+			alert("Login Failed!");
+			location.href = 'login';
+		} else {
+			alert("Success!");
+			location.href = 'patient/home';
+		}
+
+		// var response = JSON.parse(xhttp.response);
+		
+		// var xhttp1 = new XMLHttpRequest();
+		// xhttp1.open("POST", "/setPID", true);
+		// xhttp1.setRequestHeader('Content-Type', 'application/json');
+
+		// // var id_to_use = JSON.parse(xhttp.response).id;
+		
+		// var p_body = {id: -1};
+		// p_body.id = response.id;
+		
+		// xhttp1.onload = function() {
+		
+		// };
+		// xhttp1.send(JSON.stringify(p_body));
+		
+		// console.log(JSON.parse(xhttp.response).id);
+	};
     xhttp.send(JSON.stringify(body));
+
 }

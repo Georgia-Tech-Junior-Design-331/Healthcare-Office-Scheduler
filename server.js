@@ -15,6 +15,8 @@ const con = require('./cfg/mysql').con;
 const office = __dirname + '/web/office/';
 const patient = __dirname + '/web/patient/'
 
+var pid = -1;
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use('/', express.static(__dirname + '/public/'));
@@ -23,6 +25,11 @@ app.use('/modules', express.static(__dirname + '/modules/'));
 app.get('/', function(req, res) {
 	res.redirect('/temp');
 });
+
+app.post('/getPatientID', function(req, res){
+	var patient = {id: pid}
+	res.send(patient);
+});	
 
 app.get('/temp', function(req, res) {
 	res.sendFile(path.join(__dirname + '/web/temp.html'));
@@ -109,8 +116,16 @@ app.get('/patient', function(req, res) {
 	res.redirect('/patient/home');
 });
 
+app.get('/patient', function(req, res) {
+	res.redirect('/patient/home');
+});
+
 app.get('/patient/home', function(req, res) {
-	res.sendFile(path.join(patient + 'home/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'home/index.html'));
+	}
 });
 
 app.get('/patient/home/index.js', function(req, res) {
@@ -118,7 +133,11 @@ app.get('/patient/home/index.js', function(req, res) {
 });
 
 app.get('/patient/settings', function(req, res) {
-	res.sendFile(path.join(patient + 'settings/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'settings/index.html'));
+	}
 });
 
 app.get('/patient/settings/index.js', function(req, res) {
@@ -126,7 +145,11 @@ app.get('/patient/settings/index.js', function(req, res) {
 });
 
 app.get('/patient/delay', function(req, res) {
-	res.sendFile(path.join(patient + 'delay/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'delay/index.html'));
+	}
 });
 
 app.get('/patient/delay/index.js', function(req, res) {
@@ -134,7 +157,11 @@ app.get('/patient/delay/index.js', function(req, res) {
 });
 
 app.get('/patient/reschedule', function(req, res) {
-	res.sendFile(path.join(patient + 'reschedule/index.html'));
+	if (pid < 0) {
+		res.redirect('/login');
+	} else {
+		res.sendFile(path.join(patient + 'reschedule/index.html'));
+	}
 });
 
 app.post('/sendMail', function(req, res) {
@@ -164,6 +191,11 @@ app.post('/sendMail', function(req, res) {
   	}); 
 });
 
+app.post('/signOut', function(req, res) {
+	pid = -1;
+	res.send('Sign out');
+})
+
 app.post('/verify', function(req, res) {
 	var account = req.body.account;
 
@@ -171,7 +203,12 @@ app.post('/verify', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(result);
+			pid = result[0].id;
+			if (pid == -1) {
+				res.status(401).send("Bad")
+			} else {
+				res.send(result);
+			}
 		}
 	});
 });
