@@ -1,3 +1,4 @@
+//Module for rendering the main page calendar
 let today = new Date();
 let thisMonth = today.getMonth();
 let thisYear = today.getFullYear();

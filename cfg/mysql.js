@@ -1,3 +1,4 @@
+//Config file for connecting to a database.
 const mysql = require('mysql');
 
 var con = mysql.createConnection({

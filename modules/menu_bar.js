@@ -1,3 +1,4 @@
+//Module for the menu bar at the top of each page. Contains both the bar for patients and for office side.
 ReactDOM.render(<Menu />, document.getElementById('menu'));
 
 function Menu() {

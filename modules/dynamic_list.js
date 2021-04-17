@@ -1,3 +1,4 @@
+//A Dynamic_List can be created to aid in rendering custom lists. The render_func specifies how each item should be rendered.
 class Dynamic_List {
 
 	constructor(id, render_func) {

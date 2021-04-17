@@ -1,3 +1,4 @@
+//Test script for getting patients from the database.
 const mysql = require('mysql');
 const query = require('../lib/query');
 const con = require('../cfg/mysql').con;

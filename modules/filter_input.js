@@ -1,3 +1,4 @@
+//Logic for filtering lists, used in appointment listing.
 let doctors = [];
 getDocInfo();
 ReactDOM.render(<div> {filter_input()} </div>, document.getElementById('filter_input'));

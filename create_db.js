@@ -1,3 +1,4 @@
+//Script for creating a database on a server.
 const mysql = require('mysql');
 
 const con = require('./cfg/mysql').con;

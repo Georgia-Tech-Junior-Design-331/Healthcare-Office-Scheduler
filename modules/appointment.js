@@ -1,3 +1,4 @@
+//Used for rendering appointments in a Dynamic List.
 function render_appointment_item() {
     return (
         <div className="row">

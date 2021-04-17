@@ -1,3 +1,7 @@
+//Any pure formatting functions belong here
+/*
+	Takes a datetime and converts it to a user-friendly format.
+*/
 function pretty_datetime(datetime) {
 	if (datetime == null) {
 		return '';

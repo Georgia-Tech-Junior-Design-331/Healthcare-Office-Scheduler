@@ -1,3 +1,4 @@
+//Script for generating dummy doctors. Run using "node [filename].js"
 const mysql = require('mysql');
 const query = require('../lib/query');
 const con = require('../cfg/mysql').con;

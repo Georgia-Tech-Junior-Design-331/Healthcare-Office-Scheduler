@@ -1,3 +1,4 @@
+//Js for Login Page.
 document.getElementById('login').onclick = function() {
 	var account = {};
 	var body = {account: account};

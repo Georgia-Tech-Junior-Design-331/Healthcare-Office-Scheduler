@@ -1,3 +1,4 @@
+//Used for rendering requests in a Dynamic List.
 function render_request_item() {
     if (this.open == null) {
         this.open = false;
