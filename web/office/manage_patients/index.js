@@ -170,7 +170,7 @@ class Contact extends React.Component{
     }
 }
 
-
+//TODO: better handling of null inputs
 class AddAccount extends React.Component {
 
     constructor(props) {
@@ -345,7 +345,7 @@ class AddAccount extends React.Component {
 
 }
 
-
+//TODO: better removal confirmation, better views of patient data
 class ViewAccount extends React.Component {
 
     constructor(props) {
@@ -391,6 +391,7 @@ class ViewAccount extends React.Component {
             this.state.docInfo.forEach(doc => {
                 selection.push(
                 <div key={i}>
+                    <br></br>
                     <span>
                         {doc.fname + " " + doc.lname + "  "}
                     </span>
@@ -422,6 +423,7 @@ class ViewAccount extends React.Component {
             this.state.patInfo.forEach(pat => {
                 selection.push(
                 <div key={i}>
+                    <br></br>
                     <span>
                         {"User: " + pat.username + " with name: " + pat.fname + " " + pat.lname}
                     </span>
