@@ -3,7 +3,7 @@ GT Junior Design Team 331's project.
 We are building a scheduler for health offices to manage and communicate with their patients.
 
 
-# Release Notes
+# Spring 2021 Release Notes
 
 *Release Notes must address the following information:*
 
