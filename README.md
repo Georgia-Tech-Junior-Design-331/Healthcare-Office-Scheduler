@@ -36,6 +36,22 @@ We are building a scheduler for health offices to manage and communicate with th
 
 ### Patient-side application
 
+**Login**
+
+* Can login with their account assigned by the office *
+
+**Home Page**
+
+* View upcoming appointments, or appointments by day 
+
+**Request a Delay Page**
+
+* Make a delay request of the appointment *
+
+**Notification Setting Page**
+
+* Change the method to receive the notification by email or/and SMS.
+
 ## Known Issues and Future Work
 
 ### Partial Implementation
