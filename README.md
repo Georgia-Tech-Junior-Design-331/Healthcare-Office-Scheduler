@@ -5,11 +5,55 @@ We are building a scheduler for health offices to manage and communicate with th
 
 # Release Notes
 
-Release Notes must address the following information:
+*Release Notes must address the following information:*
 
-New software features for this release 
-Bug fixes made since the last release
-Known bugs and defects -- you should also include here any functionality you promised the customer but is missing in the release
+*New software features for this release* 
+*Bug fixes made since the last release*
+*Known bugs and defects -- you should also include here any functionality you promised the customer but is missing in the release*
+
+## Features
+
+### Database 
+
+* Functionality for adding, removing, and modifying any information that must be stored exists 
+
+### Office-side application 
+
+**Home Page**
+
+* View upcoming appointments, or appointments by day 
+
+**Manage Accounts Page**
+
+* Add patient, doctor accounts 
+
+* View/Remove accounts 
+
+**Requests Page**
+
+* View upcomming appointment requests, modify appointments to match requests 
+
+**Add Appointment Page**
+
+* Add a patient appointment 
+
+**Appointments Page**
+
+* Can view appointments, filter by patient, doctor, time
+
+### Patient-side application
+
+## Known Issues and Future Work
+
+### Partial Implementation
+
+* Patient Contacting: Structure is set up for testing with a personal gmail, but not for mass mailing.
+* Time picking for appointments: Lacks proper UX for managing a complex schedule to communicate busy or free times. We were looking into: https://fullcalendar.io/docs
+* Doctor Accounts: While database structure is implemented, doctors do not have log-in credidentials or their own application.
+* A general lack of robustness testing.
+
+### Missing Implementation
+* Account/schedule integration with Electronic Health Record systems.
  
 
 # Install Guide  
