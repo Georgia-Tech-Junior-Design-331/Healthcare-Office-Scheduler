@@ -38,7 +38,7 @@ We are building a scheduler for health offices to manage and communicate with th
 
 **Login**
 
-* Can login with their account assigned by the office *
+* Can login with their account assigned by the office
 
 **Home Page**
 
@@ -46,7 +46,7 @@ We are building a scheduler for health offices to manage and communicate with th
 
 **Request a Delay Page**
 
-* Make a delay request of the appointment *
+* Make a delay request of the appointment
 
 **Notification Setting Page**
 
