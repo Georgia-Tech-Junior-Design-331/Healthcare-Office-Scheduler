@@ -2,10 +2,6 @@
 GT Junior Design Team 331's project.
 We are building a scheduler for health offices to manage and communicate with their patients.
 
-# Code Review Manifest
-First, switch to the **sprint4 branch**, which has our latest work.
-
-We reccomend that you **review the web/office folder** and its possibly its direct dependencies in the **modules folder** (excluding the examples folder). This contains our frontend code for the office side of our application, which allows health office workers to create and manage appointments and patients. Each subfolder contains the code for a specific page. We are using HTML, Javascript, and React.
 
 # Release Notes
 
@@ -17,13 +13,63 @@ Known bugs and defects -- you should also include here any functionality you pro
  
 
 # Install Guide  
+This guide will describe what you need to do to get a working development environment for this project. 
 
-The Install Guide must address the following questions as applicable to the team’s product/system:
+## Requirements:
+* A MySQL database and server for storage 
+  * https://dev.mysql.com/downloads/installer/
 
-Pre-requisites: what is the required configuration of software and hardware that the customer must have before they can begin the installation process?
-Dependent libraries that must be installed: what third party software must be installed for your software to function?
-Download instructions: how will the customer and users get access to the project?
-Build instructions (if needed): if you are providing the raw source code rather than a binary build, how will the customer and users create the required executable application?
-Installation of actual application: what steps have to be taken after the software is built? What directories are required for installation?
-Run instructions:  what does the user/customer have to do to get the software to execute?
-Troubleshooting:  what are common errors that occur during installation and what is the corrective action?
+* Node.js 
+  * https://nodejs.org/en/
+
+* Plugins/dependencies:  
+  * All other dependencies are delivered through CDN. No installation necessary. 
+
+## Step-by-step:
+
+**Install a MySQL server:**
+
+* Download and install a MySQL development server for your machine 
+
+  * We used the MySQL Community Installer: 
+
+  * https://dev.mysql.com/downloads/installer/  
+
+**Install Node.js:**
+
+* Download and install Node js 
+
+  * https://nodejs.org/en/ 
+ 
+**Clone project from GitHub:**
+
+* Clone the project from GitHub as you would any other project 
+
+**Create and populate your database with dummy data:**
+
+* In a command console, navigate to the main project folder, which contains “create_db.js” 
+
+* Run “node create_db.js” in the command line 
+
+* This will set up the database and tables the application will use. 
+
+* You can now populate your database with dummy data. To do this, navigate into the “test” folder in your command line. 
+
+  * Run “node dummy_doctors.js” to populate doctors 
+
+  * Run “node dummy_patients.js” to populate patients 
+
+  * Run “node dummy_appointments.js” to populate patient appointments 
+
+  * Run “node dummy_requests.js” to populate appointment change requests 
+
+**Start the app:**
+
+* In a command console, navigate to the main project folder, which contains “server.js” 
+
+* Run “node server.js” in the command line 
+
+* In a web browser, navigate to “localhost:8080” 
+
+* You should now see the project’s webpage. From here, you can get to the patient-side or office-side. 
+
