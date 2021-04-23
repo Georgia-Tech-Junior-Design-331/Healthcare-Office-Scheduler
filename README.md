@@ -4,13 +4,6 @@ We are building a scheduler for health offices to manage and communicate with th
 
 
 # Spring 2021 Release Notes
-
-*Release Notes must address the following information:*
-
-*New software features for this release* 
-*Bug fixes made since the last release*
-*Known bugs and defects -- you should also include here any functionality you promised the customer but is missing in the release*
-
 ## Features
 
 ### Database 
