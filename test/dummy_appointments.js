@@ -46,16 +46,22 @@ con.connect(function(err) {
 
 	var da2 = new Date();
 	da2.setDate(da2.getDate() + 1);
+	da2.setHours(10);
 	var da3 = new Date();
 	da3.setDate(da3.getDate() + 2);
+	da3.setHours(12);
 	var da4 = new Date();
 	da4.setDate(da4.getDate() + 3);
+	da4.setHours(9);
 	var da5 = new Date();
 	da5.setDate(da5.getDate() + 4);
+	da5.setHours(15);
 	var da6 = new Date();
 	da6.setDate(da6.getDate() + 5);
+	da6.setHours(14);
 	var da7 = new Date();
 	da7.setDate(da7.getDate() + 6);
+	da7.setHours(11);
 
 	var a1 = {start: new Date(), end: null, description: "Hey hello there.", status: 1};
 	var a2 = {start: da2, end: null, description: "Hey hello there.", status: 1};

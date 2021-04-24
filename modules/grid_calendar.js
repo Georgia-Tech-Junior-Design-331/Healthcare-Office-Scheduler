@@ -1,23 +1,52 @@
+var grids = 0;
+
 class Grid_Calendar {
-	//list of appointments
-	//start of work day
-	//end of workday
 
-	constructor(start, end) {
+	constructor(start, end, duration = 15) {
 		this.blocks = [];
-		var block_count = (end.getHours() * 60 + end.getMinutes() - start.getHours() * 60 - start.getMinutes()) / 15;
-		var current = new Date(start.getTime());
+		this.id = 'grid' + grids;
+		grids++;
 
-		for (var i = 0; i < block_count; i++) {
-			this.blocks.push(current);
-			var current = new Date(current.getTime());
-			current.setMinutes(current.getMinutes() + 15);
-		}
+		var block_count = (end.getHours() * 60 + end.getMinutes() - start.getHours() * 60 - start.getMinutes()) / duration;
+
+		for (var i = 0; i < 7; i++) {
+			this.blocks[i] = [];
+			var current = new Date(start.getTime());
+
+			for (var j = 0; j < block_count; j++) {
+				var end = new Date(current.getTime());
+				end.setMinutes(end.getMinutes() + duration);
+				end.setSeconds(end.getSeconds() - 1);
+
+				this.blocks[i][j] = {
+					start: {
+						hour: current.getHours(), minute: current.getMinutes(), second: current.getSeconds()
+					},
+					end: {
+						hour: end.getHours(), minute: end.getMinutes(), second: end.getSeconds()
+					}
+				};
+
+				this.blocks[i][j].start.string = this.time_string(this.blocks[i][j].start);
+				this.blocks[i][j].end.string = this.time_string(this.blocks[i][j].end);
+				current.setMinutes(current.getMinutes() + duration);
+			}
+		}		
+	}
+
+	time_string(block_time) {
+		var h = block_time.hour;
+		var m = block_time.minute;
+		var s = block_time.second;
+		var hstr = (h < 10) ? '0' + h : '' + h;
+		var mstr = (m < 10) ? '0' + m : '' + m;
+		var sstr = (s < 10) ? '0' + s : '' + s;
+		return hstr + ':' + mstr + ':' + sstr;
 	}
 
 	grid() {
 		return (
-			<table>
+			<table id={this.id}>
 				<tbody>
 					<tr>
 						<th>Time</th>
@@ -30,20 +59,17 @@ class Grid_Calendar {
 						<th>Sat</th>
 					</tr>
 					{
-						this.blocks.map((item, i) => {
-							var end = new Date(item.getTime());
-							end.setMinutes(end.getMinutes() + 15);
-							end.setSeconds(end.getSeconds() - 1);
+						this.blocks[0].map((block, i) => {
 							return (
-								<tr key={i} id={'block' + i}>
-									<th className="time">{item.toLocaleTimeString() + ' - ' + end.toLocaleTimeString()}</th>
-									<th className="sun"></th>
-									<th className="mon"></th>
-									<th className="tues"></th>
-									<th className="wed"></th>
-									<th className="thurs"></th>
-									<th className="fri"></th>
-									<th className="sat"></th>
+								<tr key={i}>
+									<th className="time">{block.start.string + ' - ' + block.end.string}</th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
 								</tr>
 							)
 						})
@@ -62,23 +88,73 @@ class Grid_Calendar {
         );
 	}
 
-	render_appointments() {
-		/*
-		iterate over all appointments
-		match appointment to row(s)
-		for each row, match to day (by class)
-		mark them
-		*/
+	render_appointments(filters) {	
+		var xhttp = new XMLHttpRequest();
+		var body = {filters: filters};
+		xhttp.open('POST', 'getAppointments', true);
+		xhttp.setRequestHeader('Content-Type', 'application/json');
+		xhttp.onload = () => {			
+			this.appointments = JSON.parse(xhttp.responseText);
+			var table = document.getElementById(this.id);
+
+			for (var i = 0; i < this.appointments.length; i++) {
+				let a = this.appointments[i];
+				a.start = new Date(a.start);
+				a.end = new Date(a.end);
+				var day = a.start.getDay();
+				var blocks = this.blocks[day];
+				var start_index = 0;
+
+				for (var j = blocks.length - 1; j >= 0; j--) {
+					var start = blocks[j].start;
+					var block_time = start.hour * 3600 + start.minute * 60 + start.second;
+					start = a.start;
+					var start_time = start.getHours() * 3600 + start.getMinutes() * 60 + start.getSeconds();
+					var end = a.end;
+					var end_time = end.getHours() * 3600 + end.getMinutes() * 60 + end.getSeconds();
+
+					if (block_time <= end_time) {
+						var cell = table.rows[j + 1].cells[day + 1];
+						cell.style.backgroundColor = 'green';
+						cell.onclick = function() {
+							alert(a.id);
+						};
+
+						if (block_time <= start_time) {
+							start_index = j;
+							break;
+						}
+					}					
+				}
+			}
+		};
+		xhttp.send(JSON.stringify(body));
 	}
 }
 
 function startend() {
 	var start = new Date();
+	start.setHours(8);
+	start.setMinutes(0);
+	start.setSeconds(0);
 	var end = new Date(start.getTime());
-	end.setMinutes(end.getMinutes() + 60);
+	end.setHours(18);
 	return [start, end];
 }
 
 var se = startend();
 var cal = new Grid_Calendar(se[0], se[1]);
 cal.render_grid();
+var start = new Date();
+start.setMonth(3);
+start.setDate(25);
+start.setHours(0);
+start.setMinutes(0);
+start.setSeconds(0);
+var end = new Date();
+end.setMonth(4);
+end.setDate(1);
+end.setHours(0);
+end.setMinutes(0);
+end.setSeconds(0);
+cal.render_appointments({start: start, end: end});
