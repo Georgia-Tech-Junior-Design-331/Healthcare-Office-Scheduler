@@ -113,7 +113,7 @@ class Grid_Calendar {
 					var end = a.end;
 					var end_time = end.getHours() * 3600 + end.getMinutes() * 60 + end.getSeconds();
 
-					if (block_time <= end_time) {
+					if (block_time < end_time) {
 						var cell = table.rows[j + 1].cells[day + 1];
 						cell.style.backgroundColor = 'green';
 						cell.onclick = function() {
