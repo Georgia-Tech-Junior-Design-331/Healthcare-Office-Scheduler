@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+/* For main page
+    Some styles used in other pages as well */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Ubuntu, sans-serif;
+}
+
+.appt-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Ubuntu, sans-serif;
+    /* margin-bottom: 30px; */
+}
+
+.appts {
+    font-weight: 800;
+    font-size: 3em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.upcoming-appts {
+    font-weight: 800;
+    font-size: 1.75em;
+}
+
+.appt-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.appt-slot {
+    display: flex;
+    flex-direction: column;
+    background-color: #76A5FF;
+    height: 300px;
+    width: 600px;
+    padding: 50px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 1000;
+    font-size:1.25em;
+}
+
+.appt-slot > div {
+    margin: 10px;
+}
+
+.view-detail {
+    background-color: #C26FE9;
+    padding: 20px 100px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 1.5em;
+    font-weight: 1000;
+}
+
+.view-detail:hover {
+    cursor: pointer;
+    background-color: #9858b6;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
+/* For Delay Request Page */
+
+.request {
+    background-color: #38B63C;
+}
+
+.request:hover {
+    background-color: #277e2a;
+}
+
+.appt-num {
+    font-size: 1.5em
+}
+
+/* For Settings Page */
+
+.setting-row {
+    width: 400px;
+}
+
+.setting-name {
+    float: left;
+}
+
+.setting-element {
+    float: right;
+}
+
+/* For Appointment Detail Page */
+.appt-det {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #76A5FF;
+    padding: 50px;
+    height: 80%;
+    width: 90%;
+    max-width: 600px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 1000;
+    font-size:1.25em;
+}
+
+.reschedule-button {
+    background-color: #21dd22;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 50px;
+    width: 100%;
+}
+
+.reschedule-button:hover {
+    cursor: pointer;
+    background-color: #17a117;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
+.delay-button {
+    background-color: #38f2ff;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 50px;
+    width: 100%;
+}
+
+.delay-button:hover {
+    cursor: pointer;
+    background-color: #28a5ad;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
+.cancel-button {
+    background-color: #d82f2f;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 50px;
+    width: 100%;
+}
+
+.cancel-button:hover {
+    cursor: pointer;
+    background-color: #c76d6d;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
+.search-button {
+    background-color: #38f2ff;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: .75em;
+    font-weight: 1000;
+    height: 40px;
+    width: 70%;
+}
+
+.search-button:hover {
+    cursor: pointer;
+    background-color: #2bb6c0;
+    transition-timing-function: ease-in-out 0.5s;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}

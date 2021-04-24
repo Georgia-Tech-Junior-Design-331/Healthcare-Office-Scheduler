@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Testing</title>
+        <script>
+            var doctors = [];
+
+            function getDoctors() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open('GET', '/addDoctor', true);
+                xhttp.setRequestHeader('Content-Type', 'application/json');
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        doctors = JSON.parse(this.responseText);
+                    }
+                };
+                xhttp.send();
+            }
+
+            function addDoctor() {
+                var doctor = {};
+                doctor.fname = document.getElementById('fname').value;
+                doctor.lname = document.getElementById('lname').value;
+
+                if (doctor.fname.length < 1 || doctor.lname.length < 1) {
+                    alert('Please enter a name.');
+                    return;
+                }
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.open('POST', '/addDoctor', true);
+                xhttp.setRequestHeader('Content-Type', 'application/json');
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        doctors = JSON.parse(this.responseText);
+                    }
+                };
+                xhttp.send(JSON.stringify(doctor));
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <h3>Add Doctor</h3>
+            <label for="fname">First name:</label>
+            <br>
+            <input type="text" id="fname" name="fname" value="">
+            <br>
+            <label for="lname">Last name:</label>
+            <br>
+            <input type="text" id="lname" name="lname" value="">
+            <br>
+            <br>
+            <button type="button" onclick="addDoctor()">Submit</button>
+        </div>
+    </body>
+</html>
