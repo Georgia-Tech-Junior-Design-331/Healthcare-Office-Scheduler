@@ -57,12 +57,15 @@ We are building a scheduler for health offices to manage and communicate with th
 ### Partial Implementation
 
 * Patient Contacting: Structure is set up for testing with a personal gmail, but not for mass mailing.
-* Time picking for appointments: Lacks proper UX for managing a complex schedule to communicate busy or free times. We were looking into: https://fullcalendar.io/docs
+* Time picking for appointments: Lacks proper UX for managing a complex schedule to communicate busy or free times.
+  * We were looking into: https://fullcalendar.io/docs. See "web/test" folder and its page for our beginning-stage implementation.
 * Doctor Accounts: While database structure is implemented, doctors do not have log-in credentials or their own application.
 * A general lack of robustness testing.
 
+
 ### Missing Implementation
 * Account/schedule integration with Electronic Health Record systems.
+* Data security architecture needs to be reviewed.
  
 
 # Install Guide  
