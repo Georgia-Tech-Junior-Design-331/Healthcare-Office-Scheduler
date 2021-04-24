@@ -50,13 +50,13 @@ class Grid_Calendar {
 				<tbody>
 					<tr>
 						<th>Time</th>
-						<th>Sun</th>
-						<th>Mon</th>
-						<th>Tues</th>
-						<th>Wed</th>
-						<th>Thurs</th>
-						<th>Fri</th>
-						<th>Sat</th>
+						<th width="100px">Sunday</th>
+						<th width="100px">Monday</th>
+						<th width="100px">Tuesday</th>
+						<th width="100px">Wednesday</th>
+						<th width="100px">Thursday</th>
+						<th width="100px">Friday</th>
+						<th width="100px">Saturday</th>
 					</tr>
 					{
 						this.blocks[0].map((block, i) => {
