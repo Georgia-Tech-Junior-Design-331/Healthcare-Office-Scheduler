@@ -3,10 +3,10 @@ const mysql = require('mysql');
 const query = require('../lib/query');
 const con = require('../cfg/mysql').con;
 
-con.connect(function(err) {
-	if (err) throw err;
+function dummy_requests(con, callback) {
 	query.getAppointments(con, function(err, result) {
 		if (err) throw err;
+
 		var appointments = result;
 		var a0 = appointments[0];
 		var a1 = appointments[1];
@@ -22,22 +22,38 @@ con.connect(function(err) {
 
 		query.addRequest(con, r0, a0, function(err) {
 			if (err) throw err;
-		});
 
-		query.addRequest(con, r1, a1, function(err) {
-			if (err) throw err;
-		});
+			query.addRequest(con, r1, a1, function(err) {
+				if (err) throw err;
 
-		query.addRequest(con, r2, a2, function(err) {
-			if (err) throw err;
-		});
+				query.addRequest(con, r2, a2, function(err) {
+					if (err) throw err;
 
-		query.addRequest(con, r3, a3, function(err) {
-			if (err) throw err;
-		});
+					query.addRequest(con, r3, a3, function(err) {
+						if (err) throw err;
 
-		query.addRequest(con, r4, a4, function(err) {
-			if (err) throw err;
+						query.addRequest(con, r4, a4, function(err) {
+							if (err) throw err;
+
+							callback();
+						});
+					});
+				});			
+			});
+		});		
+	});
+}
+
+if (require.main === module) {
+    con.connect(function(err) {
+		if (err) throw err;
+		
+		dummy_requests(con, function() {
+			con.end();
 		});
 	});
-});
+}
+
+module.exports = {
+    dummy_requests
+};

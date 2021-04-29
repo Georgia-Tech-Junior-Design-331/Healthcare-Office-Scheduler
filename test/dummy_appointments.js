@@ -3,47 +3,7 @@ const mysql = require('mysql');
 const query = require('../lib/query');
 const con = require('../cfg/mysql').con;
 
-con.connect(function(err) {
-	if (err) throw err;
-	var doctors = {};
-	var patients = {};
-	query.getDoctors(con, function(err, result) {
-        if (err) throw err;
-		doctors = result;
-    });
-
-	query.getPatients(con, function(err, result) {
-        if (err) throw err;
-		patients = result;
-		query.addAppointment(con, a1, patients[0], doctors[0], function(err) {
-			if (err) throw err;
-		});
-	
-		query.addAppointment(con, a2, patients[1], doctors[1], function(err) {
-			if (err) throw err;
-		});
-	
-		query.addAppointment(con, a3, patients[2], doctors[2], function(err) {
-			if (err) throw err;
-		});
-	
-		query.addAppointment(con, a4, patients[3], doctors[3], function(err) {
-			if (err) throw err;
-		});
-	
-		query.addAppointment(con, a5, patients[4], doctors[4], function(err) {
-			if (err) throw err;
-		});
-	
-		query.addAppointment(con, a6, patients[5], doctors[2], function(err) {
-			if (err) throw err;
-		});
-	
-		query.addAppointment(con, a7, patients[6], doctors[4], function(err) {
-			if (err) throw err;
-		});
-	});
-
+function dummy_appointments(con, callback) {
 	var da2 = new Date();
 	da2.setDate(da2.getDate() + 1);
 	da2.setHours(10);
@@ -71,5 +31,62 @@ con.connect(function(err) {
 	var a6 = {start: da6, end: null, description: "Smile.", status: 1};
 	var a7 = {start: da7, end: null, description: "Yep.", status: 1};
 
-	
-});
+	var doctors = {};
+	var patients = {};
+
+	query.getDoctors(con, function(err, result) {
+        if (err) throw err;
+
+		doctors = result;
+
+		query.getPatients(con, function(err, result) {
+	        if (err) throw err;
+
+			patients = result;
+
+			query.addAppointment(con, a1, patients[0], doctors[0], function(err) {
+				if (err) throw err;
+
+				query.addAppointment(con, a2, patients[1], doctors[1], function(err) {
+					if (err) throw err;
+
+					query.addAppointment(con, a3, patients[2], doctors[2], function(err) {
+						if (err) throw err;
+
+						query.addAppointment(con, a4, patients[3], doctors[3], function(err) {
+							if (err) throw err;
+
+							query.addAppointment(con, a5, patients[4], doctors[4], function(err) {
+								if (err) throw err;
+
+								query.addAppointment(con, a6, patients[5], doctors[2], function(err) {
+									if (err) throw err;
+
+									query.addAppointment(con, a7, patients[6], doctors[4], function(err) {
+										if (err) throw err;
+
+										callback();
+									});
+								});
+							});
+						});
+					});
+				});
+			});			
+		});
+    });
+}
+
+if (require.main === module) {
+    con.connect(function(err) {
+		if (err) throw err;
+		
+		dummy_appointments(con, function() {
+			con.end();
+		});
+	});
+}
+
+module.exports = {
+    dummy_appointments
+};

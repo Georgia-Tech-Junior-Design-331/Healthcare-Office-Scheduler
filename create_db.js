@@ -83,5 +83,6 @@ con.connect(function(err) {
     con.query(createRequests, function(err, result) {
         if (err) throw err;
         console.log('Requests table created.');
+        con.end();
     });
 });
